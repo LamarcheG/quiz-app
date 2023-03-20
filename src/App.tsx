@@ -18,8 +18,7 @@ function App() {
     {
       id: 1,
       question: "What is the capital of England?",
-      type: QuestionType.MultipleChoice,
-      choices: ["New York", "London", "Paris", "Dublin"],
+      type: QuestionType.TrueFalse,
       answer: "London",
       isAnswered: false,
     },

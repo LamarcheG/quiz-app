@@ -29,7 +29,7 @@ export const QuestionItem = ({ question }: questionItemProps) => {
         "
       >
         <h2 className="text-2xl">{question.question}</h2>
-        {question.type === "MultipleChoice" && (
+        {question.type === "MultipleChoice" ? (
           <ul className="p-5">
             {question.choices?.map((choice) => (
               <div key={choice} className="flex justify-between">
@@ -43,6 +43,8 @@ export const QuestionItem = ({ question }: questionItemProps) => {
               </div>
             ))}
           </ul>
+        ) : (
+          <p>True or False</p>
         )}
         <button
           type="submit"
