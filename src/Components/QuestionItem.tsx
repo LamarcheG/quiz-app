@@ -24,11 +24,13 @@ export const QuestionItem = ({ question }: questionItemProps) => {
     <>
       <form
         onSubmit={handleSubmit}
-        className="m-5 rounded-md border-2 border-blue-800 p-5"
+        className="m-5  w-72 rounded-md border-t border-l border-blue-200 bg-gray-900 p-5 shadow-lg shadow-neutral-900
+        xl:w-96
+        "
       >
-        <h2 className="text-xl">{question.question}</h2>
+        <h2 className="text-2xl">{question.question}</h2>
         {question.type === "MultipleChoice" && (
-          <ul>
+          <ul className="p-5">
             {question.choices?.map((choice) => (
               <div key={choice} className="flex justify-between">
                 <label>{choice}</label>
@@ -42,7 +44,12 @@ export const QuestionItem = ({ question }: questionItemProps) => {
             ))}
           </ul>
         )}
-        <button type="submit">Submit</button>
+        <button
+          type="submit"
+          className="border-2 border-blue-200 text-lg hover:border-blue-200 hover:bg-blue-200 hover:text-blue-900"
+        >
+          Submit
+        </button>
       </form>
     </>
   );
