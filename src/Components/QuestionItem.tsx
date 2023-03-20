@@ -11,7 +11,7 @@ export const QuestionItem = ({ question }: questionItemProps) => {
       {question.type === "MultipleChoice" && (
         <ul>
           {question.choices?.map((choice) => (
-            <li>{choice}</li>
+            <li key={choice}>{choice}</li>
           ))}
         </ul>
       )}
