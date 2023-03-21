@@ -4,7 +4,9 @@ import {
   MultipleChoiceQuestion,
   QuestionType,
   TrueFalseQuestion,
+  FillInTheBlankQuestion,
 } from "../interfaces";
+import { FillInTheBlank } from "./AnswerInputs/FillInTheBlank";
 import { MultipleChoice } from "./AnswerInputs/MultipleChoice";
 import { TrueOrFalse } from "./AnswerInputs/TrueOrFalse";
 import { QuestionItem } from "./QuestionItem";
@@ -59,6 +61,11 @@ export const QuestionStack = ({ questions }: questionStackProps) => {
           ) : question.type === QuestionType.TrueFalse ? (
             <TrueOrFalse
               question={question as TrueFalseQuestion}
+              handleChange={handleChange}
+            />
+          ) : question.type === QuestionType.FillInTheBlank ? (
+            <FillInTheBlank
+              question={question as FillInTheBlankQuestion}
               handleChange={handleChange}
             />
           ) : (

@@ -32,7 +32,7 @@ function App() {
     },
     {
       id: 2,
-      question: "What is the capital of Spain?",
+      question: "____ is the capital of Spain?",
       type: QuestionType.FillInTheBlank,
       answer: "Madrid",
       isAnswered: false,
