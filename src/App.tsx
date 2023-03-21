@@ -17,9 +17,9 @@ function App() {
     },
     {
       id: 1,
-      question: "What is the capital of England?",
+      question: "London is the capital of England?",
       type: QuestionType.TrueFalse,
-      answer: "London",
+      answer: "True",
       isAnswered: false,
     },
   ];

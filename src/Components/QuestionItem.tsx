@@ -3,11 +3,15 @@ import { IQuestionItem } from "../interfaces";
 
 interface questionItemProps {
   question: IQuestionItem;
+  selectedChoice: string | null;
+  children?: React.ReactNode;
 }
 
-export const QuestionItem = ({ question }: questionItemProps) => {
-  const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
-
+export const QuestionItem = ({
+  question,
+  selectedChoice,
+  children,
+}: questionItemProps) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (selectedChoice === question.answer) {
@@ -15,9 +19,6 @@ export const QuestionItem = ({ question }: questionItemProps) => {
     } else {
       console.log("Incorrect!");
     }
-  };
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedChoice(e.target.value);
   };
 
   return (
@@ -29,23 +30,7 @@ export const QuestionItem = ({ question }: questionItemProps) => {
         "
       >
         <h2 className="text-2xl">{question.question}</h2>
-        {question.type === "MultipleChoice" ? (
-          <ul className="p-5">
-            {question.choices?.map((choice) => (
-              <div key={choice} className="flex justify-between">
-                <label>{choice}</label>
-                <input
-                  type="radio"
-                  name="choices"
-                  value={choice}
-                  onChange={handleChange}
-                ></input>
-              </div>
-            ))}
-          </ul>
-        ) : (
-          <p>True or False</p>
-        )}
+        {children}
         <button
           type="submit"
           className="border-2 border-blue-200 text-lg hover:border-blue-200 hover:bg-blue-200 hover:text-blue-900"
