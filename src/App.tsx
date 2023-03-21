@@ -3,20 +3,18 @@ import "./App.css";
 import { QuestionStack } from "./Components/QuestionStack";
 import {
   FillInTheBlankQuestion,
-  IQuestionItem,
   MultipleChoiceQuestion,
   QuestionType,
   TrueFalseQuestion,
 } from "./interfaces";
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  const questionStack: (
+  type questionStackType = (
     | MultipleChoiceQuestion
     | TrueFalseQuestion
     | FillInTheBlankQuestion
-  )[] = [
+  )[];
+  const questionStack: questionStackType = [
     {
       id: 0,
       question: "What is the capital of France?",
