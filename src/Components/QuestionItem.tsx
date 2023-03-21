@@ -16,7 +16,14 @@ export const QuestionItem = ({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (selectedChoice === question.answer) {
+    //format the answer and the selected choice to be lowercase and remove whitespace
+    const formatedAnswer = question.answer.toLowerCase().replace(/\s/g, "");
+
+    selectedChoice = selectedChoice
+      ? selectedChoice.toLowerCase().replace(/\s/g, "")
+      : "";
+
+    if (selectedChoice === formatedAnswer) {
       setIsCorrect(true);
     } else {
       setIsCorrect(false);
