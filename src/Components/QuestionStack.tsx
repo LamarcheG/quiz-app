@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   IQuestionItem,
   MultipleChoiceQuestion,
@@ -13,10 +13,34 @@ interface questionStackProps {
 }
 
 export const QuestionStack = ({ questions }: questionStackProps) => {
-  const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
+  const [selectedChoice, setSelectedChoice] = useState<[Number, string][]>([]);
+
+  useEffect(() => {
+    //initialize the selectedChoice array with empty strings
+    setSelectedChoice(questions.map((question) => [question.id, ""]));
+  }, [questions]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedChoice(e.target.value);
+    //if the question has already been answered, update the answer
+    if (selectedChoice.some((choice) => choice[0] === Number(e.target.name))) {
+      setSelectedChoice(
+        selectedChoice.map((choice) =>
+          choice[0] === Number(e.target.name)
+            ? [Number(e.target.name), e.target.value]
+            : choice
+        )
+      );
+    } else {
+      setSelectedChoice([
+        ...selectedChoice,
+        [Number(e.target.name), e.target.value],
+      ]);
+    }
+  };
+
+  const getAnswerForQuestion = (id: number) => {
+    const answer = selectedChoice.find((choice) => choice[0] === id);
+    return answer ? answer[1] : "";
   };
   return (
     <>
@@ -24,7 +48,7 @@ export const QuestionStack = ({ questions }: questionStackProps) => {
         <QuestionItem
           question={question}
           key={question.id}
-          selectedChoice={selectedChoice}
+          selectedChoice={getAnswerForQuestion(question.id)}
         >
           {question.type === "MultipleChoice" ? (
             <MultipleChoice
