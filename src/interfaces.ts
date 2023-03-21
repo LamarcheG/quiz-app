@@ -24,6 +24,4 @@ export enum QuestionType {
   TrueFalse = "TrueFalse",
   FillInTheBlank = "FillInTheBlank",
   ShortAnswer = "ShortAnswer",
-  Matching = "Matching",
-  DragAndDrop = "DragAndDrop",
 }

@@ -12,12 +12,14 @@ export const QuestionItem = ({
   selectedChoice,
   children,
 }: questionItemProps) => {
+  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (selectedChoice === question.answer) {
-      console.log("Correct!");
+      setIsCorrect(true);
     } else {
-      console.log("Incorrect!");
+      setIsCorrect(false);
     }
   };
 
@@ -25,18 +27,28 @@ export const QuestionItem = ({
     <>
       <form
         onSubmit={handleSubmit}
-        className="m-5  w-72 rounded-md border-t border-l border-blue-200 bg-gray-900 p-5 shadow-lg shadow-neutral-900
-        xl:w-96
-        "
+        className={
+          "m-5  w-72 rounded-md border-t border-l bg-gray-900 p-5 shadow-lg shadow-neutral-900 xl:w-96" +
+          (isCorrect === true
+            ? " border border-green-700"
+            : isCorrect === false
+            ? " border border-red-700"
+            : " border-blue-200")
+        }
       >
         <h2 className="text-2xl">{question.question}</h2>
         {children}
-        <button
-          type="submit"
-          className="border-2 border-blue-200 text-lg hover:border-blue-200 hover:bg-blue-200 hover:text-blue-900"
-        >
-          Submit
-        </button>
+
+        {isCorrect === true ? (
+          <p className="text-lg text-green-700">Correct!</p>
+        ) : isCorrect === false || isCorrect === null ? (
+          <button
+            type="submit"
+            className="border-2 border-blue-200 text-lg hover:border-blue-200 hover:bg-blue-200 hover:text-blue-900"
+          >
+            Submit
+          </button>
+        ) : null}
       </form>
     </>
   );

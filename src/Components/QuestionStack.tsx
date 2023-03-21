@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import {
   IQuestionItem,
   MultipleChoiceQuestion,
+  QuestionType,
   TrueFalseQuestion,
 } from "../interfaces";
 import { MultipleChoice } from "./AnswerInputs/MultipleChoice";
@@ -50,12 +51,12 @@ export const QuestionStack = ({ questions }: questionStackProps) => {
           key={question.id}
           selectedChoice={getAnswerForQuestion(question.id)}
         >
-          {question.type === "MultipleChoice" ? (
+          {question.type === QuestionType.MultipleChoice ? (
             <MultipleChoice
               question={question as MultipleChoiceQuestion}
               handleChange={handleChange}
             />
-          ) : question.type === "TrueFalse" ? (
+          ) : question.type === QuestionType.TrueFalse ? (
             <TrueOrFalse
               question={question as TrueFalseQuestion}
               handleChange={handleChange}
