@@ -1,12 +1,22 @@
 import { useState } from "react";
 import "./App.css";
 import { QuestionStack } from "./Components/QuestionStack";
-import { IQuestionItem, QuestionType } from "./interfaces";
+import {
+  FillInTheBlankQuestion,
+  IQuestionItem,
+  MultipleChoiceQuestion,
+  QuestionType,
+  TrueFalseQuestion,
+} from "./interfaces";
 
 function App() {
   const [count, setCount] = useState(0);
 
-  const questionStack: IQuestionItem[] = [
+  const questionStack: (
+    | MultipleChoiceQuestion
+    | TrueFalseQuestion
+    | FillInTheBlankQuestion
+  )[] = [
     {
       id: 0,
       question: "What is the capital of France?",
@@ -19,7 +29,14 @@ function App() {
       id: 1,
       question: "London is the capital of England?",
       type: QuestionType.TrueFalse,
-      answer: "True",
+      answer: "true",
+      isAnswered: false,
+    },
+    {
+      id: 2,
+      question: "What is the capital of Spain?",
+      type: QuestionType.FillInTheBlank,
+      answer: "Madrid",
       isAnswered: false,
     },
   ];

@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { IQuestionItem } from "../interfaces";
+import {
+  IQuestionItem,
+  MultipleChoiceQuestion,
+  TrueFalseQuestion,
+} from "../interfaces";
 import { MultipleChoice } from "./AnswerInputs/MultipleChoice";
 import { TrueOrFalse } from "./AnswerInputs/TrueOrFalse";
 import { QuestionItem } from "./QuestionItem";
@@ -23,9 +27,17 @@ export const QuestionStack = ({ questions }: questionStackProps) => {
           selectedChoice={selectedChoice}
         >
           {question.type === "MultipleChoice" ? (
-            <MultipleChoice question={question} handleChange={handleChange} />
+            <MultipleChoice
+              question={question as MultipleChoiceQuestion}
+              handleChange={handleChange}
+            />
+          ) : question.type === "TrueFalse" ? (
+            <TrueOrFalse
+              question={question as TrueFalseQuestion}
+              handleChange={handleChange}
+            />
           ) : (
-            <TrueOrFalse question={question} handleChange={handleChange} />
+            <p>Question type not supported</p>
           )}
         </QuestionItem>
       ))}

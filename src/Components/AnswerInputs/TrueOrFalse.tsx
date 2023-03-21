@@ -1,7 +1,7 @@
-import { IQuestionItem } from "../../interfaces";
+import { IQuestionItem, TrueFalseQuestion } from "../../interfaces";
 
 interface trueOrFalseProps {
-  question: IQuestionItem;
+  question: TrueFalseQuestion;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -13,7 +13,7 @@ export const TrueOrFalse = ({ question, handleChange }: trueOrFalseProps) => {
         <input
           type="radio"
           name="choices"
-          value="True"
+          value="true"
           onChange={handleChange}
         ></input>
       </div>
@@ -22,7 +22,7 @@ export const TrueOrFalse = ({ question, handleChange }: trueOrFalseProps) => {
         <input
           type="radio"
           name="choices"
-          value="False"
+          value="false"
           onChange={handleChange}
         ></input>
       </div>
