@@ -5,6 +5,7 @@ import {
   FillInTheBlankQuestion,
   MultipleChoiceQuestion,
   QuestionType,
+  ShortAnswerQuestion,
   TrueFalseQuestion,
 } from "./interfaces";
 
@@ -13,6 +14,7 @@ function App() {
     | MultipleChoiceQuestion
     | TrueFalseQuestion
     | FillInTheBlankQuestion
+    | ShortAnswerQuestion
   )[];
   const questionStack: questionStackType = [
     {
@@ -35,6 +37,13 @@ function App() {
       question: "____ is the capital of Spain?",
       type: QuestionType.FillInTheBlank,
       answer: "Madrid",
+      isAnswered: false,
+    },
+    {
+      id: 3,
+      question: "What is the capital of Italy?",
+      type: QuestionType.ShortAnswer,
+      answer: "Rome",
       isAnswered: false,
     },
   ];
