@@ -20,6 +20,13 @@ interface questionStackProps {
 export const QuestionStack = ({ questions }: questionStackProps) => {
   const [selectedChoice, setSelectedChoice] = useState<[Number, string][]>([]);
   const [questionStack, setQuestions] = useState<IQuestionItem[]>(questions);
+  const [currentQuestion, setCurrentQuestion] = useState<IQuestionItem>(
+    questionStack[0]
+  );
+
+  useEffect(() => {
+    setCurrentQuestion(questionStack[0]);
+  }, [questionStack]);
 
   useEffect(() => {
     //initialize the selectedChoice array with empty strings
@@ -51,6 +58,13 @@ export const QuestionStack = ({ questions }: questionStackProps) => {
     setQuestions([...questionStack.slice(1), questionStack[0]]);
   };
 
+  const nextQuestionCorrect = () => {
+    //remove the current question from the stack and wait for the transition to finish
+    setTimeout(() => {
+      setQuestions(questionStack.slice(1));
+    }, 700);
+  };
+
   return (
     <div className="flex items-center">
       <button
@@ -60,40 +74,41 @@ export const QuestionStack = ({ questions }: questionStackProps) => {
       >
         prev
       </button>
-      <ul>
-        {questionStack.map((question) => (
-          <QuestionItem
-            question={question}
-            key={question.id}
-            selectedChoice={getAnswerForQuestion(question.id)}
-            nextQuestion={nextQuestion}
-          >
-            {question.type === QuestionType.MultipleChoice ? (
-              <MultipleChoice
-                question={question as MultipleChoiceQuestion}
-                handleChange={handleChange}
-              />
-            ) : question.type === QuestionType.TrueFalse ? (
-              <TrueOrFalse
-                question={question as TrueFalseQuestion}
-                handleChange={handleChange}
-              />
-            ) : question.type === QuestionType.FillInTheBlank ? (
-              <FillInTheBlank
-                question={question as FillInTheBlankQuestion}
-                handleChange={handleChange}
-              />
-            ) : question.type === QuestionType.ShortAnswer ? (
-              <ShortAnswer
-                question={question as ShortAnswerQuestion}
-                handleChange={handleChange}
-              />
-            ) : (
-              <p>Question type not supported</p>
-            )}
-          </QuestionItem>
-        ))}
-      </ul>
+      {questionStack.length !== 0 ? (
+        <QuestionItem
+          question={currentQuestion}
+          key={currentQuestion.id}
+          selectedChoice={getAnswerForQuestion(currentQuestion.id)}
+          nextQuestion={nextQuestionCorrect}
+        >
+          {currentQuestion.type === QuestionType.MultipleChoice ? (
+            <MultipleChoice
+              question={currentQuestion as MultipleChoiceQuestion}
+              handleChange={handleChange}
+            />
+          ) : currentQuestion.type === QuestionType.TrueFalse ? (
+            <TrueOrFalse
+              question={currentQuestion as TrueFalseQuestion}
+              handleChange={handleChange}
+            />
+          ) : currentQuestion.type === QuestionType.FillInTheBlank ? (
+            <FillInTheBlank
+              question={currentQuestion as FillInTheBlankQuestion}
+              handleChange={handleChange}
+            />
+          ) : currentQuestion.type === QuestionType.ShortAnswer ? (
+            <ShortAnswer
+              question={currentQuestion as ShortAnswerQuestion}
+              handleChange={handleChange}
+            />
+          ) : (
+            <p>Question type not supported</p>
+          )}
+        </QuestionItem>
+      ) : (
+        <p className="p-5 text-3xl">Quiz complete!</p>
+      )}
+
       <button
         type="button"
         onClick={nextQuestion}
