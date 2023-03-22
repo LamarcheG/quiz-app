@@ -6,12 +6,14 @@ interface questionItemProps {
   question: IQuestionItem;
   selectedChoice: string | null;
   children?: React.ReactNode;
+  nextQuestion: () => void;
 }
 
 export const QuestionItem = ({
   question,
   selectedChoice,
   children,
+  nextQuestion,
 }: questionItemProps) => {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
@@ -20,9 +22,12 @@ export const QuestionItem = ({
 
     if (selectedChoice === null) return;
 
-    checkAnswer(question.answer, selectedChoice)
-      ? setIsCorrect(true)
-      : setIsCorrect(false);
+    if (checkAnswer(question.answer, selectedChoice)) {
+      setIsCorrect(true);
+      nextQuestion();
+    } else {
+      setIsCorrect(false);
+    }
   };
 
   return (
@@ -30,7 +35,7 @@ export const QuestionItem = ({
       <form
         onSubmit={handleSubmit}
         className={
-          "m-5  w-72 rounded-md border-t border-l bg-gray-900 p-5 shadow-lg shadow-neutral-900 xl:w-96" +
+          " m-5 w-72 rounded-md border-t border-l bg-gray-900 p-5 shadow-lg shadow-neutral-900 xl:w-96" +
           (isCorrect === true
             ? " border border-green-700"
             : isCorrect === false
