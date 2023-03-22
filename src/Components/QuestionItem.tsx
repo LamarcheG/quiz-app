@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { IQuestionItem } from "../interfaces";
+import { checkAnswer } from "../Utility/AnswerCheck";
 
 interface questionItemProps {
   question: IQuestionItem;
@@ -16,18 +17,12 @@ export const QuestionItem = ({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //format the answer and the selected choice to be lowercase and remove whitespace
-    const formatedAnswer = question.answer.toLowerCase().replace(/\s/g, "");
 
-    selectedChoice = selectedChoice
-      ? selectedChoice.toLowerCase().replace(/\s/g, "")
-      : "";
+    if (selectedChoice === null) return;
 
-    if (selectedChoice === formatedAnswer) {
-      setIsCorrect(true);
-    } else {
-      setIsCorrect(false);
-    }
+    checkAnswer(question.answer, selectedChoice)
+      ? setIsCorrect(true)
+      : setIsCorrect(false);
   };
 
   return (
