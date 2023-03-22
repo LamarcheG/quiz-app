@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./App.css";
 import { QuestionStack } from "./Components/QuestionStack";
 import {
@@ -8,6 +7,7 @@ import {
   ShortAnswerQuestion,
   TrueFalseQuestion,
 } from "./interfaces";
+import { QuestionForm } from "./Components/QuestionForm";
 
 function App() {
   type questionStackType = (
@@ -50,6 +50,7 @@ function App() {
 
   return (
     <div className="App">
+      <QuestionForm />
       <QuestionStack questions={questionStack} />
     </div>
   );
