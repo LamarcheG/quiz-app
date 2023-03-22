@@ -16,8 +16,8 @@ export const parseBruteText = (text: string) => {
       answers.push(line);
     }
   });
-
   console.log(questions, answers);
+  return questions;
 };
 
 const isLineQuestion = (line: string) => {
