@@ -1,12 +1,18 @@
+import { IQuestionItem } from "../interfaces";
 import { parseBruteText } from "../Utility/QuestionParser";
 
-export const QuestionForm = (props: any) => {
+interface QuestionFormProps {
+  addQuestions: (questions: IQuestionItem[]) => void;
+}
+
+export const QuestionForm = ({ addQuestions }: QuestionFormProps) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form);
     const bruteText = formData.get("bruteText");
-    parseBruteText(bruteText as string);
+    var questions = parseBruteText(bruteText as string);
+    addQuestions(questions);
   };
   return (
     <form className="flex flex-col" onSubmit={handleSubmit}>

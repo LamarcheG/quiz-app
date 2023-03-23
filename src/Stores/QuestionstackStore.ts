@@ -15,9 +15,9 @@ export const setQuestionStackToLocalStorage = (
 };
 
 export const getQuestionStackIdFromLocalStorage = (): number => {
-  const questionStackId = localStorage.getItem("questionStackId");
-  if (questionStackId) {
-    return parseInt(questionStackId);
+  const questionStack = getQuestionStackFromLocalStorage();
+  if (questionStack.length > 0) {
+    return questionStack[questionStack.length - 1].id + 1;
   }
   return 0;
 };

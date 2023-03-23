@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import useLocalStorage from "../Hooks/useLocalStorage";
 import {
   IQuestionItem,
   MultipleChoiceQuestion,
@@ -7,29 +8,37 @@ import {
   FillInTheBlankQuestion,
   ShortAnswerQuestion,
 } from "../interfaces";
-import { getQuestionStackFromLocalStorage } from "../Stores/QuestionstackStore";
 import { FillInTheBlank } from "./AnswerInputs/FillInTheBlank";
 import { MultipleChoice } from "./AnswerInputs/MultipleChoice";
 import { ShortAnswer } from "./AnswerInputs/ShortAnswer";
 import { TrueOrFalse } from "./AnswerInputs/TrueOrFalse";
 import { QuestionItem } from "./QuestionItem";
 
-export const QuestionStack = (props: any) => {
+interface QuestionStackProps {
+  questions: IQuestionItem[];
+}
+
+export const QuestionStack = ({ questions }: QuestionStackProps) => {
   const [selectedChoice, setSelectedChoice] = useState<[Number, string][]>([]);
-  const [questionStack, setQuestionStack] = useState<IQuestionItem[]>(
-    getQuestionStackFromLocalStorage()
-  );
+  const [questionStack, setQuestionStack] =
+    useState<IQuestionItem[]>(questions);
+
   const [currentQuestion, setCurrentQuestion] = useState<IQuestionItem>(
     questionStack[0]
   );
 
+  useEffect(() => {
+    setQuestionStack(questions);
+  }, [questions]);
   useEffect(() => {
     setCurrentQuestion(questionStack[0]);
   }, [questionStack]);
 
   useEffect(() => {
     //initialize the selectedChoice array with empty strings
-    setSelectedChoice(questionStack.map((question) => [question.id, ""]));
+    setSelectedChoice(
+      questionStack.map((question: IQuestionItem) => [question.id, ""])
+    );
   }, [questionStack]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
