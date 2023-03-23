@@ -1,39 +1,80 @@
+import {
+  IQuestionItem,
+  MultipleChoiceQuestion,
+  QuestionType,
+} from "../interfaces";
+
 const questionKeywords = ["Question", "question", "Q", "q"];
 const answerKeywords = ["Answer", "answer", "A", "a"];
 const multipleChoiceKeywords = ["-"];
 
-export const parseBruteText = (text: string) => {
-  const questions: string[] = [];
-  const answers: string[] = [];
-  const choices: string[] = [];
+export const parseBruteText = (text: string): IQuestionItem[] => {
+  const questionList: IQuestionItem[] = [];
 
-  let currentQuestionId = 0;
-  const lines = splitTextIntoLines(text);
+  var currentQuestionId = 4; //TODO: get current question id from database
 
-  lines.forEach((line) => {
-    if (isLineQuestion(line)) {
-      line = formatQuestion(line);
-      questions.push(line);
-    } else if (isLineAnswer(line)) {
-      line = formatAnswer(line);
-      answers.push(line);
-      currentQuestionId++;
-    } else if (isLineMultipleChoice(line)) {
-      line = formatMultipleChoice(line);
-      choices.push(line);
-    }
+  const blocks = splitTextIntoQuestionBlocks(text);
+  const linesInBLock: string[][] = [];
+  blocks.forEach((block) => {
+    const lines = splitTextIntoLines(block);
+    linesInBLock.push(lines);
+  });
+  console.log("Lines in block: ", linesInBLock);
+
+  linesInBLock.forEach((block) => {
+    let question = "";
+    let answer = "";
+    let choices: string[] = [];
+    block.forEach((line) => {
+      if (isLineQuestion(line)) {
+        question = formatQuestion(line);
+      } else if (isLineAnswer(line)) {
+        answer = formatAnswer(line);
+      } else if (isLineMultipleChoice(line)) {
+        line = formatMultipleChoice(line);
+        choices.push(line);
+      }
+    });
+    debugger;
+    const questionItem = buildQuestionItem(
+      currentQuestionId,
+      question,
+      answer,
+      choices
+    );
+    currentQuestionId = currentQuestionId + 1;
+    questionList.push(questionItem);
+    console.log("Question item: ", questionItem);
   });
 
-  console.log("Questions: ", questions);
-  console.log("Answers: ", answers);
-  console.log("Choices: ", choices);
-
-  return { questions, answers, choices };
+  return questionList;
 };
 
-const splitTextIntoLines = (text: string) => {
-  const lines = text.split(/\r?\n/);
-  return lines;
+const buildQuestionItem = (
+  id: number,
+  question: string,
+  answer: string,
+  choices?: string[]
+) => {
+  if (choices && choices.length > 0) {
+    const questionItem: MultipleChoiceQuestion = {
+      id: id,
+      question: question,
+      isAnswered: false,
+      answer: answer,
+      type: QuestionType.MultipleChoice,
+      choices: choices,
+    };
+    return questionItem;
+  }
+  const questionItem: IQuestionItem = {
+    id: id,
+    question: question,
+    isAnswered: false,
+    answer: answer,
+    type: QuestionType.ShortAnswer,
+  };
+  return questionItem;
 };
 
 export const splitTextIntoQuestionBlocks = (text: string): string[] => {
@@ -52,6 +93,11 @@ export const splitTextIntoQuestionBlocks = (text: string): string[] => {
     }
   });
   return blocks;
+};
+
+const splitTextIntoLines = (text: string) => {
+  const lines = text.split(/\r?\n/);
+  return lines;
 };
 
 const isLineQuestion = (line: string) => {
@@ -93,7 +139,7 @@ const formatAnswer = (answer: string) => {
 
 const formatMultipleChoice = (choice: string) => {
   //remove keywords
-  let match = choice.match(/(MultipleChoice|multiplechoice|MC|mc|-):/);
+  let match = choice.match(/-:/);
   if (match) {
     choice = choice.replace(match[0], "");
   }

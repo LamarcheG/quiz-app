@@ -1,3 +1,4 @@
+import { QuestionType } from "../interfaces";
 import {
   parseBruteText,
   splitTextIntoQuestionBlocks,
@@ -21,11 +22,15 @@ describe("QuestionParser", () => {
     questions.forEach((question, index) => {
       let expectedQuestion = questionKeywords[index] + ": Why is the sky blue?";
       let expectedAnswer = answerKeywords[index] + ": Because it is.";
-      expect(question).toEqual({
-        questions: [expectedQuestion],
-        answers: [expectedAnswer],
-        choices: [],
-      });
+      expect(question).toEqual([
+        {
+          id: 4,
+          question: expectedQuestion,
+          answer: expectedAnswer,
+          isAnswered: false,
+          type: QuestionType.ShortAnswer,
+        },
+      ]);
     });
   });
 
@@ -34,11 +39,22 @@ describe("QuestionParser", () => {
       " q: Why is the sky blue? \n a: Because it is. \n q: Why is the grass green? \n a: Because it is."
     );
 
-    expect(question).toEqual({
-      questions: ["q: Why is the sky blue?", "q: Why is the grass green?"],
-      answers: ["a: Because it is.", "a: Because it is."],
-      choices: [],
-    });
+    expect(question).toEqual([
+      {
+        id: 4,
+        question: "q: Why is the sky blue?",
+        answer: "a: Because it is.",
+        isAnswered: false,
+        type: QuestionType.ShortAnswer,
+      },
+      {
+        id: 5,
+        question: "q: Why is the grass green?",
+        answer: "a: Because it is.",
+        isAnswered: false,
+        type: QuestionType.ShortAnswer,
+      },
+    ]);
   });
 
   it("should parse a multiple choice question", () => {
@@ -46,11 +62,16 @@ describe("QuestionParser", () => {
       "q: What is the capital of France?\n -Paris\n -London\n -Rome\n a: Paris"
     );
 
-    expect(question).toEqual({
-      questions: ["q: What is the capital of France?"],
-      answers: ["a: Paris"],
-      choices: ["-Paris", "-London", "-Rome"],
-    });
+    expect(question).toEqual([
+      {
+        id: 4,
+        question: "q: What is the capital of France?",
+        answer: "a: Paris",
+        isAnswered: false,
+        type: QuestionType.MultipleChoice,
+        choices: ["-Paris", "-London", "-Rome"],
+      },
+    ]);
   });
   it("should split text into question blocks", () => {
     const text = `q: Why is the sky blue? \n a: Because it is. \n q: Why is the grass green? \n a: Because it is. \n q: What is the capital of France? \n -Paris \n -London \n -Rome \n a: Paris`;
