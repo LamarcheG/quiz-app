@@ -31,12 +31,18 @@ const useLocalStorage = (key: string, initialValue: any) => {
       // Save to local storage
       if (typeof window !== "undefined") {
         window.localStorage.setItem(key, JSON.stringify(valueToStore));
+        window.dispatchEvent(new Event("storage"));
       }
     } catch (error) {
       // A more advanced implementation would handle the error case
       console.log(error);
     }
   };
+  window.addEventListener("storage", () => {
+    const item = window.localStorage.getItem(key);
+    setStoredValue(item ? JSON.parse(item) : initialValue);
+  });
+
   useEffect(() => {
     localStorage.setItem(key, JSON.stringify(storedValue));
   }, [storedValue, key]);
