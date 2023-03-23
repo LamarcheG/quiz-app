@@ -22,15 +22,6 @@ export const getQuestionStackIdFromLocalStorage = (): number => {
   return 0;
 };
 
-export const setQuestionStackIdToLocalStorage = (
-  questionStack: IQuestionItem[]
-) => {
-  //get highest id from questionStack
-  let highestId = 0;
-  questionStack.forEach((question) => {
-    if (question.id > highestId) {
-      highestId = question.id;
-    }
-  });
-  localStorage.setItem("questionStackId", highestId.toString());
+export const setQuestionStackIdToLocalStorage = (id: number) => {
+  localStorage.setItem("questionStackId", id.toString());
 };

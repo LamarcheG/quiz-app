@@ -7,19 +7,18 @@ import {
   FillInTheBlankQuestion,
   ShortAnswerQuestion,
 } from "../interfaces";
+import { getQuestionStackFromLocalStorage } from "../Stores/QuestionstackStore";
 import { FillInTheBlank } from "./AnswerInputs/FillInTheBlank";
 import { MultipleChoice } from "./AnswerInputs/MultipleChoice";
 import { ShortAnswer } from "./AnswerInputs/ShortAnswer";
 import { TrueOrFalse } from "./AnswerInputs/TrueOrFalse";
 import { QuestionItem } from "./QuestionItem";
 
-interface questionStackProps {
-  questions: IQuestionItem[];
-}
-
-export const QuestionStack = ({ questions }: questionStackProps) => {
+export const QuestionStack = (props: any) => {
   const [selectedChoice, setSelectedChoice] = useState<[Number, string][]>([]);
-  const [questionStack, setQuestions] = useState<IQuestionItem[]>(questions);
+  const [questionStack, setQuestionStack] = useState<IQuestionItem[]>(
+    getQuestionStackFromLocalStorage()
+  );
   const [currentQuestion, setCurrentQuestion] = useState<IQuestionItem>(
     questionStack[0]
   );
@@ -30,7 +29,7 @@ export const QuestionStack = ({ questions }: questionStackProps) => {
 
   useEffect(() => {
     //initialize the selectedChoice array with empty strings
-    setSelectedChoice(questions.map((question) => [question.id, ""]));
+    setSelectedChoice(questionStack.map((question) => [question.id, ""]));
   }, [questionStack]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,18 +49,18 @@ export const QuestionStack = ({ questions }: questionStackProps) => {
 
   const prevQuestion = () => {
     //put the previous questions at the top of the stack
-    setQuestions([...questionStack.slice(1), questionStack[0]]);
+    setQuestionStack([...questionStack.slice(1), questionStack[0]]);
   };
 
   const nextQuestion = () => {
     //put the next questions at the bottom of the stack
-    setQuestions([...questionStack.slice(1), questionStack[0]]);
+    setQuestionStack([...questionStack.slice(1), questionStack[0]]);
   };
 
   const nextQuestionCorrect = () => {
     //remove the current question from the stack and wait for the transition to finish
     setTimeout(() => {
-      setQuestions(questionStack.slice(1));
+      setQuestionStack(questionStack.slice(1));
     }, 700);
   };
 

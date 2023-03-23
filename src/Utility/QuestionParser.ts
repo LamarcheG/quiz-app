@@ -3,6 +3,7 @@ import {
   MultipleChoiceQuestion,
   QuestionType,
 } from "../interfaces";
+import { getQuestionStackIdFromLocalStorage } from "../Stores/QuestionstackStore";
 
 const questionKeywords = ["Question", "question", "Q", "q"];
 const answerKeywords = ["Answer", "answer", "A", "a"];
@@ -11,7 +12,7 @@ const multipleChoiceKeywords = ["-"];
 export const parseBruteText = (text: string): IQuestionItem[] => {
   const questionList: IQuestionItem[] = [];
 
-  var currentQuestionId = 4; //TODO: get current question id from database
+  var currentQuestionId = getQuestionStackIdFromLocalStorage();
 
   const blocks = splitTextIntoQuestionBlocks(text);
   const linesInBLock: string[][] = [];
@@ -35,7 +36,6 @@ export const parseBruteText = (text: string): IQuestionItem[] => {
         choices.push(line);
       }
     });
-    debugger;
     const questionItem = buildQuestionItem(
       currentQuestionId,
       question,
