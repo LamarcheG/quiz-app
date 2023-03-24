@@ -12,8 +12,7 @@ const multipleChoiceKeywords = ["-"];
 export const parseBruteText = (text: string): IQuestionItem[] => {
   const questionList: IQuestionItem[] = [];
 
-  //var currentQuestionId = getQuestionStackIdFromLocalStorage();
-  var currentQuestionId = 4;
+  var currentQuestionId = getQuestionStackIdFromLocalStorage();
 
   const blocks = splitTextIntoQuestionBlocks(text);
   const linesInBLock: string[][] = [];
