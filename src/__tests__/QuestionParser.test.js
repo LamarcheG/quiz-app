@@ -14,14 +14,14 @@ describe("QuestionParser", () => {
     questionKeywords.forEach((questionKeyword, index) => {
       questions.push(
         parseBruteText(
-          `${questionKeywords[index]}: Why is the sky blue?\n${answerKeywords[index]}: Because it is.`
+          `${questionKeywords[index]}: Why is the sky blue q ?\n${answerKeywords[index]}: Because it is.`
         )
       );
     });
 
     questions.forEach((question, index) => {
-      let expectedQuestion = questionKeywords[index] + ": Why is the sky blue?";
-      let expectedAnswer = answerKeywords[index] + ": Because it is.";
+      let expectedQuestion = "Why is the sky blue q ?";
+      let expectedAnswer = "Because it is.";
       expect(question).toEqual([
         {
           id: 4,
@@ -42,15 +42,15 @@ describe("QuestionParser", () => {
     expect(question).toEqual([
       {
         id: 4,
-        question: "q: Why is the sky blue?",
-        answer: "a: Because it is.",
+        question: "Why is the sky blue?",
+        answer: "Because it is.",
         isAnswered: false,
         type: QuestionType.ShortAnswer,
       },
       {
         id: 5,
-        question: "q: Why is the grass green?",
-        answer: "a: Because it is.",
+        question: "Why is the grass green?",
+        answer: "Because it is.",
         isAnswered: false,
         type: QuestionType.ShortAnswer,
       },
@@ -65,11 +65,11 @@ describe("QuestionParser", () => {
     expect(question).toEqual([
       {
         id: 4,
-        question: "q: What is the capital of France?",
-        answer: "a: Paris",
+        question: "What is the capital of France?",
+        answer: "Paris",
         isAnswered: false,
         type: QuestionType.MultipleChoice,
-        choices: ["-Paris", "-London", "-Rome"],
+        choices: ["Paris", "London", "Rome"],
       },
     ]);
   });

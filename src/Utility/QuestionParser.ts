@@ -12,7 +12,8 @@ const multipleChoiceKeywords = ["-"];
 export const parseBruteText = (text: string): IQuestionItem[] => {
   const questionList: IQuestionItem[] = [];
 
-  var currentQuestionId = getQuestionStackIdFromLocalStorage();
+  //var currentQuestionId = getQuestionStackIdFromLocalStorage();
+  var currentQuestionId = 4;
 
   const blocks = splitTextIntoQuestionBlocks(text);
   const linesInBLock: string[][] = [];
@@ -20,7 +21,6 @@ export const parseBruteText = (text: string): IQuestionItem[] => {
     const lines = splitTextIntoLines(block);
     linesInBLock.push(lines);
   });
-  console.log("Lines in block: ", linesInBLock);
 
   linesInBLock.forEach((block) => {
     let question = "";
@@ -44,7 +44,6 @@ export const parseBruteText = (text: string): IQuestionItem[] => {
     );
     currentQuestionId = currentQuestionId + 1;
     questionList.push(questionItem);
-    console.log("Question item: ", questionItem);
   });
 
   return questionList;
@@ -106,7 +105,7 @@ const isLineQuestion = (line: string) => {
     line.includes(keyword + ":")
   );
 
-  return containsKeyword && line.includes("?");
+  return containsKeyword || line.includes("?");
 };
 
 const isLineAnswer = (line: string) => {
@@ -126,20 +125,35 @@ const isLineMultipleChoice = (line: string) => {
 };
 
 const formatQuestion = (question: string) => {
+  //remove keywords + ":"
+  questionKeywords.forEach((keyword) => {
+    let match = question.match(keyword + ":");
+    if (match) {
+      question = question.replace(match[0], "");
+    }
+  });
+
   // remove whitespace at beginning and end
   question = question.trim();
-
   return question;
 };
 
 const formatAnswer = (answer: string) => {
+  //remove keywords + ":"
+  answerKeywords.forEach((keyword) => {
+    let match = answer.match(keyword + ":");
+    if (match) {
+      answer = answer.replace(match[0], "");
+    }
+  });
+  // remove whitespace at beginning and end
   answer = answer.trim();
   return answer;
 };
 
 const formatMultipleChoice = (choice: string) => {
   //remove keywords
-  let match = choice.match(/-:/);
+  let match = choice.match(/-/);
   if (match) {
     choice = choice.replace(match[0], "");
   }
