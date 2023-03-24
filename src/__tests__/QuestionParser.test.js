@@ -73,6 +73,18 @@ describe("QuestionParser", () => {
       },
     ]);
   });
+  it("should parse a TRUE/FALSE question", () => {
+    const question = parseBruteText("q: The sky is blue?\n a: True");
+    expect(question).toEqual([
+      {
+        id: 4,
+        question: "The sky is blue?",
+        answer: "True",
+        isAnswered: false,
+        type: QuestionType.TrueFalse,
+      },
+    ]);
+  });
   it("should split text into question blocks", () => {
     const text = `q: Why is the sky blue? \n a: Because it is. \n q: Why is the grass green? \n a: Because it is. \n q: What is the capital of France? \n -Paris \n -London \n -Rome \n a: Paris`;
 

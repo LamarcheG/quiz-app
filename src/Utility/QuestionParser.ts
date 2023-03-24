@@ -54,14 +54,25 @@ const buildQuestionItem = (
   answer: string,
   choices?: string[]
 ) => {
-  if (choices && choices.length > 0) {
+  if (isQuestionMultipleChoice(choices)) {
     const questionItem: MultipleChoiceQuestion = {
       id: id,
       question: question,
       isAnswered: false,
       answer: answer,
       type: QuestionType.MultipleChoice,
-      choices: choices,
+      choices: choices!,
+    };
+    return questionItem;
+  }
+
+  if (isQuestionTrueFalse(answer)) {
+    const questionItem: IQuestionItem = {
+      id: id,
+      question: question,
+      isAnswered: false,
+      answer: answer,
+      type: QuestionType.TrueFalse,
     };
     return questionItem;
   }
@@ -158,4 +169,15 @@ const formatMultipleChoice = (choice: string) => {
   }
   choice = choice.trim();
   return choice;
+};
+
+const isQuestionMultipleChoice = (choices?: string[]) => {
+  return choices && choices.length > 0 ? true : false;
+};
+
+const isQuestionTrueFalse = (question: string) => {
+  return question.toLocaleLowerCase() === "true" ||
+    question.toLocaleLowerCase() === "false"
+    ? true
+    : false;
 };
