@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import useLocalStorage from "../Hooks/useLocalStorage";
 import {
   IQuestionItem,
   MultipleChoiceQuestion,
@@ -73,14 +72,22 @@ export const QuestionStack = ({ questions }: QuestionStackProps) => {
     }, 700);
   };
 
+  function solid(
+    arg0: string
+  ): import("@fortawesome/fontawesome-svg-core").IconProp {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <div className="flex items-center">
-      <button
-        type="button"
-        onClick={prevQuestion}
-        className="h-16 border-2 border-gray-900"
-      >
-        prev
+      <button type="button" onClick={prevQuestion} className="p-0">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 320 512"
+          className="h-16 w-16"
+        >
+          <path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+        </svg>
       </button>
       {questionStack.length !== 0 ? (
         <QuestionItem
@@ -117,12 +124,14 @@ export const QuestionStack = ({ questions }: QuestionStackProps) => {
         <p className="p-5 text-3xl">Quiz complete!</p>
       )}
 
-      <button
-        type="button"
-        onClick={nextQuestion}
-        className="h-16 border-2 border-gray-900"
-      >
-        next
+      <button type="button" onClick={nextQuestion} className="p-0">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 320 512"
+          className="h-16 w-16"
+        >
+          <path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z" />
+        </svg>
       </button>
     </div>
   );
