@@ -1,5 +1,6 @@
 import { IQuestionItem } from "../interfaces";
 import { parseBruteText } from "../Utility/QuestionParser";
+import { CustomTextarea } from "./CustomTextarea/CustomTextarea";
 
 interface QuestionFormProps {
   addQuestions: (questions: IQuestionItem[]) => void;
@@ -23,6 +24,7 @@ export const QuestionForm = ({ addQuestions }: QuestionFormProps) => {
         rows={10}
         className="resize p-3"
       ></textarea>
+      <CustomTextarea />
       <button type="submit">Submit</button>
     </form>
   );

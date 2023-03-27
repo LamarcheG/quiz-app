@@ -109,7 +109,7 @@ const splitTextIntoLines = (text: string) => {
   return lines;
 };
 
-const isLineQuestion = (line: string) => {
+export const isLineQuestion = (line: string) => {
   //check if line contains any of the keywords
   const containsKeyword = questionKeywords.some((keyword) =>
     line.includes(keyword + ":")
@@ -118,7 +118,7 @@ const isLineQuestion = (line: string) => {
   return containsKeyword || line.includes("?");
 };
 
-const isLineAnswer = (line: string) => {
+export const isLineAnswer = (line: string) => {
   //check if line contains any of the keywords
   const containsKeyword = answerKeywords.some((keyword) =>
     line.includes(keyword + ":")

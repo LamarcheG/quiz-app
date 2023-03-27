@@ -1,0 +1,8 @@
+.question{
+    color: red;
+    border: red 1px solid;
+}
+.answer{
+    color: blue;
+    border: blue 1px solid;
+}
