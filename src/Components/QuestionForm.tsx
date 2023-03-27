@@ -15,14 +15,19 @@ export const QuestionForm = ({ addQuestions }: QuestionFormProps) => {
     const form = e.currentTarget;
     const formData = new FormData(form);
     const bruteText = formData.get("bruteText");
-    var questions = parseBruteText(bruteText as string);
-    addQuestions(questions);
-    form.reset();
-    setSuccess(true);
+    try {
+      const questions = parseBruteText(bruteText as string);
+      addQuestions(questions);
+      form.reset();
+      setSuccess(true);
+    } catch (error: any) {
+      setErrorMessage(error.message);
+      setSuccess(false);
+    }
   };
 
   useEffect(() => {
-    if (success) {
+    if (success === true || success === false) {
       setTimeout(() => {
         setSuccess(null);
       }, 2000);
@@ -37,11 +42,12 @@ export const QuestionForm = ({ addQuestions }: QuestionFormProps) => {
         id="bruteText"
         rows={10}
         className="resize p-3"
+        required
       ></textarea>
       {success === true ? (
         <p className="text-3xl text-green-700">Success!</p>
       ) : success === false ? (
-        <p className="text-3xl text-red-700">Error!</p>
+        <p className="text-3xl text-red-700">{errorMessage}</p>
       ) : (
         <button type="submit">Submit</button>
       )}

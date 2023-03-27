@@ -15,6 +15,9 @@ export const parseBruteText = (text: string): IQuestionItem[] => {
   var currentQuestionId = getQuestionStackIdFromLocalStorage();
 
   const blocks = splitTextIntoQuestionBlocks(text);
+  if (blocks.length === 0) {
+    throw new Error("No questions found");
+  }
   const linesInBLock: string[][] = [];
   blocks.forEach((block) => {
     const lines = splitTextIntoLines(block);
@@ -35,6 +38,12 @@ export const parseBruteText = (text: string): IQuestionItem[] => {
         choices.push(line);
       }
     });
+    if (question === "") {
+      throw new Error("Question not found");
+    }
+    if (answer === "") {
+      throw new Error("Answer not found");
+    }
     const questionItem = buildQuestionItem(
       currentQuestionId,
       question,
