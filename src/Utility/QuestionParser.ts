@@ -16,7 +16,7 @@ export const parseBruteText = (text: string): IQuestionItem[] => {
 
   const blocks = splitTextIntoQuestionBlocks(text);
   if (blocks.length === 0) {
-    throw new Error("No questions found");
+    throw new Error("No question blocks found");
   }
   const linesInBLock: string[][] = [];
   blocks.forEach((block) => {
@@ -30,9 +30,9 @@ export const parseBruteText = (text: string): IQuestionItem[] => {
     let choices: string[] = [];
     block.forEach((line) => {
       if (isLineQuestion(line)) {
-        question = formatQuestion(line);
+        question += formatQuestion(line);
       } else if (isLineAnswer(line)) {
-        answer = formatAnswer(line);
+        answer += formatAnswer(line);
       } else if (isLineMultipleChoice(line)) {
         line = formatMultipleChoice(line);
         choices.push(line);
