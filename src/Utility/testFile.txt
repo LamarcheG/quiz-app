@@ -1,10 +1,10 @@
 q: Why is the sky blue?
 a: Because it is.
- q: What is the capital of France?
--Paris
--London
--Rome
-a: Paris
+ q: Are you pretty?
+-Yes
+-No
+-Toaster
+a: Toaster
 q: Why is the grass green?
 a: Because it is.
 

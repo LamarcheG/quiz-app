@@ -38,7 +38,7 @@ function App() {
   ]);
 
   const addQuestions = (questions: IQuestionItem[]) => {
-    setQuestionStack([...questionStack, ...questions]);
+    setQuestionStack([...questions, ...questionStack]);
   };
   return (
     <div className="App">
