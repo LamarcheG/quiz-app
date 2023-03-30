@@ -3,6 +3,7 @@ import { QuestionStack } from "./Components/QuestionStack";
 import { IQuestionItem } from "./interfaces";
 import { QuestionForm } from "./Components/QuestionForm";
 import useLocalStorage from "./Hooks/useLocalStorage";
+import { QuestionStackProvider } from "./Stores/QuestionStackContext";
 
 function App() {
   const [questionStack, setQuestionStack] = useLocalStorage("questionStack", [
@@ -42,8 +43,10 @@ function App() {
   };
   return (
     <div className="App">
-      <QuestionForm addQuestions={addQuestions} />
-      <QuestionStack questions={questionStack} />
+      <QuestionStackProvider>
+        <QuestionForm addQuestions={addQuestions} />
+        <QuestionStack questions={questionStack} />
+      </QuestionStackProvider>
     </div>
   );
 }

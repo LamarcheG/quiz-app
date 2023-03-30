@@ -72,12 +72,6 @@ export const QuestionStack = ({ questions }: QuestionStackProps) => {
     }, 700);
   };
 
-  function solid(
-    arg0: string
-  ): import("@fortawesome/fontawesome-svg-core").IconProp {
-    throw new Error("Function not implemented.");
-  }
-
   return (
     <div className="flex items-center">
       <button type="button" onClick={prevQuestion} className="p-0">
