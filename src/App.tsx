@@ -4,48 +4,36 @@ import { IQuestionItem } from "./interfaces";
 import { QuestionForm } from "./Components/QuestionForm";
 import useLocalStorage from "./Hooks/useLocalStorage";
 import { QuestionStackProvider } from "./Stores/QuestionStackContext";
+import db from "../src/firebaseInit";
+import { useEffect, useState } from "react";
+import { collection, onSnapshot } from "firebase/firestore";
 
 function App() {
-  const [questionStack, setQuestionStack] = useLocalStorage("questionStack", [
-    {
-      id: 0,
-      question: "What is the capital of France?",
-      type: "MultipleChoice",
-      choices: ["New York", "London", "Paris", "Dublin"],
-      answer: "Paris",
-      isAnswered: false,
-    },
-    {
-      id: 1,
-      question: "London is the capital of England?",
-      type: "TrueFalse",
-      answer: "true",
-      isAnswered: false,
-    },
-    {
-      id: 2,
-      question: "____ is the capital of Spain?",
-      type: "FillInTheBlank",
-      answer: "Madrid",
-      isAnswered: false,
-    },
-    {
-      id: 3,
-      question: "What is the capital of Italy?",
-      type: "ShortAnswer",
-      answer: "Rome",
-      isAnswered: false,
-    },
-  ]);
+  const [questionStack, setQuestionStack] = useState<any>();
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const subscribeToQuestions = () => {
+    const collectionRef = collection(db, "questions");
+    onSnapshot(collectionRef, (snapshot) => {
+      const questionsArray = snapshot.docs.map((doc) => doc.data());
+      setQuestionStack(questionsArray);
+      setIsLoaded(true);
+    });
+  };
+
+  useEffect(() => {
+    subscribeToQuestions();
+  }, []);
 
   const addQuestions = (questions: IQuestionItem[]) => {
     setQuestionStack([...questions, ...questionStack]);
   };
+
   return (
     <div className="App">
       <QuestionStackProvider>
         <QuestionForm addQuestions={addQuestions} />
-        <QuestionStack questions={questionStack} />
+        {isLoaded && <QuestionStack questions={questionStack} />}
       </QuestionStackProvider>
     </div>
   );

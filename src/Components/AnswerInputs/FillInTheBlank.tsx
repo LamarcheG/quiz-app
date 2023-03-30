@@ -16,7 +16,7 @@ export const FillInTheBlank = ({
         <input
           className="h-6 w-32 rounded-sm px-1 py-3"
           type="text"
-          name={question.id.toString()}
+          name={question.id}
           onChange={handleChange}
         ></input>
       </div>

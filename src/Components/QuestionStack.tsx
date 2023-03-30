@@ -18,9 +18,10 @@ interface QuestionStackProps {
 }
 
 export const QuestionStack = ({ questions }: QuestionStackProps) => {
-  const [selectedChoice, setSelectedChoice] = useState<[Number, string][]>([]);
-  const [questionStack, setQuestionStack] =
-    useState<IQuestionItem[]>(questions);
+  const [selectedChoice, setSelectedChoice] = useState<[string, string][]>([]);
+  const [questionStack, setQuestionStack] = useState<IQuestionItem[]>(
+    questions ? questions : []
+  );
 
   const [currentQuestion, setCurrentQuestion] = useState<IQuestionItem>(
     questionStack[0]
@@ -29,6 +30,7 @@ export const QuestionStack = ({ questions }: QuestionStackProps) => {
   useEffect(() => {
     setQuestionStack(questions);
   }, [questions]);
+
   useEffect(() => {
     setCurrentQuestion(questionStack[0]);
   }, [questionStack]);
@@ -43,14 +45,12 @@ export const QuestionStack = ({ questions }: QuestionStackProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedChoice(
       selectedChoice.map((choice) =>
-        choice[0] === Number(e.target.name)
-          ? [Number(e.target.name), e.target.value]
-          : choice
+        choice[0] === e.target.name ? [e.target.name, e.target.value] : choice
       )
     );
   };
 
-  const getAnswerForQuestion = (id: number) => {
+  const getAnswerForQuestion = (id: string) => {
     const answer = selectedChoice.find((choice) => choice[0] === id);
     return answer ? answer[1] : "";
   };

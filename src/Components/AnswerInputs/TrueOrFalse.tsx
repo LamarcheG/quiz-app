@@ -13,7 +13,7 @@ export const TrueOrFalse = ({ question, handleChange }: trueOrFalseProps) => {
         <input
           className="h-5 w-5"
           type="radio"
-          name={question.id.toString()}
+          name={question.id}
           value="true"
           onChange={handleChange}
         ></input>
@@ -23,7 +23,7 @@ export const TrueOrFalse = ({ question, handleChange }: trueOrFalseProps) => {
         <input
           className="h-5 w-5"
           type="radio"
-          name={question.id.toString()}
+          name={question.id}
           value="false"
           onChange={handleChange}
         ></input>

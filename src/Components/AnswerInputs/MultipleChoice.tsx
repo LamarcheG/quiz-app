@@ -18,7 +18,7 @@ export const MultipleChoice = ({
           <input
             className="h-5 w-5"
             type="radio"
-            name={question.id.toString()}
+            name={question.id}
             value={choice}
             onChange={handleChange}
           ></input>

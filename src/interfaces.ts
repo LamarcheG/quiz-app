@@ -1,5 +1,5 @@
 export interface IQuestionItem {
-  id: number;
+  id: string;
   question: string;
   isAnswered: boolean;
   answer: string;
