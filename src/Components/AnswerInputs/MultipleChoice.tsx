@@ -11,7 +11,7 @@ export const MultipleChoice = ({
   handleChange,
 }: multipleChoiceProps) => {
   return (
-    <ul className="p-5">
+    <div className="p-5">
       {question.choices?.map((choice) => (
         <div key={choice} className="flex items-center justify-between">
           <label>{choice}</label>
@@ -24,6 +24,6 @@ export const MultipleChoice = ({
           ></input>
         </div>
       ))}
-    </ul>
+    </div>
   );
 };

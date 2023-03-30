@@ -7,7 +7,7 @@ interface trueOrFalseProps {
 
 export const TrueOrFalse = ({ question, handleChange }: trueOrFalseProps) => {
   return (
-    <ul className="m-auto w-32 p-5">
+    <div className="m-auto w-32 p-5">
       <div className="flex items-center justify-between">
         <label>True</label>
         <input
@@ -28,6 +28,6 @@ export const TrueOrFalse = ({ question, handleChange }: trueOrFalseProps) => {
           onChange={handleChange}
         ></input>
       </div>
-    </ul>
+    </div>
   );
 };
