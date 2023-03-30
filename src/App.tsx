@@ -6,7 +6,7 @@ import useLocalStorage from "./Hooks/useLocalStorage";
 import { QuestionStackProvider } from "./Stores/QuestionStackContext";
 import db from "../src/firebaseInit";
 import { useEffect, useState } from "react";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, addDoc } from "firebase/firestore";
 
 function App() {
   const [questionStack, setQuestionStack] = useState<any>();
@@ -26,7 +26,12 @@ function App() {
   }, []);
 
   const addQuestions = (questions: IQuestionItem[]) => {
-    setQuestionStack([...questions, ...questionStack]);
+    const collectionRef = collection(db, "questions");
+    questions.forEach((question) => {
+      //remove id from question object
+      const { id, ...questionWithoutId } = question;
+      addDoc(collectionRef, questionWithoutId);
+    });
   };
 
   return (

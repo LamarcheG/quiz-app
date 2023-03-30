@@ -12,8 +12,6 @@ const multipleChoiceKeywords = ["-"];
 export const parseBruteText = (text: string): IQuestionItem[] => {
   const questionList: IQuestionItem[] = [];
 
-  var currentQuestionId = getQuestionStackIdFromLocalStorage();
-
   const blocks = splitTextIntoQuestionBlocks(text);
   if (blocks.length === 0) {
     throw new Error("No question blocks found");
@@ -44,13 +42,7 @@ export const parseBruteText = (text: string): IQuestionItem[] => {
     if (answer === "") {
       throw new Error("Answer not found");
     }
-    const questionItem = buildQuestionItem(
-      currentQuestionId,
-      question,
-      answer,
-      choices
-    );
-    currentQuestionId = currentQuestionId + 1;
+    const questionItem = buildQuestionItem("", question, answer, choices);
     questionList.push(questionItem);
   });
 
@@ -58,7 +50,7 @@ export const parseBruteText = (text: string): IQuestionItem[] => {
 };
 
 const buildQuestionItem = (
-  id: number,
+  id: string,
   question: string,
   answer: string,
   choices?: string[]
