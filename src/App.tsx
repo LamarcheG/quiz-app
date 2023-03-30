@@ -9,13 +9,16 @@ import { useEffect, useState } from "react";
 import { collection, onSnapshot, addDoc } from "firebase/firestore";
 
 function App() {
-  const [questionStack, setQuestionStack] = useState<any>();
+  const [questionStack, setQuestionStack] = useState<IQuestionItem[]>();
   const [isLoaded, setIsLoaded] = useState(false);
+  let id = 0;
 
   const subscribeToQuestions = () => {
     const collectionRef = collection(db, "questions");
     onSnapshot(collectionRef, (snapshot) => {
-      const questionsArray = snapshot.docs.map((doc) => doc.data());
+      const questionsArray = snapshot.docs.map((doc) => {
+        return { ...doc.data(), id: doc.id } as IQuestionItem;
+      });
       setQuestionStack(questionsArray);
       setIsLoaded(true);
     });
@@ -38,7 +41,7 @@ function App() {
     <div className="App">
       <QuestionStackProvider>
         <QuestionForm addQuestions={addQuestions} />
-        {isLoaded && <QuestionStack questions={questionStack} />}
+        {isLoaded && <QuestionStack questions={questionStack!} />}
       </QuestionStackProvider>
     </div>
   );
