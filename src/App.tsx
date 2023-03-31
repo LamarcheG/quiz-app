@@ -2,8 +2,6 @@ import "./App.css";
 import { QuestionStack } from "./Components/QuestionStack";
 import { IQuestionItem } from "./interfaces";
 import { QuestionForm } from "./Components/QuestionForm";
-import useLocalStorage from "./Hooks/useLocalStorage";
-import { QuestionStackProvider } from "./Stores/QuestionStackContext";
 import db from "../src/firebaseInit";
 import { useEffect, useState } from "react";
 import { collection, onSnapshot, addDoc } from "firebase/firestore";
@@ -39,10 +37,8 @@ function App() {
 
   return (
     <div className="App">
-      <QuestionStackProvider>
-        <QuestionForm addQuestions={addQuestions} />
-        {isLoaded && <QuestionStack questions={questionStack!} />}
-      </QuestionStackProvider>
+      <QuestionForm addQuestions={addQuestions} />
+      {isLoaded && <QuestionStack questions={questionStack!} />}
     </div>
   );
 }
