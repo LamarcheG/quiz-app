@@ -12,7 +12,10 @@ function App() {
   let id = 0;
 
   const subscribeToQuestions = () => {
-    const collectionRef = collection(db, "questions");
+    const collectionRef = collection(
+      db,
+      "/users/Hu88lIByGDI2NJtO2eFF/stacks/BRcTRiNyQ6hLmBqLjnzw/questions"
+    );
     onSnapshot(collectionRef, (snapshot) => {
       const questionsArray = snapshot.docs.map((doc) => {
         return { ...doc.data(), id: doc.id } as IQuestionItem;
@@ -27,7 +30,10 @@ function App() {
   }, []);
 
   const addQuestions = (questions: IQuestionItem[]) => {
-    const collectionRef = collection(db, "questions");
+    const collectionRef = collection(
+      db,
+      "/users/Hu88lIByGDI2NJtO2eFF/stacks/BRcTRiNyQ6hLmBqLjnzw/questions"
+    );
     questions.forEach((question) => {
       //remove id from question object
       const { id, ...questionWithoutId } = question;
