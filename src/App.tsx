@@ -9,7 +9,6 @@ import { collection, onSnapshot, addDoc } from "firebase/firestore";
 function App() {
   const [questionStack, setQuestionStack] = useState<IQuestionItem[]>();
   const [isLoaded, setIsLoaded] = useState(false);
-  let id = 0;
 
   const subscribeToQuestions = () => {
     const collectionRef = collection(
