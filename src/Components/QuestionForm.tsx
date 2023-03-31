@@ -37,7 +37,7 @@ export const QuestionForm = ({ addQuestions }: QuestionFormProps) => {
 
   return (
     <form className="flex flex-col items-center" onSubmit={handleSubmit}>
-      <label htmlFor="bruteText">Enter your question and answer here:</label>
+      <label htmlFor="bruteText">Enter your question card:</label>
       <textarea
         name="bruteText"
         id="bruteText"
