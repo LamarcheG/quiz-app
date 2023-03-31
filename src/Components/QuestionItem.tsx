@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { IQuestionItem } from "../interfaces";
 import { checkAnswer } from "../Utility/AnswerCheck";
+import { SubmitButton } from "./Styled/SubmitButton";
 
 interface questionItemProps {
   question: IQuestionItem;
@@ -49,12 +50,7 @@ export const QuestionItem = ({
         {isCorrect === true ? (
           <p className="text-lg text-green-700">Correct!</p>
         ) : isCorrect === false || isCorrect === null ? (
-          <button
-            type="submit"
-            className="border-2 border-blue-200 text-lg hover:border-blue-200 hover:bg-blue-200 hover:text-blue-900"
-          >
-            Submit
-          </button>
+          <SubmitButton>Submit</SubmitButton>
         ) : null}
       </form>
     </>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { IQuestionItem } from "../interfaces";
 import { parseBruteText } from "../Utility/QuestionParser";
+import { SubmitButton } from "./Styled/SubmitButton";
 
 interface QuestionFormProps {
   addQuestions: (questions: IQuestionItem[]) => void;
@@ -35,13 +36,13 @@ export const QuestionForm = ({ addQuestions }: QuestionFormProps) => {
   }, [success]);
 
   return (
-    <form className="flex flex-col" onSubmit={handleSubmit}>
+    <form className="flex flex-col items-center" onSubmit={handleSubmit}>
       <label htmlFor="bruteText">Enter your question and answer here:</label>
       <textarea
         name="bruteText"
         id="bruteText"
         rows={10}
-        className="resize p-3"
+        className="w-60 resize-y p-3 md:w-96"
         required
       ></textarea>
       {success === true ? (
@@ -49,7 +50,7 @@ export const QuestionForm = ({ addQuestions }: QuestionFormProps) => {
       ) : success === false ? (
         <p className="text-3xl text-red-700">{errorMessage}</p>
       ) : (
-        <button type="submit">Submit</button>
+        <SubmitButton className="my-5">Submit</SubmitButton>
       )}
     </form>
   );

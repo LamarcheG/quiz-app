@@ -73,7 +73,7 @@ export const QuestionStack = ({ questions }: QuestionStackProps) => {
   };
 
   return (
-    <div className="flex items-center">
+    <div className="m-auto flex w-fit items-center">
       <button type="button" onClick={prevQuestion} className="p-0">
         <svg
           xmlns="http://www.w3.org/2000/svg"
