@@ -11,7 +11,7 @@ export const FillInTheBlank = ({
 }: fillInTheBlankProps) => {
   return (
     <div className="flex items-center justify-between p-5">
-      <label>Answer</label>
+      <label className="pr-3">Answer</label>
       <input
         className="h-6 w-32 rounded-sm px-1 py-3"
         type="text"

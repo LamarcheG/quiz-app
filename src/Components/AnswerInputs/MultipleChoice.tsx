@@ -14,7 +14,7 @@ export const MultipleChoice = ({
     <div className="p-5">
       {question.choices?.map((choice) => (
         <div key={choice} className="flex items-center justify-between">
-          <label>{choice}</label>
+          <label className="pr-3">{choice}</label>
           <input
             className="h-5 w-5"
             type="radio"

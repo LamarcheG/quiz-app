@@ -19,7 +19,7 @@ export const TrueOrFalse = ({ question, handleChange }: trueOrFalseProps) => {
         ></input>
       </div>
       <div className="flex items-center justify-between">
-        <label>False</label>
+        <label className="pr-3">False</label>
         <input
           className="h-5 w-5"
           type="radio"
