@@ -5,7 +5,7 @@ import { QuestionStackProvider } from "./Stores/QuestionStackContext";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ErrorPage } from "./Pages/ErrorPage";
 import { Root } from "./Pages/Root";
-import App from "./App";
+import { Stack } from "./Pages/Stack";
 import { Index } from "./Pages/Index";
 import { MyStacks } from "./Pages/MyStacks";
 
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
       { index: true, element: <Index /> },
       {
         path: "/stacks/:stackId",
-        element: <App />,
+        element: <Stack />,
       },
       {
         path: "/stacks",
