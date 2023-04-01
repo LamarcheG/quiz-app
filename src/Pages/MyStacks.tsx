@@ -21,17 +21,17 @@ export const MyStacks = (props: any) => {
   }, []);
 
   return (
-    <div>
-      <h1>My Stacks</h1>
-      <ul className="flex flex-col">
+    <>
+      <h1 className="pb-5">My Stacks</h1>
+      <ul className="items-left flex flex-col justify-center ">
         {stacks.map((stack) => {
           return (
-            <Link to={`/stacks/${stack.id}`} key={stack.id}>
-              {stack.name}
-            </Link>
+            <li key={stack.id} className="w-fit list-inside list-disc p-2">
+              <Link to={`/stacks/${stack.id}`}>{stack.name}</Link>
+            </li>
           );
         })}
       </ul>
-    </div>
+    </>
   );
 };
