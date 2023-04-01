@@ -7,6 +7,7 @@ import { ErrorPage } from "./Pages/ErrorPage";
 import { Root } from "./Pages/Root";
 import App from "./App";
 import { Index } from "./Pages/Index";
+import { MyStacks } from "./Pages/MyStacks";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "/quiz",
         element: <App />,
+      },
+      {
+        path: "/stacks",
+        element: <MyStacks />,
       },
     ],
   },
