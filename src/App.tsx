@@ -33,7 +33,7 @@ function App() {
   const addQuestions = (questions: IQuestionItem[]) => {
     const collectionRef = collection(
       db,
-      "/users/Hu88lIByGDI2NJtO2eFF/stacks/BRcTRiNyQ6hLmBqLjnzw/questions"
+      `/users/Hu88lIByGDI2NJtO2eFF/stacks/${stackId}/questions`
     );
     questions.forEach((question) => {
       //remove id from question object
