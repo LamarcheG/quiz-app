@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Index /> },
       {
-        path: "/quiz",
+        path: "/stacks/:stackId",
         element: <App />,
       },
       {

@@ -5,15 +5,17 @@ import { QuestionForm } from "./Components/QuestionForm";
 import db from "../src/firebaseInit";
 import { useEffect, useState } from "react";
 import { collection, onSnapshot, addDoc } from "firebase/firestore";
+import { useParams } from "react-router-dom";
 
 function App() {
   const [questionStack, setQuestionStack] = useState<IQuestionItem[]>();
   const [isLoaded, setIsLoaded] = useState(false);
+  const { stackId } = useParams();
 
   const subscribeToQuestions = () => {
     const collectionRef = collection(
       db,
-      "/users/Hu88lIByGDI2NJtO2eFF/stacks/BRcTRiNyQ6hLmBqLjnzw/questions"
+      `/users/Hu88lIByGDI2NJtO2eFF/stacks/${stackId}/questions`
     );
     onSnapshot(collectionRef, (snapshot) => {
       const questionsArray = snapshot.docs.map((doc) => {
