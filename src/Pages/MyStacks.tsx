@@ -4,7 +4,8 @@ import db from "../firebaseInit";
 
 export const MyStacks = (props: any) => {
   const [stacks, setStacks] = useState<any[]>([]);
-  useEffect(() => {
+
+  const subscribeToStacks = () => {
     const collectionRef = collection(db, "/users/Hu88lIByGDI2NJtO2eFF/stacks");
     onSnapshot(collectionRef, (snapshot) => {
       const stacksArray = snapshot.docs.map((doc) => {
@@ -12,7 +13,12 @@ export const MyStacks = (props: any) => {
       });
       setStacks(stacksArray);
     });
+  };
+
+  useEffect(() => {
+    subscribeToStacks();
   }, []);
+
   return (
     <div>
       <h1>My Stacks</h1>
