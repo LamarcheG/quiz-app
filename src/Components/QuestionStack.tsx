@@ -23,6 +23,11 @@ export const QuestionStack = ({ questions }: QuestionStackProps) => {
     questions ? questions : []
   );
 
+  useEffect(() => {
+    setQuestionStack(questions);
+    setCurrentQuestion(questions[0]);
+  }, [questions]);
+
   const [currentQuestion, setCurrentQuestion] = useState<IQuestionItem>(
     questionStack[0]
   );
