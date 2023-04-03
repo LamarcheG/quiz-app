@@ -1,10 +1,20 @@
-import { collection, onSnapshot } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  onSnapshot,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
 import db from "../firebaseInit";
 import { Link } from "react-router-dom";
+import { SubmitButton } from "../Components/Styled/SubmitButton";
 
 export const MyStacks = (props: any) => {
   const [stacks, setStacks] = useState<any[]>([]);
+  const [displayForm, setDisplayForm] = useState(false);
+  const [newSubject, setNewSubject] = useState("");
 
   const subscribeToStacks = () => {
     const collectionRef = collection(db, "/users/Hu88lIByGDI2NJtO2eFF/stacks");
@@ -20,6 +30,16 @@ export const MyStacks = (props: any) => {
     subscribeToStacks();
   }, []);
 
+  const addSubject = async () => {
+    const collectionRef = collection(db, "/users/Hu88lIByGDI2NJtO2eFF/stacks");
+    addDoc(collectionRef, { name: newSubject });
+    setNewSubject("");
+  };
+
+  const handleFormChange = () => (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewSubject(e.target.value);
+  };
+
   return (
     <>
       <h1 className="pb-5">My Stacks</h1>
@@ -32,6 +52,21 @@ export const MyStacks = (props: any) => {
           );
         })}
       </ul>
+      <button type="button" onClick={() => setDisplayForm((prev) => !prev)}>
+        Add a subject
+      </button>
+      {displayForm && (
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            addSubject();
+            setDisplayForm(false);
+          }}
+        >
+          <input type="text" value={newSubject} onChange={handleFormChange()} />
+          <SubmitButton>Add</SubmitButton>
+        </form>
+      )}
     </>
   );
 };

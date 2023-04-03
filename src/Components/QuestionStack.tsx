@@ -28,14 +28,7 @@ export const QuestionStack = ({ questions }: QuestionStackProps) => {
   );
 
   useEffect(() => {
-    setQuestionStack(questions);
-  }, [questions]);
-
-  useEffect(() => {
     setCurrentQuestion(questionStack[0]);
-  }, [questionStack]);
-
-  useEffect(() => {
     //initialize the selectedChoice array with empty strings
     setSelectedChoice(
       questionStack.map((question: IQuestionItem) => [question.id, ""])
