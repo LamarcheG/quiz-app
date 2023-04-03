@@ -3,11 +3,11 @@ import { IQuestionItem } from "../interfaces";
 import { parseBruteText } from "../Utility/QuestionParser";
 import { SubmitButton } from "./Styled/SubmitButton";
 
-interface QuestionFormProps {
+interface AddQuestionFormProps {
   addQuestions: (questions: IQuestionItem[]) => void;
 }
 
-export const QuestionForm = ({ addQuestions }: QuestionFormProps) => {
+export const AddQuestionForm = ({ addQuestions }: AddQuestionFormProps) => {
   const [success, setSuccess] = useState<Boolean | null>(null);
   const [errorMessage, setErrorMessage] = useState<string>("");
 

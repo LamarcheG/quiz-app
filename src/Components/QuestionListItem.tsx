@@ -3,19 +3,19 @@ import { IQuestionItem } from "../interfaces";
 import { checkAnswer } from "../Utility/AnswerCheck";
 import { SubmitButton } from "./Styled/SubmitButton";
 
-interface questionItemProps {
+interface QuestionListItemProps {
   question: IQuestionItem;
   selectedChoice: string | null;
   children?: React.ReactNode;
   nextQuestion: () => void;
 }
 
-export const QuestionItem = ({
+export const QuestionListItem = ({
   question,
   selectedChoice,
   children,
   nextQuestion,
-}: questionItemProps) => {
+}: QuestionListItemProps) => {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

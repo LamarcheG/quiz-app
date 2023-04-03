@@ -1,6 +1,6 @@
-import { QuestionStack } from "../Components/QuestionStack";
+import { QuestionList } from "../Components/QuestionList";
 import { IQuestionItem } from "../interfaces";
-import { QuestionForm } from "../Components/QuestionForm";
+import { AddQuestionForm } from "../Components/AddQuestionForm";
 import db from "../../src/firebaseInit";
 import { useEffect, useState } from "react";
 import { collection, onSnapshot, addDoc } from "firebase/firestore";
@@ -43,8 +43,8 @@ export const Stack = () => {
 
   return (
     <div className="App">
-      <QuestionForm addQuestions={addQuestions} />
-      {isLoaded && <QuestionStack questions={questionStack!} />}
+      <AddQuestionForm addQuestions={addQuestions} />
+      {isLoaded && <QuestionList questions={questionStack!} />}
     </div>
   );
 };

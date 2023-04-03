@@ -11,13 +11,13 @@ import { FillInTheBlank } from "./AnswerInputs/FillInTheBlank";
 import { MultipleChoice } from "./AnswerInputs/MultipleChoice";
 import { ShortAnswer } from "./AnswerInputs/ShortAnswer";
 import { TrueOrFalse } from "./AnswerInputs/TrueOrFalse";
-import { QuestionItem } from "./QuestionItem";
+import { QuestionListItem } from "./QuestionListItem";
 
-interface QuestionStackProps {
+interface QuestionListProps {
   questions: IQuestionItem[];
 }
 
-export const QuestionStack = ({ questions }: QuestionStackProps) => {
+export const QuestionList = ({ questions }: QuestionListProps) => {
   const [selectedChoice, setSelectedChoice] = useState<[string, string][]>([]);
   const [questionStack, setQuestionStack] = useState<IQuestionItem[]>(
     questions ? questions : []
@@ -82,7 +82,7 @@ export const QuestionStack = ({ questions }: QuestionStackProps) => {
         </svg>
       </button>
       {questionStack.length !== 0 ? (
-        <QuestionItem
+        <QuestionListItem
           question={currentQuestion}
           key={currentQuestion.id}
           selectedChoice={getAnswerForQuestion(currentQuestion.id)}
@@ -111,7 +111,7 @@ export const QuestionStack = ({ questions }: QuestionStackProps) => {
           ) : (
             <p>Question type not supported</p>
           )}
-        </QuestionItem>
+        </QuestionListItem>
       ) : (
         <p className="p-5 text-3xl">Quiz complete!</p>
       )}
