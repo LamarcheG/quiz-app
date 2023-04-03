@@ -29,3 +29,11 @@ export enum QuestionType {
   FillInTheBlank = "FillInTheBlank",
   ShortAnswer = "ShortAnswer",
 }
+
+export interface User {
+  user: {
+    uid: string;
+    name: string;
+    email: string;
+  };
+}

@@ -10,14 +10,20 @@ import { useEffect, useState } from "react";
 import db from "../firebaseInit";
 import { Link } from "react-router-dom";
 import { SubmitButton } from "../Components/Styled/SubmitButton";
+import { useUser } from "../Stores/UserContext";
+import { User } from "../interfaces";
 
 export const MyStacks = (props: any) => {
   const [stacks, setStacks] = useState<any[]>([]);
   const [displayForm, setDisplayForm] = useState(false);
   const [newSubject, setNewSubject] = useState("");
+  const userContext = useUser() as unknown as User;
 
   const subscribeToStacks = () => {
-    const collectionRef = collection(db, "/users/Hu88lIByGDI2NJtO2eFF/stacks");
+    const collectionRef = collection(
+      db,
+      `/users/${userContext.user.uid}/stacks`
+    );
     onSnapshot(collectionRef, (snapshot) => {
       const stacksArray = snapshot.docs.map((doc) => {
         return { ...doc.data(), id: doc.id };
@@ -31,7 +37,10 @@ export const MyStacks = (props: any) => {
   }, []);
 
   const addSubject = async () => {
-    const collectionRef = collection(db, "/users/Hu88lIByGDI2NJtO2eFF/stacks");
+    const collectionRef = collection(
+      db,
+      `/users/${userContext.user.uid}/stacks`
+    );
     addDoc(collectionRef, { name: newSubject });
     setNewSubject("");
   };

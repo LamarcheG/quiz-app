@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { QuestionStackProvider } from "./Stores/QuestionStackContext";
+import { UserProvider } from "./Stores/UserContext";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ErrorPage } from "./Pages/ErrorPage";
 import { Root } from "./Pages/Root";
@@ -30,8 +30,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <QuestionStackProvider>
+    <UserProvider>
       <RouterProvider router={router} />
-    </QuestionStackProvider>
+    </UserProvider>
   </React.StrictMode>
 );

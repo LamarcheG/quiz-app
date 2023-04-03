@@ -5,16 +5,19 @@ import db from "../../src/firebaseInit";
 import { useEffect, useState } from "react";
 import { collection, onSnapshot, addDoc } from "firebase/firestore";
 import { useParams } from "react-router-dom";
+import { useUser } from "../Stores/UserContext";
+import { User } from "../interfaces";
 
 export const Stack = () => {
   const [questionStack, setQuestionStack] = useState<IQuestionItem[]>();
   const [isLoaded, setIsLoaded] = useState(false);
   const { stackId } = useParams();
+  const userContext = useUser() as unknown as User;
 
   const subscribeToQuestions = () => {
     const collectionRef = collection(
       db,
-      `/users/Hu88lIByGDI2NJtO2eFF/stacks/${stackId}/questions`
+      `/users/${userContext.user.uid}/stacks/${stackId}/questions`
     );
     onSnapshot(collectionRef, (snapshot) => {
       const questionsArray = snapshot.docs.map((doc) => {
@@ -32,7 +35,7 @@ export const Stack = () => {
   const addQuestions = (questions: IQuestionItem[]) => {
     const collectionRef = collection(
       db,
-      `/users/Hu88lIByGDI2NJtO2eFF/stacks/${stackId}/questions`
+      `/users/${userContext.user.uid}/stacks/${stackId}/questions`
     );
     questions.forEach((question) => {
       //remove id from question object

@@ -5,9 +5,9 @@ const UserDispatchContext = createContext<React.Dispatch<any> | null>(null);
 
 const initialState = {
   user: {
-    name: "",
-    email: "",
-    uid: "",
+    name: "Guillaume",
+    email: "test@email.com",
+    uid: "Hu88lIByGDI2NJtO2eFF",
   },
 };
 
