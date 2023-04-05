@@ -67,13 +67,3 @@ export const Nav = () => {
     </>
   );
 };
-// <nav className="absolute left-0 top-0 z-0 h-full bg-gray-500 lg:w-48">
-//   <div className="flex h-24 flex-col items-center justify-between">
-//     <Link to="/" className="text-lg text-gray-900">
-//       Home
-//     </Link>
-//     <Link to="/stacks" className="text-lg text-gray-900">
-//       My stacks
-//     </Link>
-//   </div>
-// </nav>
