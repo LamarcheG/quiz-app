@@ -3,9 +3,11 @@ import { Nav } from "../Components/Navigation/Nav";
 
 export const Root = () => {
   return (
-    <div className="mx-auto w-fit">
+    <>
       <Nav />
-      <Outlet />
-    </div>
+      <div className="mx-auto w-fit">
+        <Outlet />
+      </div>
+    </>
   );
 };
