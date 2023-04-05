@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { IQuestionItem } from "../interfaces";
-import { parseBruteText } from "../Utility/QuestionParser";
-import { SubmitButton } from "./Styled/SubmitButton";
+import { IQuestionItem } from "../../interfaces";
+import { parseBruteText } from "../../Utility/QuestionParser";
+import { SubmitButton } from "../Styled/SubmitButton";
 
 interface AddQuestionFormProps {
   addQuestions: (questions: IQuestionItem[]) => void;

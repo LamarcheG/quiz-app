@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { IQuestionItem } from "../interfaces";
-import { checkAnswer } from "../Utility/AnswerCheck";
-import { SubmitButton } from "./Styled/SubmitButton";
+import { IQuestionItem } from "../../interfaces";
+import { checkAnswer } from "../../Utility/AnswerCheck";
+import { SubmitButton } from "../Styled/SubmitButton";
 
 interface QuestionListItemProps {
   question: IQuestionItem;

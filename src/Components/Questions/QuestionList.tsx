@@ -6,11 +6,11 @@ import {
   TrueFalseQuestion,
   FillInTheBlankQuestion,
   ShortAnswerQuestion,
-} from "../interfaces";
-import { FillInTheBlank } from "./AnswerInputs/FillInTheBlank";
-import { MultipleChoice } from "./AnswerInputs/MultipleChoice";
-import { ShortAnswer } from "./AnswerInputs/ShortAnswer";
-import { TrueOrFalse } from "./AnswerInputs/TrueOrFalse";
+} from "../../interfaces";
+import { FillInTheBlank } from "../AnswerInputs/FillInTheBlank";
+import { MultipleChoice } from "../AnswerInputs/MultipleChoice";
+import { ShortAnswer } from "../AnswerInputs/ShortAnswer";
+import { TrueOrFalse } from "../AnswerInputs/TrueOrFalse";
 import { QuestionListItem } from "./QuestionListItem";
 
 interface QuestionListProps {

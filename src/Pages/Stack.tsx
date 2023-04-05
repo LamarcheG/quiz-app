@@ -1,6 +1,6 @@
-import { QuestionList } from "../Components/QuestionList";
+import { QuestionList } from "../Components/Questions/QuestionList";
 import { IQuestionItem } from "../interfaces";
-import { AddQuestionForm } from "../Components/AddQuestionForm";
+import { AddQuestionForm } from "../Components/Questions/AddQuestionForm";
 import db from "../../src/firebaseInit";
 import { useEffect, useState } from "react";
 import { collection, onSnapshot, addDoc } from "firebase/firestore";
