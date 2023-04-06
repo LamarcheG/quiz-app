@@ -30,9 +30,9 @@ export const Nav = () => {
       {isSmallScreen ? (
         <>
           {isNavOpen ? (
-            <nav className="static absolute left-0 top-0 z-0 h-full w-48 bg-gray-500">
+            <nav className="z-0 h-full w-48 bg-gray-500">
               <button
-                className="relative top-0 left-0 z-10 border-none px-4 py-3 outline-none"
+                className="relative top-2 left-2 z-10 border-none px-4 py-3 outline-none"
                 onClick={() => setIsNavOpen(false)}
               >
                 <svg
@@ -54,7 +54,7 @@ export const Nav = () => {
             </nav>
           ) : (
             <button
-              className="absolute top-0 left-0 z-10 border-none px-3 py-2 outline-none"
+              className="absolute top-2 left-2 z-10 border-none px-3 py-2 outline-none"
               onClick={() => setIsNavOpen(true)}
             >
               <svg
@@ -68,7 +68,7 @@ export const Nav = () => {
           )}
         </>
       ) : (
-        <nav className="absolute left-0 top-0 z-0 h-full w-48 bg-gray-500">
+        <nav className="absolute left-0 top-0 z-0 h-full w-56 bg-gray-500">
           <div className="flex h-24 flex-col items-center justify-between">
             <Link to="/" className="text-lg text-gray-900">
               Home

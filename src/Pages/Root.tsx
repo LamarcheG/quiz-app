@@ -1,13 +1,13 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { Nav } from "../Components/Navigation/Nav";
 
 export const Root = () => {
   return (
-    <>
+    <div className="flex h-full w-full">
       <Nav />
-      <div className="mx-auto w-fit">
+      <div className="flex w-full items-center justify-center">
         <Outlet />
       </div>
-    </>
+    </div>
   );
 };
