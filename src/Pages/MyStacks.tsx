@@ -51,7 +51,18 @@ export const MyStacks = (props: any) => {
 
   return (
     <div>
-      <h1 className="pb-5">My Stacks</h1>
+      <div className="flex items-center pb-5">
+        <h1 className="pr-5">My Stacks</h1>
+        {!displayForm && (
+          <button
+            type="button"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-green-500 p-0"
+            onClick={() => setDisplayForm(true)}
+          >
+            +
+          </button>
+        )}
+      </div>
       <ul className="items-left flex flex-col justify-center ">
         {stacks.map((stack) => {
           return (
@@ -61,9 +72,6 @@ export const MyStacks = (props: any) => {
           );
         })}
       </ul>
-      <button type="button" onClick={() => setDisplayForm((prev) => !prev)}>
-        Add a subject
-      </button>
       {displayForm && (
         <form
           onSubmit={(e) => {
@@ -71,9 +79,24 @@ export const MyStacks = (props: any) => {
             addSubject();
             setDisplayForm(false);
           }}
+          className="flex flex-col items-center"
         >
-          <input type="text" value={newSubject} onChange={handleFormChange()} />
-          <SubmitButton>Add</SubmitButton>
+          <input
+            type="text"
+            className="mt-2"
+            value={newSubject}
+            onChange={handleFormChange()}
+          />
+          <div>
+            <SubmitButton className="mt-2">Add</SubmitButton>
+            <button
+              type="button"
+              className="underline"
+              onClick={() => setDisplayForm(false)}
+            >
+              Annuler
+            </button>
+          </div>
         </form>
       )}
     </div>
