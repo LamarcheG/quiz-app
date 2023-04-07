@@ -50,7 +50,7 @@ export const MyStacks = (props: any) => {
   };
 
   return (
-    <>
+    <div>
       <h1 className="pb-5">My Stacks</h1>
       <ul className="items-left flex flex-col justify-center ">
         {stacks.map((stack) => {
@@ -76,6 +76,6 @@ export const MyStacks = (props: any) => {
           <SubmitButton>Add</SubmitButton>
         </form>
       )}
-    </>
+    </div>
   );
 };
