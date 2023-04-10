@@ -1,4 +1,7 @@
+import { addDoc, collection } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import db from "../../firebaseInit";
 import {
   IQuestionItem,
   MultipleChoiceQuestion,
@@ -6,7 +9,9 @@ import {
   TrueFalseQuestion,
   FillInTheBlankQuestion,
   ShortAnswerQuestion,
+  User,
 } from "../../interfaces";
+import { useUser } from "../../Stores/UserContext";
 import { FillInTheBlank } from "../AnswerInputs/FillInTheBlank";
 import { MultipleChoice } from "../AnswerInputs/MultipleChoice";
 import { ShortAnswer } from "../AnswerInputs/ShortAnswer";
@@ -28,6 +33,9 @@ export const QuestionList = ({ questions }: QuestionListProps) => {
   const [nbCorrect, setNbCorrect] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
 
+  const userContext = useUser() as unknown as User;
+  const { stackId } = useParams();
+
   useEffect(() => {
     setQuestionStack(questions);
     setCurrentQuestion(questions[0]);
@@ -44,8 +52,24 @@ export const QuestionList = ({ questions }: QuestionListProps) => {
   useEffect(() => {
     if (questionStack.length === 0) {
       setIsFinished(true);
+      logStats();
     }
   }, [questionStack]);
+
+  const logStats = () => {
+    let percentage = calculateScore();
+
+    //log the stats in the object in firebase
+    const collectionRef = collection(
+      db,
+      `/users/${userContext.user.uid}/stacks/${stackId}/stats`
+    );
+    //add a new document to the collection
+    addDoc(collectionRef, {
+      score: percentage,
+      date: new Date(),
+    });
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedChoice(
