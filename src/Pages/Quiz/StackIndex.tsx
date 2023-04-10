@@ -32,6 +32,7 @@ export const StackIndex = () => {
       <p>Stack Name: {stackName}</p>
       <Link to={`/stacks/${stackId}/quiz`}>Quiz</Link>
       <Link to={`/stacks/${stackId}/stats`}>Stats</Link>
+      <Link to={`/stacks/${stackId}/edit`}>Edit</Link>
     </div>
   );
 };

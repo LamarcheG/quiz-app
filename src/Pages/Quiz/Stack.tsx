@@ -32,21 +32,8 @@ export const Stack = () => {
     subscribeToQuestions();
   }, []);
 
-  const addQuestions = (questions: IQuestionItem[]) => {
-    const collectionRef = collection(
-      db,
-      `/users/${userContext.user.uid}/stacks/${stackId}/questions`
-    );
-    questions.forEach((question) => {
-      //remove id from question object
-      const { id, ...questionWithoutId } = question;
-      addDoc(collectionRef, questionWithoutId);
-    });
-  };
-
   return (
     <div className="App">
-      <AddQuestionForm addQuestions={addQuestions} />
       {isLoaded && <QuestionList questions={questionStack!} />}
     </div>
   );
