@@ -35,6 +35,12 @@ export const QuestionList = ({ questions }: QuestionListProps) => {
 
   const userContext = useUser() as unknown as User;
   const { stackId } = useParams();
+  const [beginTime, setBeginTime] = useState(new Date());
+  const [endTime, setEndTime] = useState(new Date());
+
+  useEffect(() => {
+    setBeginTime(new Date());
+  }, []);
 
   useEffect(() => {
     setQuestionStack(questions);
@@ -52,12 +58,19 @@ export const QuestionList = ({ questions }: QuestionListProps) => {
   useEffect(() => {
     if (questionStack.length === 0) {
       setIsFinished(true);
-      logStats();
+      setEndTime(new Date());
     }
   }, [questionStack]);
 
+  useEffect(() => {
+    if (isFinished) {
+      logStats();
+    }
+  }, [isFinished]);
+
   const logStats = () => {
     let percentage = calculateScore();
+    let time = calculateTime();
 
     //log the stats in the object in firebase
     const collectionRef = collection(
@@ -67,6 +80,7 @@ export const QuestionList = ({ questions }: QuestionListProps) => {
     //add a new document to the collection
     addDoc(collectionRef, {
       score: percentage,
+      time: time,
       date: new Date(),
     });
   };
@@ -106,6 +120,12 @@ export const QuestionList = ({ questions }: QuestionListProps) => {
 
   const calculateScore = () => {
     return Math.round((nbCorrect / questions.length) * 100);
+  };
+
+  const calculateTime = () => {
+    //calculate the time in seconds between the begin and end time
+    let time = (endTime.getTime() - beginTime.getTime()) / 1000;
+    return time;
   };
 
   return (
