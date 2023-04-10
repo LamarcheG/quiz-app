@@ -55,7 +55,9 @@ export const QuestionList = ({ questions }: QuestionListProps) => {
 
   const prevQuestion = () => {
     //put the previous questions at the top of the stack
-    setQuestionStack([...questionStack.slice(1), questionStack[0]]);
+    //remove the last question from the stack and put it at the top
+    let prev = questionStack.slice(-1);
+    setQuestionStack([...prev, ...questionStack.slice(0, -1)]);
   };
 
   const nextQuestion = () => {
