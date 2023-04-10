@@ -30,24 +30,25 @@ export const Nav = () => {
       {isSmallScreen ? (
         <>
           {isNavOpen ? (
-            <nav className="absolute z-0 h-full w-48 bg-gray-500">
+            <nav className="absolute z-0 h-full w-48 bg-gray-900">
+              {/** Close button */}
               <button
-                className="relative top-2 left-2 z-10 border-none px-4 py-3 outline-none"
+                className="relative top-2 left-2 z-10 border-none bg-neutral-800 px-4 py-3 outline-none"
                 onClick={() => setIsNavOpen(false)}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 384 512"
-                  className="w-2"
+                  className="w-2 fill-neutral-300"
                 >
                   <path d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z" />
                 </svg>
               </button>
-              <div className="flex h-24 flex-col items-center justify-between">
-                <Link to="/" className="text-lg text-gray-900">
+              <div className="flex min-h-min flex-col items-center justify-between">
+                <Link to="/" className="pt-5 text-lg text-white">
                   Home
                 </Link>
-                <Link to="/stacks" className="text-lg text-gray-900">
+                <Link to="/stacks" className="pt-5 text-lg text-white">
                   My stacks
                 </Link>
               </div>
@@ -68,12 +69,12 @@ export const Nav = () => {
           )}
         </>
       ) : (
-        <nav className="absolute left-0 top-0 z-0 h-full w-56 bg-gray-500">
-          <div className="flex h-24 flex-col items-center justify-between">
-            <Link to="/" className="text-lg text-gray-900">
+        <nav className="absolute left-0 top-0 z-0 h-full w-56 bg-gray-900">
+          <div className="flex min-h-min flex-col items-center justify-between">
+            <Link to="/" className="pt-5 text-lg text-white">
               Home
             </Link>
-            <Link to="/stacks" className="text-lg text-gray-900">
+            <Link to="/stacks" className="pt-5 text-lg text-white">
               My stacks
             </Link>
           </div>
