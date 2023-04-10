@@ -25,14 +25,31 @@ export const StackIndex = () => {
     };
     getStackName();
   }, []);
+
+  const captitalize = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
   return (
-    <div>
-      <h1>Stack Index</h1>
-      <p>Stack ID: {stackId}</p>
-      <p>Stack Name: {stackName}</p>
-      <Link to={`/stacks/${stackId}/quiz`}>Quiz</Link>
-      <Link to={`/stacks/${stackId}/stats`}>Stats</Link>
-      <Link to={`/stacks/${stackId}/edit`}>Edit</Link>
+    <div className="pt-12 text-center">
+      <h1>Subject: {captitalize(stackName)}</h1>
+      <Link
+        to={`/stacks/${stackId}/quiz`}
+        className="inline-block rounded-md border-2 border-gray-900 px-3 py-2"
+      >
+        Quiz
+      </Link>
+      <Link
+        to={`/stacks/${stackId}/stats`}
+        className="inline-block rounded-md border-2 border-gray-900 px-3 py-2"
+      >
+        Stats
+      </Link>
+      <Link
+        to={`/stacks/${stackId}/edit`}
+        className="inline-block rounded-md border-2 border-gray-900 px-3 py-2"
+      >
+        Edit
+      </Link>
       <Outlet />
     </div>
   );

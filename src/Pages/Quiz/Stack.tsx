@@ -32,9 +32,5 @@ export const Stack = () => {
     subscribeToQuestions();
   }, []);
 
-  return (
-    <div className="App">
-      {isLoaded && <QuestionList questions={questionStack!} />}
-    </div>
-  );
+  return <div>{isLoaded && <QuestionList questions={questionStack!} />}</div>;
 };

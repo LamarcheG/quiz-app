@@ -69,7 +69,7 @@ export const Nav = () => {
           )}
         </>
       ) : (
-        <nav className="absolute left-0 top-0 z-0 h-full w-56 bg-gray-900">
+        <nav className="h-full w-64 bg-gray-900">
           <div className="flex min-h-min flex-col items-center justify-between">
             <Link to="/" className="pt-5 text-lg text-white">
               Home

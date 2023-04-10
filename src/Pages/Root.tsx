@@ -5,7 +5,7 @@ export const Root = () => {
   return (
     <div className="flex h-full w-full">
       <Nav />
-      <div className="grid w-full items-center justify-center">
+      <div className="w-full">
         <Outlet />
       </div>
     </div>
