@@ -56,7 +56,7 @@ export const MyStacks = (props: any) => {
         {!displayForm && (
           <button
             type="button"
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-green-500 p-0"
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-sky-600 p-0"
             onClick={() => setDisplayForm(true)}
           >
             +
