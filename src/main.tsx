@@ -22,18 +22,20 @@ const router = createBrowserRouter([
       {
         path: "/stacks/:stackId",
         element: <StackIndex />,
-      },
-      {
-        path: "/stacks/:stackId/quiz",
-        element: <Stack />,
-      },
-      {
-        path: "/stacks/:stackId/stats",
-        element: <Stats />,
-      },
-      {
-        path: "/stacks/:stackId/edit",
-        element: <EditStack />,
+        children: [
+          {
+            path: "/stacks/:stackId/quiz",
+            element: <Stack />,
+          },
+          {
+            path: "/stacks/:stackId/stats",
+            element: <Stats />,
+          },
+          {
+            path: "/stacks/:stackId/edit",
+            element: <EditStack />,
+          },
+        ],
       },
       {
         path: "/stacks",

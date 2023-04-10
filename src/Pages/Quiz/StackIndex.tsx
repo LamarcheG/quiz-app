@@ -1,6 +1,6 @@
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 import db from "../../firebaseInit";
 import { User } from "../../interfaces";
 import { useUser } from "../../Stores/UserContext";
@@ -33,6 +33,7 @@ export const StackIndex = () => {
       <Link to={`/stacks/${stackId}/quiz`}>Quiz</Link>
       <Link to={`/stacks/${stackId}/stats`}>Stats</Link>
       <Link to={`/stacks/${stackId}/edit`}>Edit</Link>
+      <Outlet />
     </div>
   );
 };
