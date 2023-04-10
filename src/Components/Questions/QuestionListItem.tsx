@@ -7,14 +7,14 @@ interface QuestionListItemProps {
   question: IQuestionItem;
   selectedChoice: string | null;
   children?: React.ReactNode;
-  nextQuestion: () => void;
+  questionAnswered: (isCorrect: boolean) => void;
 }
 
 export const QuestionListItem = ({
   question,
   selectedChoice,
   children,
-  nextQuestion,
+  questionAnswered,
 }: QuestionListItemProps) => {
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
@@ -25,9 +25,10 @@ export const QuestionListItem = ({
 
     if (checkAnswer(question.answer, selectedChoice)) {
       setIsCorrect(true);
-      nextQuestion();
+      questionAnswered(true);
     } else {
       setIsCorrect(false);
+      questionAnswered(false);
     }
   };
 
