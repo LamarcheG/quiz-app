@@ -1,15 +1,12 @@
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  onSnapshot,
-} from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import db from "../../firebaseInit";
 import { User } from "../../interfaces";
 import { useUser } from "../../Stores/UserContext";
+import { Chart as ChartJS, LinearScale } from "chart.js";
+import { Line } from "react-chartjs-2";
+import "chart.js/auto";
 
 export const Stats = () => {
   const { stackId } = useParams();
@@ -21,6 +18,8 @@ export const Stats = () => {
     const newDate = new Date(date.seconds * 1000);
     return newDate;
   };
+
+  ChartJS.register(LinearScale);
 
   useEffect(() => {
     const getStackStats = async () => {
@@ -81,6 +80,11 @@ export const Stats = () => {
     return (total / statList.length).toFixed(2) + " seconds";
   };
 
+  const getLabels = () => {
+    let labels = statList.map((stat) => formatDateTime(stat.date));
+    return labels;
+  };
+
   return (
     <div>
       {statList.map((stat) => {
@@ -96,6 +100,34 @@ export const Stats = () => {
         <p>Average Score: {getAverageScore()}</p>
         <p>Average Time: {getAverageTime()}</p>
       </div>
+      <Line
+        datasetIdKey="id"
+        data={{
+          labels: getLabels(),
+          datasets: [
+            {
+              label: "Score",
+              data: statList.map((stat) => stat.score),
+              borderColor: "rgb(255, 99, 132)",
+              backgroundColor: "rgba(255, 99, 132, 0.5)",
+            },
+          ],
+        }}
+      />
+      <Line
+        datasetIdKey="id2"
+        data={{
+          labels: getLabels(),
+          datasets: [
+            {
+              label: "Time",
+              data: statList.map((stat) => stat.time),
+              borderColor: "rgb(54, 162, 235)",
+              backgroundColor: "rgba(54, 162, 235, 0.5)",
+            },
+          ],
+        }}
+      />
     </div>
   );
 };
