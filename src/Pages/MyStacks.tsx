@@ -50,55 +50,57 @@ export const MyStacks = (props: any) => {
   };
 
   return (
-    <div>
-      <div className="flex items-center pb-5">
-        <h1 className="pr-5">My Stacks</h1>
-        {!displayForm && (
-          <button
-            type="button"
-            className="flex h-8 w-8 items-center justify-center rounded-full bg-sky-600 p-0"
-            onClick={() => setDisplayForm(true)}
-          >
-            +
-          </button>
-        )}
-      </div>
-      <ul className="items-left flex flex-col justify-center ">
-        {stacks.map((stack) => {
-          return (
-            <li key={stack.id} className="w-fit list-inside list-disc p-2">
-              <Link to={`/stacks/${stack.id}`}>{stack.name}</Link>
-            </li>
-          );
-        })}
-      </ul>
-      {displayForm && (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            addSubject();
-            setDisplayForm(false);
-          }}
-          className="flex flex-col items-center"
-        >
-          <input
-            type="text"
-            className="mt-2"
-            value={newSubject}
-            onChange={handleFormChange()}
-          />
-          <div>
-            <SubmitButton className="mt-2">Add</SubmitButton>
+    <div className="grid h-full items-center justify-center">
+      <div>
+        <div className="flex items-center pb-5">
+          <h1 className="pr-5">My Stacks</h1>
+          {!displayForm && (
             <button
               type="button"
-              className="underline"
-              onClick={() => setDisplayForm(false)}
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-sky-600 p-0"
+              onClick={() => setDisplayForm(true)}
             >
-              Annuler
+              +
             </button>
-          </div>
-        </form>
-      )}
+          )}
+        </div>
+        <ul className="items-left flex flex-col justify-center ">
+          {stacks.map((stack) => {
+            return (
+              <li key={stack.id} className="w-fit list-inside list-disc p-2">
+                <Link to={`/stacks/${stack.id}`}>{stack.name}</Link>
+              </li>
+            );
+          })}
+        </ul>
+        {displayForm && (
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              addSubject();
+              setDisplayForm(false);
+            }}
+            className="flex flex-col items-center"
+          >
+            <input
+              type="text"
+              className="mt-2"
+              value={newSubject}
+              onChange={handleFormChange()}
+            />
+            <div>
+              <SubmitButton className="mt-2">Add</SubmitButton>
+              <button
+                type="button"
+                className="underline"
+                onClick={() => setDisplayForm(false)}
+              >
+                Annuler
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
     </div>
   );
 };

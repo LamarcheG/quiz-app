@@ -8,6 +8,9 @@ import { useUser } from "../../Stores/UserContext";
 export const StackIndex = () => {
   const { stackId } = useParams();
   const [stackName, setStackName] = useState("");
+  const [activeTab, setActiveTab] = useState(
+    "index" as "quiz" | "stats" | "edit" | "index"
+  );
   const userContext = useUser() as unknown as User;
 
   useEffect(() => {
@@ -29,28 +32,49 @@ export const StackIndex = () => {
   const captitalize = (str: string) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
+
+  const handleTabClick = (tab: "quiz" | "stats" | "edit") => () => {
+    setActiveTab(tab);
+  };
+
   return (
     <div className="pt-12 text-center">
       <h1>Subject: {captitalize(stackName)}</h1>
-      <Link
-        to={`/stacks/${stackId}/quiz`}
-        className="inline-block rounded-md border-2 border-gray-900 px-3 py-2"
-      >
-        Quiz
-      </Link>
-      <Link
-        to={`/stacks/${stackId}/stats`}
-        className="inline-block rounded-md border-2 border-gray-900 px-3 py-2"
-      >
-        Stats
-      </Link>
-      <Link
-        to={`/stacks/${stackId}/edit`}
-        className="inline-block rounded-md border-2 border-gray-900 px-3 py-2"
-      >
-        Edit
-      </Link>
-      <Outlet />
+      <div className="m-auto mt-2 flex w-4/6 items-center justify-between xl:w-64">
+        <Link
+          to={`/stacks/${stackId}/quiz`}
+          className={
+            "inline-block w-16 rounded-full border-2 px-3 py-1 text-white" +
+            (activeTab === "quiz" ? " border-gray-900" : " border-neutral-500")
+          }
+          onClick={handleTabClick("quiz")}
+        >
+          Quiz
+        </Link>
+        <Link
+          to={`/stacks/${stackId}/stats`}
+          className={
+            "inline-block w-16 rounded-full border-2 px-3 py-1 text-white" +
+            (activeTab === "stats" ? " border-gray-900" : " border-neutral-500")
+          }
+          onClick={handleTabClick("stats")}
+        >
+          Stats
+        </Link>
+        <Link
+          to={`/stacks/${stackId}/edit`}
+          className={
+            "inline-block w-16 rounded-full border-2 px-3 py-1 text-white" +
+            (activeTab === "edit" ? " border-gray-900" : " border-neutral-500")
+          }
+          onClick={handleTabClick("edit")}
+        >
+          Edit
+        </Link>
+      </div>
+      <div className="mt-3">
+        <Outlet />
+      </div>
     </div>
   );
 };

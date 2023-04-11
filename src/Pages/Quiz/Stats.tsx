@@ -93,7 +93,7 @@ export const Stats = () => {
     <>
       {isLoaded ? (
         <div>
-          <div className="mt-5">
+          <div>
             <p>Average Score: {getAverageScore()}</p>
             <p>Average Time: {getAverageTime()}</p>
           </div>
