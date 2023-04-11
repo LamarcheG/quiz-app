@@ -9,7 +9,7 @@ export const StackIndex = () => {
   const { stackId } = useParams();
   const [stackName, setStackName] = useState("");
   const [activeTab, setActiveTab] = useState(
-    "index" as "quiz" | "stats" | "edit" | "index"
+    "quiz" as "quiz" | "stats" | "edit"
   );
   const userContext = useUser() as unknown as User;
 
