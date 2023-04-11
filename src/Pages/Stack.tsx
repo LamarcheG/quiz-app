@@ -1,9 +1,9 @@
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link, Outlet, useParams } from "react-router-dom";
-import db from "../../firebaseInit";
-import { User } from "../../interfaces";
-import { useUser } from "../../Stores/UserContext";
+import db from "../firebaseInit";
+import { User } from "../interfaces";
+import { useUser } from "../Stores/UserContext";
 
 export const StackIndex = () => {
   const { stackId } = useParams();

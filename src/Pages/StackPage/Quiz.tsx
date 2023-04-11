@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import { useUser } from "../../Stores/UserContext";
 import { User } from "../../interfaces";
 
-export const Stack = () => {
+export const Quiz = () => {
   const [questionStack, setQuestionStack] = useState<IQuestionItem[]>();
   const [isLoaded, setIsLoaded] = useState(false);
   const { stackId } = useParams();

@@ -5,12 +5,12 @@ import { UserProvider } from "./Stores/UserContext";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ErrorPage } from "./Pages/ErrorPage";
 import { Root } from "./Pages/Root";
-import { Stack } from "./Pages/Quiz/Stack";
+import { Quiz } from "./Pages/StackPage/Quiz";
 import { Index } from "./Pages/Index";
 import { MyStacks } from "./Pages/MyStacks";
-import { Stats } from "./Pages/Quiz/Stats";
-import { EditStack } from "./Pages/Quiz/EditStack";
-import { StackIndex } from "./Pages/Quiz/StackIndex";
+import { Stats } from "./Pages/StackPage/Stats";
+import { EditStack } from "./Pages/StackPage/EditStack";
+import { StackIndex } from "./Pages/Stack";
 
 const router = createBrowserRouter([
   {
@@ -23,9 +23,10 @@ const router = createBrowserRouter([
         path: "/stacks/:stackId",
         element: <StackIndex />,
         children: [
+          { index: true, element: <Quiz /> },
           {
             path: "/stacks/:stackId/quiz",
-            element: <Stack />,
+            element: <Quiz />,
           },
           {
             path: "/stacks/:stackId/stats",
