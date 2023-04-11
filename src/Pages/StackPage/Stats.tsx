@@ -58,13 +58,12 @@ export const Stats = () => {
 
   const formatDateTime = (date: Date) => {
     const newDate = new Date(date);
-    return (
-      newDate.toDateString() +
-      " " +
-      newDate.getHours() +
-      ":" +
-      newDate.getMinutes()
-    );
+    let hours = newDate.getHours();
+    let minutes = newDate.getMinutes().toString();
+    if (newDate.getMinutes() < 10) {
+      minutes = "0" + newDate.getMinutes();
+    }
+    return newDate.toDateString() + " " + hours + ":" + minutes;
   };
 
   const getAverageScore = () => {
