@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import db from "../../firebaseInit";
 import { User } from "../../interfaces";
 import { useUser } from "../../Stores/UserContext";
-import { Chart as ChartJS, LinearScale } from "chart.js";
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
 
@@ -13,13 +12,12 @@ export const Stats = () => {
   const [statListOriginal, setStatListOriginal] = useState<any[]>([]);
   const [statList, setStatList] = useState<any[]>([]);
   const userContext = useUser() as unknown as User;
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const convertFirebaseDate = (date: any) => {
     const newDate = new Date(date.seconds * 1000);
     return newDate;
   };
-
-  ChartJS.register(LinearScale);
 
   useEffect(() => {
     const getStackStats = async () => {
@@ -45,6 +43,12 @@ export const Stats = () => {
     sortStats(newStatList);
     setStatList(newStatList);
   }, [statListOriginal]);
+
+  useEffect(() => {
+    if (statList.length > 0) {
+      setIsLoaded(true);
+    }
+  }, [statList]);
 
   const sortStats = (statList: any[]) => {
     statList.sort((a, b) => {
@@ -86,48 +90,53 @@ export const Stats = () => {
   };
 
   return (
-    <div>
-      {statList.map((stat) => {
-        return (
-          <div key={stat.id} className="border">
-            <p>{formatDateTime(stat.date)}</p>
-            <p>{stat.score}</p>
-            <p>{stat.time}</p>
+    <>
+      {isLoaded ? (
+        <div>
+          <div className="mt-5">
+            <p>Average Score: {getAverageScore()}</p>
+            <p>Average Time: {getAverageTime()}</p>
           </div>
-        );
-      })}
-      <div>
-        <p>Average Score: {getAverageScore()}</p>
-        <p>Average Time: {getAverageTime()}</p>
-      </div>
-      <Line
-        datasetIdKey="id"
-        data={{
-          labels: getLabels(),
-          datasets: [
-            {
-              label: "Score",
-              data: statList.map((stat) => stat.score),
-              borderColor: "rgb(255, 99, 132)",
-              backgroundColor: "rgba(255, 99, 132, 0.5)",
-            },
-          ],
-        }}
-      />
-      <Line
-        datasetIdKey="id2"
-        data={{
-          labels: getLabels(),
-          datasets: [
-            {
-              label: "Time",
-              data: statList.map((stat) => stat.time),
-              borderColor: "rgb(54, 162, 235)",
-              backgroundColor: "rgba(54, 162, 235, 0.5)",
-            },
-          ],
-        }}
-      />
-    </div>
+          {statList.length > 1 ? (
+            <div className="m-auto w-full md:w-4/6">
+              <Line
+                datasetIdKey="id"
+                data={{
+                  labels: getLabels(),
+                  datasets: [
+                    {
+                      label: "Score",
+                      data: statList.map((stat) => stat.score),
+                      borderColor: "rgb(255, 99, 132)",
+                      backgroundColor: "rgba(255, 99, 132, 0.5)",
+                    },
+                  ],
+                }}
+              />
+              <Line
+                datasetIdKey="id2"
+                data={{
+                  labels: getLabels(),
+                  datasets: [
+                    {
+                      label: "Time",
+                      data: statList.map((stat) => stat.time),
+                      borderColor: "rgb(54, 162, 235)",
+                      backgroundColor: "rgba(54, 162, 235, 0.5)",
+                    },
+                  ],
+                }}
+              />
+            </div>
+          ) : (
+            <p className="mt-5 text-xl text-red-500">
+              Not enough data to display charts
+            </p>
+          )}
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )}
+    </>
   );
 };
