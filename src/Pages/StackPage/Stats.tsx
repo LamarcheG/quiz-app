@@ -58,14 +58,25 @@ export const Stats = () => {
     });
   };
 
-  const formatDateTime = (date: Date) => {
+  const formatDateTime = (date: Date, lastDate?: Date) => {
+    if (lastDate) {
+      //if the date is the same as the last date, only show the time
+      if (date.toDateString() === lastDate.toDateString()) {
+        let hours = date.getHours();
+        let minutes = date.getMinutes().toString();
+        if (date.getMinutes() < 10) {
+          minutes = "0" + date.getMinutes();
+        }
+        return hours + ":" + minutes;
+      }
+    }
     const newDate = new Date(date);
     let hours = newDate.getHours();
     let minutes = newDate.getMinutes().toString();
     if (newDate.getMinutes() < 10) {
       minutes = "0" + newDate.getMinutes();
     }
-    return newDate.toDateString() + " " + hours + ":" + minutes;
+    return newDate.toLocaleDateString("en-US") + " " + hours + ":" + minutes;
   };
 
   const getNbOfRounds = () => {
@@ -90,7 +101,12 @@ export const Stats = () => {
   };
 
   const getLabels = () => {
-    let labels = statList.map((stat) => formatDateTime(stat.date));
+    let labels: string[] = [];
+    let lastDate: Date | undefined = undefined;
+    statList.forEach((stat) => {
+      labels.push(formatDateTime(stat.date, lastDate));
+      lastDate = stat.date;
+    });
     return labels;
   };
 
