@@ -13,6 +13,8 @@ export const Stats = () => {
   const [statList, setStatList] = useState<any[]>([]);
   const userContext = useUser() as unknown as User;
   const [isLoaded, setIsLoaded] = useState(false);
+  const [nbOfStats, setNbOfStats] = useState(5);
+  const [showLatest, setShowLatest] = useState(false);
 
   const convertFirebaseDate = (date: any) => {
     const newDate = new Date(date.seconds * 1000);
@@ -92,10 +94,44 @@ export const Stats = () => {
     return labels;
   };
 
+  const getLabelsLatest = () => {
+    let labels = statList
+      .slice(statList.length - nbOfStats, statList.length)
+      .map((stat) => formatDateTime(stat.date));
+    return labels;
+  };
+
+  const getScoreData = () => {
+    let data = statList.map((stat) => stat.score);
+    return data;
+  };
+
+  const getScoreDataLatest = () => {
+    let data = statList
+      .slice(statList.length - nbOfStats, statList.length)
+      .map((stat) => stat.score);
+    return data;
+  };
+
+  const getTimeData = () => {
+    let data = statList.map((stat) => stat.time);
+    return data;
+  };
+
+  const getTimeDataLatest = () => {
+    let data = statList
+      .slice(statList.length - nbOfStats, statList.length)
+      .map((stat) => stat.time);
+    return data;
+  };
+
   return (
     <>
       {isLoaded ? (
         <div>
+          <button onClick={() => setShowLatest(!showLatest)}>
+            {showLatest ? "Show all" : "Show latest"}
+          </button>
           <div>
             <p>Number of tests taken: {getNbOfRounds()}</p>
             <p>Average Score: {getAverageScore()}</p>
@@ -103,34 +139,69 @@ export const Stats = () => {
           </div>
           {statList.length > 1 ? (
             <div className="m-auto w-full md:w-4/6">
-              <Line
-                datasetIdKey="id"
-                data={{
-                  labels: getLabels(),
-                  datasets: [
-                    {
-                      label: "Score",
-                      data: statList.map((stat) => stat.score),
-                      borderColor: "rgb(255, 99, 132)",
-                      backgroundColor: "rgba(255, 99, 132, 0.5)",
-                    },
-                  ],
-                }}
-              />
-              <Line
-                datasetIdKey="id2"
-                data={{
-                  labels: getLabels(),
-                  datasets: [
-                    {
-                      label: "Time",
-                      data: statList.map((stat) => stat.time),
-                      borderColor: "rgb(54, 162, 235)",
-                      backgroundColor: "rgba(54, 162, 235, 0.5)",
-                    },
-                  ],
-                }}
-              />
+              {showLatest ? (
+                <div>
+                  <Line
+                    datasetIdKey="id"
+                    data={{
+                      labels: getLabelsLatest(),
+                      datasets: [
+                        {
+                          label: "Score",
+                          data: getScoreDataLatest(),
+                          borderColor: "rgb(255, 99, 132)",
+                          backgroundColor: "rgba(255, 99, 132, 0.5)",
+                        },
+                      ],
+                    }}
+                  />
+                  <Line
+                    datasetIdKey="id2"
+                    data={{
+                      labels: getLabelsLatest(),
+                      datasets: [
+                        {
+                          label: "Time",
+                          data: getTimeDataLatest(),
+                          borderColor: "rgb(54, 162, 235)",
+                          backgroundColor: "rgba(54, 162, 235, 0.5)",
+                        },
+                      ],
+                    }}
+                  />
+                </div>
+              ) : (
+                <div>
+                  <Line
+                    datasetIdKey="id"
+                    data={{
+                      labels: getLabels(),
+                      datasets: [
+                        {
+                          label: "Score",
+                          data: statList.map((stat) => stat.score),
+                          borderColor: "rgb(255, 99, 132)",
+                          backgroundColor: "rgba(255, 99, 132, 0.5)",
+                        },
+                      ],
+                    }}
+                  />
+                  <Line
+                    datasetIdKey="id2"
+                    data={{
+                      labels: getLabels(),
+                      datasets: [
+                        {
+                          label: "Time",
+                          data: statList.map((stat) => stat.time),
+                          borderColor: "rgb(54, 162, 235)",
+                          backgroundColor: "rgba(54, 162, 235, 0.5)",
+                        },
+                      ],
+                    }}
+                  />
+                </div>
+              )}
             </div>
           ) : (
             <p className="mt-5 text-xl text-red-500">
