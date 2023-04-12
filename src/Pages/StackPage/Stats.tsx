@@ -125,22 +125,36 @@ export const Stats = () => {
     return data;
   };
 
+  const handleNbStatsChange = (e: any) => {
+    setNbOfStats(e.target.value);
+  };
+
   return (
     <>
       {isLoaded ? (
         <div>
-          <button onClick={() => setShowLatest(!showLatest)}>
-            {showLatest ? "Show all" : "Show latest"}
-          </button>
           <div>
             <p>Number of tests taken: {getNbOfRounds()}</p>
             <p>Average Score: {getAverageScore()}</p>
             <p>Average Time: {getAverageTime()}</p>
           </div>
           {statList.length > 1 ? (
-            <div className="m-auto w-full md:w-4/6">
+            <div className="m-auto mt-3 w-full md:w-4/6">
+              {statList.length > nbOfStats && (
+                <button onClick={() => setShowLatest(!showLatest)}>
+                  {showLatest ? "Show all" : "Show latest"}
+                </button>
+              )}
               {showLatest ? (
                 <div>
+                  <p>Number of tests to show: {nbOfStats}</p>
+                  <input
+                    type="range"
+                    min="2"
+                    max={statList.length - 1}
+                    value={nbOfStats}
+                    onChange={handleNbStatsChange}
+                  />
                   <Line
                     datasetIdKey="id"
                     data={{
