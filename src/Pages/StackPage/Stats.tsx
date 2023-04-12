@@ -115,19 +115,19 @@ export const Stats = () => {
   };
 
   const getLabels = () => {
-    let labels: string[] = [];
-    let lastDate: Date | undefined = undefined;
-    statList.forEach((stat) => {
-      labels.push(formatDateTime(stat.date, lastDate));
-      lastDate = stat.date;
-    });
+    let labels = statList.map((stat) => formatDateTime(stat.date));
     return labels;
   };
 
   const getLabelsLatest = () => {
-    let labels = statList
+    let labels: string[] = [];
+    let lastDate: Date | undefined = undefined;
+    statList
       .slice(statList.length - nbOfStats, statList.length)
-      .map((stat) => formatDateTime(stat.date));
+      .forEach((stat) => {
+        labels.push(formatDateTime(stat.date, lastDate));
+        lastDate = stat.date;
+      });
     return labels;
   };
 
