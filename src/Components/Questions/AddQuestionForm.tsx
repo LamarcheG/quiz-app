@@ -5,9 +5,13 @@ import { SubmitButton } from "../Styled/SubmitButton";
 
 interface AddQuestionFormProps {
   addQuestions: (questions: IQuestionItem[]) => void;
+  closeForm: () => void;
 }
 
-export const AddQuestionForm = ({ addQuestions }: AddQuestionFormProps) => {
+export const AddQuestionForm = ({
+  addQuestions,
+  closeForm,
+}: AddQuestionFormProps) => {
   const [success, setSuccess] = useState<Boolean | null>(null);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -50,7 +54,12 @@ export const AddQuestionForm = ({ addQuestions }: AddQuestionFormProps) => {
       ) : success === false ? (
         <p className="text-3xl text-red-700">{errorMessage}</p>
       ) : (
-        <SubmitButton className="my-5">Submit</SubmitButton>
+        <div>
+          <SubmitButton className="my-5">Submit</SubmitButton>
+          <button type="button" onClick={closeForm} className="underline">
+            Cancel
+          </button>
+        </div>
       )}
     </form>
   );
