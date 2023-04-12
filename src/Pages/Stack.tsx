@@ -14,6 +14,17 @@ export const StackIndex = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const userContext = useUser() as unknown as User;
 
+  const getActiveTabFromUrl = () => {
+    const url = window.location.href;
+    if (url.includes("quiz")) {
+      return "quiz";
+    } else if (url.includes("stats")) {
+      return "stats";
+    } else if (url.includes("edit")) {
+      return "edit";
+    }
+  };
+
   useEffect(() => {
     const getStackName = async () => {
       const stackRef = doc(
@@ -28,6 +39,7 @@ export const StackIndex = () => {
       }
     };
     getStackName();
+    setActiveTab(getActiveTabFromUrl()!);
     setIsLoaded(true);
   }, []);
 
