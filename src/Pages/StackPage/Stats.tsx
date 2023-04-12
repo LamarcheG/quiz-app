@@ -59,24 +59,38 @@ export const Stats = () => {
   };
 
   const formatDateTime = (date: Date, lastDate?: Date) => {
+    var hours = date.getHours();
+    var minutes = ("0" + date.getMinutes()).slice(-2);
+    // determine if it's AM or PM
+    var meridiem = hours >= 12 ? "pm" : "am";
+
+    // convert to 12-hour format
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+
     if (lastDate) {
       //if the date is the same as the last date, only show the time
       if (date.toDateString() === lastDate.toDateString()) {
-        let hours = date.getHours();
-        let minutes = date.getMinutes().toString();
-        if (date.getMinutes() < 10) {
-          minutes = "0" + date.getMinutes();
-        }
-        return hours + ":" + minutes;
+        return hours + ":" + minutes + "" + meridiem;
       }
     }
-    const newDate = new Date(date);
-    let hours = newDate.getHours();
-    let minutes = newDate.getMinutes().toString();
-    if (newDate.getMinutes() < 10) {
-      minutes = "0" + newDate.getMinutes();
-    }
-    return newDate.toLocaleDateString("en-US") + " " + hours + ":" + minutes;
+    var year = date.getFullYear();
+    var month = ("0" + (date.getMonth() + 1)).slice(-2);
+    var day = ("0" + date.getDate()).slice(-2);
+
+    return (
+      year +
+      "/" +
+      month +
+      "/" +
+      day +
+      " " +
+      hours +
+      ":" +
+      minutes +
+      "" +
+      meridiem
+    );
   };
 
   const getNbOfRounds = () => {
