@@ -66,6 +66,10 @@ export const Stats = () => {
     return newDate.toDateString() + " " + hours + ":" + minutes;
   };
 
+  const getNbOfRounds = () => {
+    return statList.length;
+  };
+
   const getAverageScore = () => {
     let total = 0;
     statList.forEach((stat) => {
@@ -93,6 +97,7 @@ export const Stats = () => {
       {isLoaded ? (
         <div>
           <div>
+            <p>Number of tests taken: {getNbOfRounds()}</p>
             <p>Average Score: {getAverageScore()}</p>
             <p>Average Time: {getAverageTime()}</p>
           </div>
