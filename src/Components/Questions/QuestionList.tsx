@@ -20,9 +20,15 @@ import { QuestionListItem } from "./QuestionListItem";
 
 interface QuestionListProps {
   questions: IQuestionItem[];
+  beginTime: Date;
+  quizEnd: () => void;
 }
 
-export const QuestionList = ({ questions }: QuestionListProps) => {
+export const QuestionList = ({
+  questions,
+  beginTime,
+  quizEnd,
+}: QuestionListProps) => {
   const [selectedChoice, setSelectedChoice] = useState<[string, string][]>([]);
   const [questionStack, setQuestionStack] = useState<IQuestionItem[]>(
     questions ? questions : []
@@ -35,12 +41,7 @@ export const QuestionList = ({ questions }: QuestionListProps) => {
 
   const userContext = useUser() as unknown as User;
   const { stackId } = useParams();
-  const [beginTime, setBeginTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
-
-  useEffect(() => {
-    setBeginTime(new Date());
-  }, []);
 
   useEffect(() => {
     setQuestionStack(questions);
@@ -65,6 +66,7 @@ export const QuestionList = ({ questions }: QuestionListProps) => {
   useEffect(() => {
     if (isFinished) {
       logStats();
+      quizEnd();
     }
   }, [isFinished]);
 
