@@ -30,7 +30,7 @@ export const Nav = () => {
       {isSmallScreen ? (
         <>
           {isNavOpen ? (
-            <nav className="absolute z-0 h-full min-h-screen w-48 bg-gray-900">
+            <nav className="absolute z-10 h-full min-h-screen w-48 bg-gray-900">
               {/** Close button */}
               <button
                 className="relative top-2 left-2 z-10 border-none bg-neutral-800 px-4 py-3 outline-none"
