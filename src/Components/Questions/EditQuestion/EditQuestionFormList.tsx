@@ -42,7 +42,7 @@ export const EditQuestionFormList = ({
   };
 
   return (
-    <div className="m-auto flex w-fit items-center">
+    <div className="flex h-full w-full items-center justify-center">
       <button type="button" onClick={prevQuestion} className="p-0">
         <svg
           xmlns="http://www.w3.org/2000/svg"
