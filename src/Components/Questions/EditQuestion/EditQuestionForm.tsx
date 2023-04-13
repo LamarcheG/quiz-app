@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { IQuestionItem } from "../../../interfaces";
+import {
+  IQuestionItem,
+  QuestionType,
+  MultipleChoiceQuestion,
+} from "../../../interfaces";
 import { SubmitButton } from "../../Styled/SubmitButton";
 
 interface EditQuestionFormProps {
@@ -14,10 +18,20 @@ export const EditQuestionForm = ({
   const [success, setSuccess] = useState<Boolean | null>(null);
   const [questionInput, setQuestionInput] = useState(question.question);
   const [answerInput, setAnswerInput] = useState(question.answer);
+  const [choices, setChoices] = useState<string[]>(
+    question.type === QuestionType.MultipleChoice
+      ? (question as MultipleChoiceQuestion).choices
+      : []
+  );
 
   useEffect(() => {
     setQuestionInput(question.question);
     setAnswerInput(question.answer);
+    if (question.type === QuestionType.MultipleChoice) {
+      setChoices((question as MultipleChoiceQuestion).choices);
+    } else {
+      setChoices([]);
+    }
   }, [question]);
 
   useEffect(() => {
@@ -35,16 +49,32 @@ export const EditQuestionForm = ({
     } else if (name === "answer") {
       setAnswerInput(value);
     }
+    if (name === "choice") {
+      const choiceIndex = parseInt(e.currentTarget.id.replace("choice", ""));
+      let newChoices = [...choices];
+      newChoices[choiceIndex] = value;
+      setChoices(newChoices);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     //build a new question object and pass it to the updateQuestion function
-    let newQuestion = {
-      ...question,
-      question: questionInput as string,
-      answer: answerInput as string,
-    };
+    let newQuestion: IQuestionItem;
+    if (question.type === QuestionType.MultipleChoice) {
+      newQuestion = {
+        ...question,
+        question: questionInput as string,
+        answer: answerInput as string,
+        choices: choices,
+      } as MultipleChoiceQuestion;
+    } else {
+      newQuestion = {
+        ...question,
+        question: questionInput as string,
+        answer: answerInput as string,
+      };
+    }
     try {
       updateQuestion(newQuestion);
       setSuccess(true);
@@ -62,6 +92,22 @@ export const EditQuestionForm = ({
         value={questionInput}
         onChange={handleChange}
       />
+      {choices.length > 0 &&
+        choices.map((choice, index) => {
+          return (
+            <div key={index} className="w-full">
+              <label htmlFor={`choice${index}`}>{index + 1}:</label>
+              <input
+                type="text"
+                name="choice"
+                id={`choice${index}`}
+                value={choice}
+                checked={choice === question.answer}
+                onChange={handleChange}
+              />
+            </div>
+          );
+        })}
       <label htmlFor="answer">Answer</label>
       <input
         type="text"

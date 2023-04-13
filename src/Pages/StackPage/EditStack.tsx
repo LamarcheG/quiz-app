@@ -10,7 +10,12 @@ import { useParams } from "react-router-dom";
 import { AddQuestionForm } from "../../Components/Questions/AddQuestionForm";
 import { EditQuestionFormList } from "../../Components/Questions/EditQuestion/EditQuestionFormList";
 import db from "../../firebaseInit";
-import { IQuestionItem, User } from "../../interfaces";
+import {
+  IQuestionItem,
+  MultipleChoiceQuestion,
+  QuestionType,
+  User,
+} from "../../interfaces";
 import { useUser } from "../../Stores/UserContext";
 
 export const EditStack = () => {
@@ -76,6 +81,14 @@ export const EditStack = () => {
     //get question with id
     const questionRef = doc(collectionRef, question.id);
     //update question
+    if (question.type === QuestionType.MultipleChoice) {
+      updateDoc(questionRef, {
+        question: question.question,
+        answer: question.answer,
+        choices: (question as MultipleChoiceQuestion).choices,
+      });
+      return;
+    }
     updateDoc(questionRef, {
       question: question.question,
       answer: question.answer,
@@ -92,7 +105,7 @@ export const EditStack = () => {
       ) : (
         <div>
           {isLoaded && questionStack && (
-            <div className="relative m-auto h-60 w-96 border">
+            <div className="relative m-auto h-72 w-96 border">
               <EditQuestionFormList
                 questions={questionStack!}
                 updateQuestion={updateQuestion}
