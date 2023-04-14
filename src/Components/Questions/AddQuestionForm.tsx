@@ -46,7 +46,7 @@ export const AddQuestionForm = ({
         name="bruteText"
         id="bruteText"
         rows={10}
-        className="w-60 resize-y p-3 md:w-96"
+        className="w-60 resize-y rounded-md border-t border-l bg-gray-900 p-3 shadow-lg shadow-neutral-900 md:w-96"
         required
       ></textarea>
       {success === true ? (
