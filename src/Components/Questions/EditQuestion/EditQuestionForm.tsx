@@ -96,21 +96,23 @@ export const EditQuestionForm = ({
         />
       </div>
       {choices.length > 0 && (
-        <ul>
-          Choices
-          {choices.map((choice, index) => (
-            <li key={index}>
-              <input
-                type="text"
-                name="choice"
-                id={`choice${index}`}
-                value={choice}
-                onChange={handleChange}
-                className="rounded-sm px-2"
-              />
-            </li>
-          ))}
-        </ul>
+        <div>
+          <p>Choices</p>
+          <ul>
+            {choices.map((choice, index) => (
+              <li key={index} className="mb-1 last:mb-0">
+                <input
+                  type="text"
+                  name="choice"
+                  id={`choice${index}`}
+                  value={choice}
+                  onChange={handleChange}
+                  className="rounded-sm px-2"
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
       <div className="flex flex-col">
         <label htmlFor="answer">Answer</label>
