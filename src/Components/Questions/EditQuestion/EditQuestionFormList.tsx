@@ -19,7 +19,7 @@ export const EditQuestionFormList = ({
 }: EditQuestionFormListProps) => {
   return (
     <div className="flex h-full w-full items-center justify-center">
-      <button type="button" onClick={prevQuestion} className="p-0">
+      <button type="button" onClick={prevQuestion} className="mr-3 p-0">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 320 512"
@@ -32,7 +32,7 @@ export const EditQuestionFormList = ({
         question={currentQuestion}
         updateQuestion={updateQuestion}
       />
-      <button type="button" onClick={nextQuestion} className="p-0">
+      <button type="button" onClick={nextQuestion} className="ml-3 p-0">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 320 512"

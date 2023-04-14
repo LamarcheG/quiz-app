@@ -83,43 +83,50 @@ export const EditQuestionForm = ({
     }
   };
   return (
-    <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
-      <label htmlFor="question">Question</label>
-      <input
-        type="text"
-        name="question"
-        id="question"
-        value={questionInput}
-        onChange={handleChange}
-      />
-      {choices.length > 0 &&
-        choices.map((choice, index) => {
-          return (
-            <div key={index} className="w-full">
-              <label htmlFor={`choice${index}`}>{index + 1}:</label>
+    <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
+      <div className="flex flex-col">
+        <label htmlFor="question">Question</label>
+        <input
+          type="text"
+          name="question"
+          id="question"
+          value={questionInput}
+          onChange={handleChange}
+          className="rounded-sm px-2"
+        />
+      </div>
+      {choices.length > 0 && (
+        <ul>
+          Choices
+          {choices.map((choice, index) => (
+            <li key={index}>
               <input
                 type="text"
                 name="choice"
                 id={`choice${index}`}
                 value={choice}
-                checked={choice === question.answer}
                 onChange={handleChange}
+                className="rounded-sm px-2"
               />
-            </div>
-          );
-        })}
-      <label htmlFor="answer">Answer</label>
-      <input
-        type="text"
-        name="answer"
-        id="answer"
-        value={answerInput}
-        onChange={handleChange}
-      />
+            </li>
+          ))}
+        </ul>
+      )}
+      <div className="flex flex-col">
+        <label htmlFor="answer">Answer</label>
+        <input
+          type="text"
+          name="answer"
+          id="answer"
+          value={answerInput}
+          onChange={handleChange}
+          className="rounded-sm px-2"
+        />
+      </div>
       {success === true ? (
         <p className="text-3xl text-green-700">Success!</p>
       ) : (
-        <div className="flex justify-end">
+        <div className="flex justify-center">
           <SubmitButton>Update</SubmitButton>
         </div>
       )}

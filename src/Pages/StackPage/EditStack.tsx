@@ -136,7 +136,7 @@ export const EditStack = () => {
       ) : (
         <div>
           {isLoaded && questionStack && (
-            <div className="relative m-auto h-72 w-96 border">
+            <div className="relative m-auto grid h-fit min-h-[16rem] w-96 items-center justify-center rounded-md border-t border-l border-blue-200 bg-gray-900 p-5 shadow-lg shadow-neutral-900">
               <button
                 type="button"
                 className="absolute left-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-sky-600 p-0"
