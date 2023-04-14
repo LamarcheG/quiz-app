@@ -1,6 +1,7 @@
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   onSnapshot,
   updateDoc,
@@ -20,7 +21,9 @@ import { useUser } from "../../Stores/UserContext";
 
 export const EditStack = () => {
   const [displayForm, setDisplayForm] = useState(false);
+  const [questions, setQuestions] = useState<IQuestionItem[]>([]);
   const [questionStack, setQuestionStack] = useState<IQuestionItem[]>([]);
+  const [currentQuestion, setCurrentQuestion] = useState<IQuestionItem>();
   const [isLoaded, setIsLoaded] = useState(false);
   const [lastId, setLastId] = useState("");
   const { stackId } = useParams();
@@ -35,10 +38,15 @@ export const EditStack = () => {
       const questionsArray = snapshot.docs.map((doc) => {
         return { ...doc.data(), id: doc.id } as IQuestionItem;
       });
-      setQuestionStack(questionsArray);
+      setQuestions(questionsArray);
+      setCurrentQuestion(questionsArray[0]);
       setIsLoaded(true);
     });
   };
+
+  useEffect(() => {
+    setQuestionStack(sortQuestions(questions));
+  }, [questions]);
 
   useEffect(() => {
     subscribeToQuestions();
@@ -46,7 +54,7 @@ export const EditStack = () => {
 
   useEffect(() => {
     if (questionStack.length > 0) {
-      setQuestionStack(sortQuestions(questionStack));
+      setCurrentQuestion(questionStack[0]);
     }
   }, [questionStack]);
 
@@ -95,8 +103,31 @@ export const EditStack = () => {
     });
   };
 
+  const deleteQuestion = () => {
+    const collectionRef = collection(
+      db,
+      `/users/${userContext.user.uid}/stacks/${stackId}/questions`
+    );
+    //get question with id
+    const questionRef = doc(collectionRef, currentQuestion?.id);
+    //delete question
+    deleteDoc(questionRef);
+  };
+
   const closeForm = () => {
     setDisplayForm(false);
+  };
+
+  const prevQuestion = () => {
+    //put the previous questions at the top of the stack
+    //remove the last question from the stack and put it at the top
+    let prev = questionStack.slice(-1);
+    setQuestionStack([...prev, ...questionStack.slice(0, -1)]);
+  };
+
+  const nextQuestion = () => {
+    //put the next questions at the bottom of the stack
+    setQuestionStack([...questionStack.slice(1), questionStack[0]]);
   };
   return (
     <div>
@@ -106,16 +137,24 @@ export const EditStack = () => {
         <div>
           {isLoaded && questionStack && (
             <div className="relative m-auto h-72 w-96 border">
-              <EditQuestionFormList
-                questions={questionStack!}
-                updateQuestion={updateQuestion}
-              />
               <button
                 type="button"
-                className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-sky-600 p-0"
+                className="absolute left-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-sky-600 p-0"
                 onClick={() => setDisplayForm(true)}
               >
                 +
+              </button>
+              <EditQuestionFormList
+                currentQuestion={currentQuestion!}
+                prevQuestion={prevQuestion}
+                nextQuestion={nextQuestion}
+                updateQuestion={updateQuestion}
+              />
+              <button
+                className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-red-600 p-0"
+                onClick={deleteQuestion}
+              >
+                x
               </button>
             </div>
           )}

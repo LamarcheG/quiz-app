@@ -5,42 +5,18 @@ import { useUser } from "../../../Stores/UserContext";
 import { EditQuestionForm } from "./EditQuestionForm";
 
 interface EditQuestionFormListProps {
-  questions: IQuestionItem[];
+  currentQuestion: IQuestionItem;
+  prevQuestion: () => void;
+  nextQuestion: () => void;
   updateQuestion: (question: IQuestionItem) => void;
 }
 
 export const EditQuestionFormList = ({
-  questions,
+  currentQuestion,
+  prevQuestion,
+  nextQuestion,
   updateQuestion,
 }: EditQuestionFormListProps) => {
-  const [questionStack, setQuestionStack] = useState<IQuestionItem[]>(
-    questions ? questions : []
-  );
-  const [currentQuestion, setCurrentQuestion] = useState<IQuestionItem>(
-    questionStack[0]
-  );
-
-  useEffect(() => {
-    setQuestionStack(questions);
-    setCurrentQuestion(questions[0]);
-  }, [questions]);
-
-  useEffect(() => {
-    setCurrentQuestion(questionStack[0]);
-  }, [questionStack]);
-
-  const prevQuestion = () => {
-    //put the previous questions at the top of the stack
-    //remove the last question from the stack and put it at the top
-    let prev = questionStack.slice(-1);
-    setQuestionStack([...prev, ...questionStack.slice(0, -1)]);
-  };
-
-  const nextQuestion = () => {
-    //put the next questions at the bottom of the stack
-    setQuestionStack([...questionStack.slice(1), questionStack[0]]);
-  };
-
   return (
     <div className="flex h-full w-full items-center justify-center">
       <button type="button" onClick={prevQuestion} className="p-0">
