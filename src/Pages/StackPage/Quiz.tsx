@@ -15,11 +15,10 @@ export const Quiz = () => {
   const [showQuiz, setShowQuiz] = useState(false);
   const [showCountDown, setShowCountDown] = useState(false);
   const [countDown, setCountDown] = useState(COUNT_DOWN_TIME);
-  const [isLoaded, setIsLoaded] = useState(false);
   const { stackId } = useParams();
   const userContext = useUser() as unknown as User;
 
-  const subscribeToQuestions = () => {
+  const subscribeToQuestions = async () => {
     const collectionRef = collection(
       db,
       `/users/${userContext.user.uid}/stacks/${stackId}/questions`
@@ -62,7 +61,7 @@ export const Quiz = () => {
 
   return (
     <>
-      {isLoaded && !showQuiz && (
+      {!showQuiz ? (
         <div>
           {!showCountDown ? (
             <button onClick={quizBegin}>Start Quiz</button>
@@ -72,8 +71,7 @@ export const Quiz = () => {
             </div>
           )}
         </div>
-      )}
-      {isLoaded && showQuiz && (
+      ) : (
         <QuestionList
           questions={questionStack!}
           beginTime={beginTime}

@@ -12,7 +12,7 @@ export const MyStacks = (props: any) => {
   const [newSubject, setNewSubject] = useState("");
   const userContext = useUser() as unknown as User;
 
-  const subscribeToStacks = () => {
+  const subscribeToStacks = async () => {
     const collectionRef = collection(
       db,
       `/users/${userContext.user.uid}/stacks`
