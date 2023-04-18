@@ -61,7 +61,7 @@ export const StackIndex = () => {
   return (
     <>
       {isLoaded && (
-        <div className="pt-12 text-center">
+        <div className="pt-24 text-center">
           <h1>Subject: {captitalize(stackName)}</h1>
           <div className="m-auto mt-2 flex w-4/6 items-center justify-between xl:w-64">
             <Link
