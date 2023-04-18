@@ -24,7 +24,7 @@ describe("QuestionParser", () => {
       let expectedAnswer = "Because it is.";
       expect(question).toEqual([
         {
-          id: 4,
+          id: "",
           question: expectedQuestion,
           answer: expectedAnswer,
           isAnswered: false,
@@ -41,14 +41,14 @@ describe("QuestionParser", () => {
 
     expect(question).toEqual([
       {
-        id: 4,
+        id: "",
         question: "Why is the sky blue?",
         answer: "Because it is.",
         isAnswered: false,
         type: QuestionType.ShortAnswer,
       },
       {
-        id: 5,
+        id: "",
         question: "Why is the grass green?",
         answer: "Because it is.",
         isAnswered: false,
@@ -64,7 +64,7 @@ describe("QuestionParser", () => {
 
     expect(question).toEqual([
       {
-        id: 4,
+        id: "",
         question: "What is the capital of France?",
         answer: "Paris",
         isAnswered: false,
@@ -77,7 +77,7 @@ describe("QuestionParser", () => {
     const question = parseBruteText("q: The sky is blue?\n a: True");
     expect(question).toEqual([
       {
-        id: 4,
+        id: "",
         question: "The sky is blue?",
         answer: "True",
         isAnswered: false,

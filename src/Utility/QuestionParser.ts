@@ -3,7 +3,6 @@ import {
   MultipleChoiceQuestion,
   QuestionType,
 } from "../interfaces";
-import { getQuestionStackIdFromLocalStorage } from "../Stores/QuestionstackStore";
 
 const questionKeywords = ["Question", "question", "Q", "q"];
 const answerKeywords = ["Answer", "answer", "A", "a"];
