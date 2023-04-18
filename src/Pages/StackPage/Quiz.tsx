@@ -24,7 +24,7 @@ export const Quiz = () => {
       db,
       `/users/${userContext.user.uid}/stacks/${stackId}/questions`
     );
-    onSnapshot(
+    const unsubscribe = onSnapshot(
       collectionRef,
       (snapshot) => {
         const questionsArray = snapshot.docs.map((doc) => {
@@ -37,10 +37,14 @@ export const Quiz = () => {
         console.log(error);
       }
     );
+    return unsubscribe;
   };
 
   useEffect(() => {
-    subscribeToQuestions();
+    const unsubscribe = subscribeToQuestions();
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   const quizBegin = () => {

@@ -26,12 +26,12 @@ export const StackIndex = () => {
   };
 
   useEffect(() => {
-    const getStackName = async () => {
+    const getStackName = () => {
       const stackRef = doc(
         db,
         `/users/${userContext.user.uid}/stacks/${stackId}`
       );
-      onSnapshot(
+      const unsubscribe = onSnapshot(
         stackRef,
         (snapshot) => {
           setStackName(snapshot.data()?.name);
@@ -40,10 +40,14 @@ export const StackIndex = () => {
           console.log(error);
         }
       );
+      return unsubscribe;
     };
-    getStackName();
+    const unsubscribe = getStackName();
     setActiveTab(getActiveTabFromUrl()!);
     setIsLoaded(true);
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   const captitalize = (str: string) => {

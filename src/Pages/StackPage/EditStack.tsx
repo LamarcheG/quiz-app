@@ -34,7 +34,7 @@ export const EditStack = () => {
       db,
       `/users/${userContext.user.uid}/stacks/${stackId}/questions`
     );
-    onSnapshot(
+    const unsubscribe = onSnapshot(
       collectionRef,
       (snapshot) => {
         const questionsArray = snapshot.docs.map((doc) => {
@@ -48,6 +48,7 @@ export const EditStack = () => {
         console.log(error);
       }
     );
+    return unsubscribe;
   };
 
   useEffect(() => {
@@ -55,7 +56,10 @@ export const EditStack = () => {
   }, [questions]);
 
   useEffect(() => {
-    subscribeToQuestions();
+    const unsubscribe = subscribeToQuestions();
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   useEffect(() => {

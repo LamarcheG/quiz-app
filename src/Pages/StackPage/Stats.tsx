@@ -22,12 +22,12 @@ export const Stats = () => {
   };
 
   useEffect(() => {
-    const getStackStats = async () => {
+    const getStackStats = () => {
       const stackRef = collection(
         db,
         `/users/${userContext.user.uid}/stacks/${stackId}/stats`
       );
-      onSnapshot(
+      const unsubscribe = onSnapshot(
         stackRef,
         (snapshot) => {
           const stats = snapshot.docs.map((doc) => ({
@@ -40,8 +40,12 @@ export const Stats = () => {
           console.log(error);
         }
       );
+      return unsubscribe;
     };
-    getStackStats();
+    const unsubscribe = getStackStats();
+    return () => {
+      unsubscribe();
+    };
   }, []);
   useEffect(() => {
     const newStatList = statListOriginal.map((stat) => {

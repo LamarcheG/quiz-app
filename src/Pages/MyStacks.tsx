@@ -17,7 +17,7 @@ export const MyStacks = (props: any) => {
       db,
       `/users/${userContext.user.uid}/stacks`
     );
-    onSnapshot(
+    const unsubscribe = onSnapshot(
       collectionRef,
       (snapshot) => {
         const stacksArray = snapshot.docs.map((doc) => {
@@ -29,10 +29,14 @@ export const MyStacks = (props: any) => {
         console.log(error);
       }
     );
+    return unsubscribe;
   };
 
   useEffect(() => {
-    subscribeToStacks();
+    const unsubscribe = subscribeToStacks();
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   const addSubject = async () => {
