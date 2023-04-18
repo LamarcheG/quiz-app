@@ -24,13 +24,17 @@ export const Quiz = () => {
       db,
       `/users/${userContext.user.uid}/stacks/${stackId}/questions`
     );
-    onSnapshot(collectionRef, (snapshot) => {
-      const questionsArray = snapshot.docs.map((doc) => {
-        return { ...doc.data(), id: doc.id } as IQuestionItem;
+    try {
+      onSnapshot(collectionRef, (snapshot) => {
+        const questionsArray = snapshot.docs.map((doc) => {
+          return { ...doc.data(), id: doc.id } as IQuestionItem;
+        });
+        setQuestionStack(questionsArray);
+        setIsLoaded(true);
       });
-      setQuestionStack(questionsArray);
-      setIsLoaded(true);
-    });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {

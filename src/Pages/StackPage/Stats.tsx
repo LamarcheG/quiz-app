@@ -22,7 +22,7 @@ export const Stats = () => {
   };
 
   useEffect(() => {
-    const getStackStats = async () => {
+    const getStackStats = () => {
       const stackRef = collection(
         db,
         `/users/${userContext.user.uid}/stacks/${stackId}/stats`
@@ -223,7 +223,7 @@ export const Stats = () => {
                       datasets: [
                         {
                           label: "Score",
-                          data: statList.map((stat) => stat.score),
+                          data: getScoreData(),
                           borderColor: "rgb(255, 99, 132)",
                           backgroundColor: "rgba(255, 99, 132, 0.5)",
                         },
@@ -237,7 +237,7 @@ export const Stats = () => {
                       datasets: [
                         {
                           label: "Time",
-                          data: statList.map((stat) => stat.time),
+                          data: getTimeData(),
                           borderColor: "rgb(54, 162, 235)",
                           backgroundColor: "rgba(54, 162, 235, 0.5)",
                         },

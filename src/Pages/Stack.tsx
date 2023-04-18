@@ -1,4 +1,4 @@
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link, Outlet, useParams } from "react-router-dom";
 import db from "../firebaseInit";
@@ -31,11 +31,16 @@ export const StackIndex = () => {
         db,
         `/users/${userContext.user.uid}/stacks/${stackId}`
       );
-      const stackDoc = await getDoc(stackRef);
-      if (stackDoc.exists()) {
-        setStackName(stackDoc.data().name);
-      } else {
-        console.log("No such document!");
+      try {
+        onSnapshot(stackRef, (doc) => {
+          if (doc.exists()) {
+            setStackName(doc.data()!.name);
+          } else {
+            console.log("No such document!");
+          }
+        });
+      } catch (err) {
+        console.log(err);
       }
     };
     getStackName();
