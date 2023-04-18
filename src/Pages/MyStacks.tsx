@@ -71,7 +71,7 @@ export const MyStacks = (props: any) => {
           {stacks.map((stack) => {
             return (
               <li key={stack.id} className="w-fit list-inside list-disc p-2">
-                <Link to={`/stacks/${stack.id}`}>{stack.name}</Link>
+                <Link to={`/stacks/${stack.id}/quiz`}>{stack.name}</Link>
               </li>
             );
           })}

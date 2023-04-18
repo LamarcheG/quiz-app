@@ -10,7 +10,7 @@ import { Index } from "./Pages/Index";
 import { MyStacks } from "./Pages/MyStacks";
 import { Stats } from "./Pages/StackPage/Stats";
 import { EditStack } from "./Pages/StackPage/EditStack";
-import { StackIndex } from "./Pages/Stack";
+import { Stack } from "./Pages/Stack";
 
 const router = createBrowserRouter([
   {
@@ -21,9 +21,8 @@ const router = createBrowserRouter([
       { index: true, element: <Index /> },
       {
         path: "/stacks/:stackId",
-        element: <StackIndex />,
+        element: <Stack />,
         children: [
-          { index: true, element: <Quiz /> },
           {
             path: "/stacks/:stackId/quiz",
             element: <Quiz />,

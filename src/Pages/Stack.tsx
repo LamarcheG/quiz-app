@@ -5,7 +5,7 @@ import db from "../firebaseInit";
 import { User } from "../interfaces";
 import { useUser } from "../Stores/UserContext";
 
-export const StackIndex = () => {
+export const Stack = () => {
   const { stackId } = useParams();
   const [stackName, setStackName] = useState("");
   const [activeTab, setActiveTab] = useState(
