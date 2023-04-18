@@ -29,7 +29,6 @@ export const Quiz = () => {
           return { ...doc.data(), id: doc.id } as IQuestionItem;
         });
         setQuestionStack(questionsArray);
-        setIsLoaded(true);
       });
     } catch (error) {
       console.log(error);
