@@ -27,13 +27,19 @@ export const Stats = () => {
         db,
         `/users/${userContext.user.uid}/stacks/${stackId}/stats`
       );
-      onSnapshot(stackRef, (snapshot) => {
-        const stats = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setStatListOriginal(stats);
-      });
+      onSnapshot(
+        stackRef,
+        (snapshot) => {
+          const stats = snapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
+          setStatListOriginal(stats);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     };
     getStackStats();
   }, []);

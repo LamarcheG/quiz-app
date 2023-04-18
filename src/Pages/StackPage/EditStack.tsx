@@ -34,14 +34,20 @@ export const EditStack = () => {
       db,
       `/users/${userContext.user.uid}/stacks/${stackId}/questions`
     );
-    onSnapshot(collectionRef, (snapshot) => {
-      const questionsArray = snapshot.docs.map((doc) => {
-        return { ...doc.data(), id: doc.id } as IQuestionItem;
-      });
-      setQuestions(questionsArray);
-      setCurrentQuestion(questionsArray[0]);
-      setIsLoaded(true);
-    });
+    onSnapshot(
+      collectionRef,
+      (snapshot) => {
+        const questionsArray = snapshot.docs.map((doc) => {
+          return { ...doc.data(), id: doc.id } as IQuestionItem;
+        });
+        setQuestions(questionsArray);
+        setCurrentQuestion(questionsArray[0]);
+        setIsLoaded(true);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   };
 
   useEffect(() => {

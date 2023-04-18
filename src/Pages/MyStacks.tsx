@@ -1,11 +1,4 @@
-import {
-  addDoc,
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  onSnapshot,
-} from "firebase/firestore";
+import { addDoc, collection, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import db from "../firebaseInit";
 import { Link } from "react-router-dom";
@@ -24,12 +17,18 @@ export const MyStacks = (props: any) => {
       db,
       `/users/${userContext.user.uid}/stacks`
     );
-    onSnapshot(collectionRef, (snapshot) => {
-      const stacksArray = snapshot.docs.map((doc) => {
-        return { ...doc.data(), id: doc.id };
-      });
-      setStacks(stacksArray);
-    });
+    onSnapshot(
+      collectionRef,
+      (snapshot) => {
+        const stacksArray = snapshot.docs.map((doc) => {
+          return { ...doc.data(), id: doc.id };
+        });
+        setStacks(stacksArray);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   };
 
   useEffect(() => {
