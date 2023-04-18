@@ -11,6 +11,7 @@ export const StackIndex = () => {
   const [activeTab, setActiveTab] = useState(
     "quiz" as "quiz" | "stats" | "edit"
   );
+  const [isLoaded, setIsLoaded] = useState(false);
   const userContext = useUser() as unknown as User;
 
   const getActiveTabFromUrl = () => {
@@ -44,6 +45,7 @@ export const StackIndex = () => {
     };
     getStackName();
     setActiveTab(getActiveTabFromUrl()!);
+    setIsLoaded(true);
   }, []);
 
   const captitalize = (str: string) => {
@@ -56,50 +58,52 @@ export const StackIndex = () => {
 
   return (
     <>
-      <div className="pt-12 text-center">
-        <h1>Subject: {captitalize(stackName)}</h1>
-        <div className="m-auto mt-2 flex w-4/6 items-center justify-between xl:w-64">
-          <Link
-            to={`/stacks/${stackId}/quiz`}
-            className={
-              "inline-block w-16 rounded-full border-2 px-3 py-1 text-white" +
-              (activeTab === "quiz"
-                ? " border-gray-900"
-                : " border-neutral-500")
-            }
-            onClick={handleTabClick("quiz")}
-          >
-            Quiz
-          </Link>
-          <Link
-            to={`/stacks/${stackId}/stats`}
-            className={
-              "inline-block w-16 rounded-full border-2 px-3 py-1 text-white" +
-              (activeTab === "stats"
-                ? " border-gray-900"
-                : " border-neutral-500")
-            }
-            onClick={handleTabClick("stats")}
-          >
-            Stats
-          </Link>
-          <Link
-            to={`/stacks/${stackId}/edit`}
-            className={
-              "inline-block w-16 rounded-full border-2 px-3 py-1 text-white" +
-              (activeTab === "edit"
-                ? " border-gray-900"
-                : " border-neutral-500")
-            }
-            onClick={handleTabClick("edit")}
-          >
-            Edit
-          </Link>
+      {isLoaded && (
+        <div className="pt-12 text-center">
+          <h1>Subject: {captitalize(stackName)}</h1>
+          <div className="m-auto mt-2 flex w-4/6 items-center justify-between xl:w-64">
+            <Link
+              to={`/stacks/${stackId}/quiz`}
+              className={
+                "inline-block w-16 rounded-full border-2 px-3 py-1 text-white" +
+                (activeTab === "quiz"
+                  ? " border-gray-900"
+                  : " border-neutral-500")
+              }
+              onClick={handleTabClick("quiz")}
+            >
+              Quiz
+            </Link>
+            <Link
+              to={`/stacks/${stackId}/stats`}
+              className={
+                "inline-block w-16 rounded-full border-2 px-3 py-1 text-white" +
+                (activeTab === "stats"
+                  ? " border-gray-900"
+                  : " border-neutral-500")
+              }
+              onClick={handleTabClick("stats")}
+            >
+              Stats
+            </Link>
+            <Link
+              to={`/stacks/${stackId}/edit`}
+              className={
+                "inline-block w-16 rounded-full border-2 px-3 py-1 text-white" +
+                (activeTab === "edit"
+                  ? " border-gray-900"
+                  : " border-neutral-500")
+              }
+              onClick={handleTabClick("edit")}
+            >
+              Edit
+            </Link>
+          </div>
+          <div className="mt-3">
+            <Outlet />
+          </div>
         </div>
-        <div className="mt-3">
-          <Outlet />
-        </div>
-      </div>
+      )}
     </>
   );
 };
