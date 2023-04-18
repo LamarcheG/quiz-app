@@ -31,11 +31,15 @@ export const StackIndex = () => {
         db,
         `/users/${userContext.user.uid}/stacks/${stackId}`
       );
-      const stackDoc = await getDoc(stackRef);
-      if (stackDoc.exists()) {
-        setStackName(stackDoc.data().name);
-      } else {
-        console.log("No such document!");
+      try {
+        const stackDoc = await getDoc(stackRef);
+        if (stackDoc.exists()) {
+          setStackName(stackDoc.data().name);
+        } else {
+          console.log("No such document!");
+        }
+      } catch (err) {
+        console.log(err);
       }
     };
     getStackName();
