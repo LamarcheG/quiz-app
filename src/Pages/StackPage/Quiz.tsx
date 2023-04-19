@@ -68,23 +68,29 @@ export const Quiz = () => {
 
   return (
     <>
-      {isLoaded && !showQuiz && (
-        <div>
-          {!showCountDown ? (
-            <button onClick={quizBegin}>Start Quiz</button>
-          ) : (
+      {questionStack?.length === 0 ? (
+        <p>No Questions</p>
+      ) : (
+        <>
+          {isLoaded && !showQuiz && (
             <div>
-              <h1>{countDown}</h1>
+              {!showCountDown ? (
+                <button onClick={quizBegin}>Start Quiz</button>
+              ) : (
+                <div>
+                  <h1>{countDown}</h1>
+                </div>
+              )}
             </div>
           )}
-        </div>
-      )}
-      {isLoaded && showQuiz && (
-        <QuestionList
-          questions={questionStack!}
-          beginTime={beginTime}
-          quizEnd={quizEnd}
-        />
+          {isLoaded && showQuiz && (
+            <QuestionList
+              questions={questionStack!}
+              beginTime={beginTime}
+              quizEnd={quizEnd}
+            />
+          )}
+        </>
       )}
     </>
   );
