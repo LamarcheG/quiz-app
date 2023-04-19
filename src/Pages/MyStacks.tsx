@@ -107,17 +107,15 @@ export const MyStacks = (props: any) => {
         {!isLoaded ? (
           <p>Loading...</p>
         ) : (
-          <ul className="grid grid-cols-3 gap-3">
+          <ul className="flex flex-col gap-3 lg:grid lg:grid-cols-3">
             {stacks.map((stack) => {
               return (
-                <li
+                <Link
                   key={stack.id}
-                  className=" w-full rounded-md  bg-gray-900 p-5 shadow-md shadow-neutral-900 "
+                  to={`/stacks/${stack.id}/quiz`}
+                  className="w-full rounded-md bg-gray-900 p-5 shadow-md shadow-neutral-900 "
                 >
-                  <Link
-                    to={`/stacks/${stack.id}/quiz`}
-                    className="text-white hover:text-white"
-                  >
+                  <li className="text-white hover:text-white">
                     <h2 className="mb-1 text-2xl font-bold text-neutral-400">
                       {stack.name}
                     </h2>
@@ -135,8 +133,8 @@ export const MyStacks = (props: any) => {
                     ) : (
                       <span>Not started yet</span>
                     )}
-                  </Link>
-                </li>
+                  </li>
+                </Link>
               );
             })}
           </ul>
