@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { SubmitButton } from "../Components/Styled/SubmitButton";
 import { useUser } from "../Stores/UserContext";
 import { User } from "../interfaces";
+import { LoadingSpinner } from "../Components/Styled/LoadingSpinner";
 
 export const MyStacks = (props: any) => {
   const [stacks, setStacks] = useState<any[]>([]);
@@ -105,7 +106,7 @@ export const MyStacks = (props: any) => {
           )}
         </div>
         {!isLoaded ? (
-          <p>Loading...</p>
+          <LoadingSpinner />
         ) : (
           <ul className="flex flex-col gap-3 lg:grid lg:grid-cols-3">
             {stacks.map((stack) => {

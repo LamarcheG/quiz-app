@@ -6,6 +6,7 @@ import { User } from "../../interfaces";
 import { useUser } from "../../Stores/UserContext";
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
+import { LoadingSpinner } from "../../Components/Styled/LoadingSpinner";
 
 export const Stats = () => {
   const { stackId } = useParams();
@@ -264,7 +265,7 @@ export const Stats = () => {
           )}
         </>
       ) : (
-        <p>Loading...</p>
+        <LoadingSpinner />
       )}
     </>
   );
