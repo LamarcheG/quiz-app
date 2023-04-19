@@ -57,7 +57,7 @@ export const Stats = () => {
   }, [statListOriginal]);
 
   useEffect(() => {
-    if (statList.length > 0) {
+    if (statList.length >= 0) {
       setIsLoaded(true);
     }
   }, [statList]);
@@ -173,13 +173,13 @@ export const Stats = () => {
     <>
       {isLoaded ? (
         <div>
-          <div>
-            <p>Number of tests taken: {getNbOfRounds()}</p>
-            <p>Average Score: {getAverageScore()}</p>
-            <p>Average Time: {getAverageTime()}</p>
-          </div>
           {statList.length > 1 ? (
             <div className="m-auto mt-3 w-full md:w-4/6">
+              <div className="mb-3">
+                <p>Number of tests taken: {getNbOfRounds()}</p>
+                <p>Average Score: {getAverageScore()}</p>
+                <p>Average Time: {getAverageTime()}</p>
+              </div>
               {statList.length > nbOfStats && (
                 <button onClick={() => setShowLatest(!showLatest)}>
                   {showLatest ? "Show all" : "Show latest"}
