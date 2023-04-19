@@ -10,7 +10,6 @@ import { LoadingSpinner } from "../../Components/Styled/LoadingSpinner";
 
 export const Stats = () => {
   const { stackId } = useParams();
-  const [statListOriginal, setStatListOriginal] = useState<any[]>([]);
   const [statList, setStatList] = useState<any[]>([]);
   const userContext = useUser() as unknown as User;
   const [isLoaded, setIsLoaded] = useState(false);
@@ -33,9 +32,13 @@ export const Stats = () => {
         (snapshot) => {
           const stats = snapshot.docs.map((doc) => ({
             id: doc.id,
-            ...doc.data(),
+            date: convertFirebaseDate(doc.data().date),
+            score: doc.data().score,
+            time: doc.data().time,
           }));
-          setStatListOriginal(stats);
+          sortStats(stats);
+          setStatList(stats);
+          setIsLoaded(true);
         },
         (error) => {
           console.log(error);
@@ -48,20 +51,6 @@ export const Stats = () => {
       unsubscribe();
     };
   }, []);
-  useEffect(() => {
-    const newStatList = statListOriginal.map((stat) => {
-      stat.date = convertFirebaseDate(stat.date);
-      return stat;
-    });
-    sortStats(newStatList);
-    setStatList(newStatList);
-  }, [statListOriginal]);
-
-  useEffect(() => {
-    if (statList.length >= 0) {
-      setIsLoaded(true);
-    }
-  }, [statList]);
 
   const sortStats = (statList: any[]) => {
     statList.sort((a, b) => {
@@ -172,7 +161,9 @@ export const Stats = () => {
 
   return (
     <>
-      {isLoaded ? (
+      {!isLoaded ? (
+        <LoadingSpinner />
+      ) : (
         <>
           {statList.length > 1 ? (
             <div className="m-auto mt-3 w-full md:w-4/6">
@@ -264,8 +255,6 @@ export const Stats = () => {
             </p>
           )}
         </>
-      ) : (
-        <LoadingSpinner />
       )}
     </>
   );
