@@ -140,11 +140,11 @@ export const EditStack = () => {
     setQuestionStack([...questionStack.slice(1), questionStack[0]]);
   };
   return (
-    <div>
+    <>
       {displayForm ? (
         <AddQuestionForm addQuestions={addQuestions} closeForm={closeForm} />
       ) : (
-        <div>
+        <>
           {isLoaded && questionStack && (
             <div className="relative m-auto grid h-fit min-h-[16rem] w-96 items-center justify-center rounded-md border-t border-l border-blue-200 bg-gray-900 p-5 shadow-lg shadow-neutral-900">
               <button
@@ -168,8 +168,8 @@ export const EditStack = () => {
               </button>
             </div>
           )}
-        </div>
+        </>
       )}
-    </div>
+    </>
   );
 };

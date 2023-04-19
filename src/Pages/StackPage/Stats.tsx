@@ -172,7 +172,7 @@ export const Stats = () => {
   return (
     <>
       {isLoaded ? (
-        <div>
+        <>
           {statList.length > 1 ? (
             <div className="m-auto mt-3 w-full md:w-4/6">
               <div className="mb-3">
@@ -262,7 +262,7 @@ export const Stats = () => {
               Not enough data to display charts
             </p>
           )}
-        </div>
+        </>
       ) : (
         <p>Loading...</p>
       )}

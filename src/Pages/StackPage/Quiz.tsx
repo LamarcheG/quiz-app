@@ -73,7 +73,7 @@ export const Quiz = () => {
       ) : (
         <>
           {isLoaded && !showQuiz && (
-            <div>
+            <>
               {!showCountDown ? (
                 <button onClick={quizBegin}>Start Quiz</button>
               ) : (
@@ -81,7 +81,7 @@ export const Quiz = () => {
                   <h1>{countDown}</h1>
                 </div>
               )}
-            </div>
+            </>
           )}
           {isLoaded && showQuiz && (
             <QuestionList
