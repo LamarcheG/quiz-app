@@ -37,3 +37,15 @@ export interface User {
     email: string;
   };
 }
+
+export interface BasicStat {
+  nbOfStats: number;
+  averageScore: number;
+  averageTime: number;
+}
+
+export interface StackWithStats {
+  id: string;
+  name: string;
+  stats: BasicStat;
+}

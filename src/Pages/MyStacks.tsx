@@ -4,78 +4,24 @@ import db from "../firebaseInit";
 import { Link } from "react-router-dom";
 import { SubmitButton } from "../Components/Styled/SubmitButton";
 import { useUser } from "../Stores/UserContext";
-import { User } from "../interfaces";
+import { StackWithStats, User } from "../interfaces";
 import { LoadingSpinner } from "../Components/Styled/LoadingSpinner";
+import { useStacks } from "../Stores/StacksContext";
 
 export const MyStacks = (props: any) => {
-  const [stacks, setStacks] = useState<any[]>([]);
+  const [stacks, setStacks] = useState<StackWithStats[]>([]);
   const [displayForm, setDisplayForm] = useState(false);
   const [newSubject, setNewSubject] = useState("");
   const userContext = useUser() as unknown as User;
   const [isLoaded, setIsLoaded] = useState(false);
-
-  const subscribeToStacks = () => {
-    const collectionRef = collection(
-      db,
-      `/users/${userContext.user.uid}/stacks`
-    );
-    const unsubscribe = onSnapshot(
-      collectionRef,
-      (snapshot) => {
-        const stacksArray = snapshot.docs.map(async (doc) => {
-          const stats = await getStats(doc.id);
-          return { ...doc.data(), id: doc.id, stats };
-        });
-        Promise.all(stacksArray).then((values) => {
-          setStacks(values);
-          setIsLoaded(true);
-        });
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    return unsubscribe;
-  };
-
-  const getStats = async (id: string) => {
-    const collectionRef = collection(
-      db,
-      `/users/${userContext.user.uid}/stacks/${id}/stats`
-    );
-
-    const statsList = await getDocs(collectionRef).then((snapshot) => {
-      const statsArray = snapshot.docs.map((doc) => {
-        return { ...doc.data(), id: doc.id };
-      });
-      return statsArray;
-    });
-    let processedStats = {};
-    if (statsList.length > 0) {
-      processedStats = processStats(statsList);
-    }
-    return processedStats;
-  };
-
-  const processStats = (stats: any[]) => {
-    let averageTime = 0;
-    let averageScore = 0;
-
-    stats.forEach((stat) => {
-      averageTime += stat.time;
-      averageScore += stat.score;
-    });
-    averageTime = Math.round((averageTime / stats.length) * 100) / 100;
-    averageScore = Math.round((averageScore / stats.length) * 100) / 100;
-    return { nbOfStats: stats.length, averageTime, averageScore };
-  };
+  const stackContext = useStacks() as unknown as { stacks: StackWithStats[] };
 
   useEffect(() => {
-    const unsubscribe = subscribeToStacks();
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+    if (stackContext.stacks) {
+      setStacks(stackContext.stacks);
+      setIsLoaded(true);
+    }
+  }, [stackContext.stacks]);
 
   const addSubject = async () => {
     const collectionRef = collection(
@@ -124,7 +70,7 @@ export const MyStacks = (props: any) => {
                       <div className="flex flex-col">
                         <span>
                           Completed: {stack.stats.nbOfStats}{" "}
-                          {stack.stats.nbOfStats > 0 ? "times" : "time"}
+                          {stack.stats.nbOfStats > 1 ? "times" : "time"}
                         </span>
                         <span>
                           Average time: {stack.stats.averageTime} seconds

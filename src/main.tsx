@@ -11,6 +11,7 @@ import { MyStacks } from "./Pages/MyStacks";
 import { Stats } from "./Pages/StackPage/Stats";
 import { EditStack } from "./Pages/StackPage/EditStack";
 import { Stack } from "./Pages/Stack";
+import { StacksProvider } from "./Stores/StacksContext";
 
 const router = createBrowserRouter([
   {
@@ -48,7 +49,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <UserProvider>
-      <RouterProvider router={router} />
+      <StacksProvider>
+        <RouterProvider router={router} />
+      </StacksProvider>
     </UserProvider>
   </React.StrictMode>
 );
