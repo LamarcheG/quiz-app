@@ -1,6 +1,4 @@
-import { useState } from "react";
-import { IQuestionItem, MultipleChoiceQuestion } from "../../interfaces";
-
+import { MultipleChoiceQuestion } from "../../interfaces";
 interface multipleChoiceProps {
   question: MultipleChoiceQuestion;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

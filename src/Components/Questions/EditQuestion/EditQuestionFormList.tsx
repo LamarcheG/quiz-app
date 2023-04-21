@@ -1,7 +1,4 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { IQuestionItem, User } from "../../../interfaces";
-import { useUser } from "../../../Stores/UserContext";
+import { IQuestionItem } from "../../../interfaces";
 import { EditQuestionForm } from "./EditQuestionForm";
 
 interface EditQuestionFormListProps {

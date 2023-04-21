@@ -1,4 +1,4 @@
-import { IQuestionItem, TrueFalseQuestion } from "../../interfaces";
+import { TrueFalseQuestion } from "../../interfaces";
 
 interface trueOrFalseProps {
   question: TrueFalseQuestion;

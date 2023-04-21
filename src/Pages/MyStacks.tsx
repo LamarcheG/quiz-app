@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, onSnapshot } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import db from "../firebaseInit";
 import { Link } from "react-router-dom";

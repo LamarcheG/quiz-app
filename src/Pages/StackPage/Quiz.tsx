@@ -1,9 +1,8 @@
 import { QuestionList } from "../../Components/Questions/QuestionList";
 import { IQuestionItem } from "../../interfaces";
-import { AddQuestionForm } from "../../Components/Questions/AddQuestionForm";
 import db from "../../firebaseInit";
 import { useEffect, useState } from "react";
-import { collection, onSnapshot, addDoc } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import { useParams } from "react-router-dom";
 import { useUser } from "../../Stores/UserContext";
 import { User } from "../../interfaces";

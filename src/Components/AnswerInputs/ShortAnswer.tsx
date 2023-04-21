@@ -1,5 +1,4 @@
 import { ShortAnswerQuestion } from "../../interfaces";
-
 interface shortAnswerProps {
   question: ShortAnswerQuestion;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
