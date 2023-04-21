@@ -5,12 +5,13 @@ import db from "../firebaseInit";
 import { User } from "../interfaces";
 import { useUser } from "../Stores/UserContext";
 
+//make aggregate type for activeTab
+type ActiveTab = "quiz" | "stats" | "edit";
+
 export const Stack = () => {
   const { stackId } = useParams();
   const [stackName, setStackName] = useState("");
-  const [activeTab, setActiveTab] = useState(
-    "quiz" as "quiz" | "stats" | "edit"
-  );
+  const [activeTab, setActiveTab] = useState("quiz" as ActiveTab);
   const [isLoaded, setIsLoaded] = useState(false);
   const userContext = useUser() as unknown as User;
 
@@ -20,7 +21,7 @@ export const Stack = () => {
       return "quiz";
     } else if (url.includes("stats")) {
       return "stats";
-    } else if (url.includes("edit")) {
+    } else {
       return "edit";
     }
   };
@@ -43,7 +44,7 @@ export const Stack = () => {
       return unsubscribe;
     };
     const unsubscribe = getStackName();
-    setActiveTab(getActiveTabFromUrl()!);
+    setActiveTab(getActiveTabFromUrl());
     setIsLoaded(true);
     return () => {
       unsubscribe();
@@ -54,7 +55,7 @@ export const Stack = () => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
-  const handleTabClick = (tab: "quiz" | "stats" | "edit") => () => {
+  const handleTabClick = (tab: ActiveTab) => () => {
     setActiveTab(tab);
   };
 
