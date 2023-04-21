@@ -52,15 +52,16 @@ export const EditStack = () => {
   };
 
   useEffect(() => {
-    setQuestionStack(sortQuestions(questions));
-  }, [questions]);
-
-  useEffect(() => {
     const unsubscribe = subscribeToQuestions();
+
     return () => {
       unsubscribe();
     };
   }, []);
+
+  useEffect(() => {
+    setQuestionStack(sortQuestions(questions));
+  }, [questions]);
 
   useEffect(() => {
     if (questionStack.length > 0) {

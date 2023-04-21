@@ -26,26 +26,28 @@ export const Stack = () => {
     }
   };
 
+  const getStackName = () => {
+    const stackRef = doc(
+      db,
+      `/users/${userContext.user.uid}/stacks/${stackId}`
+    );
+    const unsubscribe = onSnapshot(
+      stackRef,
+      (snapshot) => {
+        setStackName(snapshot.data()?.name);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    return unsubscribe;
+  };
+
   useEffect(() => {
-    const getStackName = () => {
-      const stackRef = doc(
-        db,
-        `/users/${userContext.user.uid}/stacks/${stackId}`
-      );
-      const unsubscribe = onSnapshot(
-        stackRef,
-        (snapshot) => {
-          setStackName(snapshot.data()?.name);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-      return unsubscribe;
-    };
     const unsubscribe = getStackName();
     setActiveTab(getActiveTabFromUrl());
     setIsLoaded(true);
+
     return () => {
       unsubscribe();
     };

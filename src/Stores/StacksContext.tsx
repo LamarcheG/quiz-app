@@ -74,6 +74,7 @@ export const StacksProvider = ({ children }: any) => {
 
   useEffect(() => {
     const unsubscribe = subscribeToStacks();
+
     return () => {
       unsubscribe();
     };

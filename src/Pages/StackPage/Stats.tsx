@@ -21,32 +21,34 @@ export const Stats = () => {
     return newDate;
   };
 
+  const getStackStats = () => {
+    const stackRef = collection(
+      db,
+      `/users/${userContext.user.uid}/stacks/${stackId}/stats`
+    );
+    const unsubscribe = onSnapshot(
+      stackRef,
+      (snapshot) => {
+        const stats = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          date: convertFirebaseDate(doc.data().date),
+          score: doc.data().score,
+          time: doc.data().time,
+        }));
+        sortStats(stats);
+        setStatList(stats);
+        setIsLoaded(true);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    return unsubscribe;
+  };
+
   useEffect(() => {
-    const getStackStats = () => {
-      const stackRef = collection(
-        db,
-        `/users/${userContext.user.uid}/stacks/${stackId}/stats`
-      );
-      const unsubscribe = onSnapshot(
-        stackRef,
-        (snapshot) => {
-          const stats = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            date: convertFirebaseDate(doc.data().date),
-            score: doc.data().score,
-            time: doc.data().time,
-          }));
-          sortStats(stats);
-          setStatList(stats);
-          setIsLoaded(true);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-      return unsubscribe;
-    };
     const unsubscribe = getStackStats();
+
     return () => {
       unsubscribe();
     };

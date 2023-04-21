@@ -41,6 +41,7 @@ export const Quiz = () => {
 
   useEffect(() => {
     const unsubscribe = subscribeToQuestions();
+
     return () => {
       unsubscribe();
     };
