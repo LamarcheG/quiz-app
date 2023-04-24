@@ -3,7 +3,6 @@ import {
   collection,
   deleteDoc,
   doc,
-  onSnapshot,
   updateDoc,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
