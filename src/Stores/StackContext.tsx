@@ -1,7 +1,7 @@
 import { collection, onSnapshot, Unsubscribe } from "firebase/firestore";
 import { createContext, useContext, useEffect, useReducer } from "react";
 import db from "../firebaseInit";
-import { User } from "../interfaces";
+import { IQuestionItem, User } from "../interfaces";
 import { useUser } from "./UserContext";
 
 const StackContext = createContext(null);
@@ -34,12 +34,18 @@ export const StackProvider = ({ id, children }: any) => {
       db,
       `/users/${userContext.user.uid}/stacks/${id}/questions`
     );
-    const unsubscribe = onSnapshot(collectionRef, (snapshot) => {
-      const questionsArray = snapshot.docs.map((doc) => {
-        return { ...doc.data(), id: doc.id };
-      });
-      dispatch({ type: "REPLACE_QUESTIONS", payload: questionsArray });
-    });
+    const unsubscribe = onSnapshot(
+      collectionRef,
+      (snapshot) => {
+        const questionsArray = snapshot.docs.map((doc) => {
+          return { ...doc.data(), id: doc.id };
+        });
+        dispatch({ type: "REPLACE_QUESTIONS", payload: questionsArray });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     return unsubscribe;
   };
 
@@ -48,12 +54,18 @@ export const StackProvider = ({ id, children }: any) => {
       db,
       `/users/${userContext.user.uid}/stacks/${id}/stats`
     );
-    const unsubscribe = onSnapshot(collectionRef, (snapshot) => {
-      const statsArray = snapshot.docs.map((doc) => {
-        return { ...doc.data(), id: doc.id };
-      });
-      dispatch({ type: "REPLACE_STATS", payload: statsArray });
-    });
+    const unsubscribe = onSnapshot(
+      collectionRef,
+      (snapshot) => {
+        const statsArray = snapshot.docs.map((doc) => {
+          return { ...doc.data(), id: doc.id };
+        });
+        dispatch({ type: "REPLACE_STATS", payload: statsArray });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
     return unsubscribe;
   };
 
@@ -82,6 +94,28 @@ export const useStack = () => {
     throw new Error("useStack must be used within a StackProvider");
   }
   return context;
+};
+
+export const useStackQuestions = () => {
+  const context = useContext(StackContext) as unknown as {
+    questions: IQuestionItem[];
+  };
+  if (context === undefined) {
+    throw new Error("useStack must be used within a StackProvider");
+  } else if (context === null) {
+    return [];
+  }
+  return context.questions;
+};
+
+export const useStackStats = () => {
+  const context = useContext(StackContext) as unknown as { stats: any[] };
+  if (context === undefined) {
+    throw new Error("useStack must be used within a StackProvider");
+  } else if (context === null) {
+    return [];
+  }
+  return context.stats;
 };
 
 export const useStackDispatch = () => {
