@@ -14,7 +14,7 @@ describe("QuestionParser", () => {
     questionKeywords.forEach((questionKeyword, index) => {
       questions.push(
         parseBruteText(
-          `${questionKeywords[index]}: Why is the sky blue q ?\n${answerKeywords[index]}: Because it is.`
+          `${questionKeyword}: Why is the sky blue q ?\n${answerKeywords[index]}: Because it is.`
         )
       );
     });
