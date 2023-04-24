@@ -24,6 +24,11 @@ const reducer = (state: any, action: any) => {
   }
 };
 
+const convertFirebaseDate = (date: any) => {
+  const newDate = new Date(date.seconds * 1000);
+  return newDate;
+};
+
 export const StackProvider = ({ id, children }: any) => {
   const [state, dispatch] = useReducer(reducer, []);
 
@@ -58,7 +63,12 @@ export const StackProvider = ({ id, children }: any) => {
       collectionRef,
       (snapshot) => {
         const statsArray = snapshot.docs.map((doc) => {
-          return { ...doc.data(), id: doc.id };
+          return {
+            id: doc.id,
+            date: convertFirebaseDate(doc.data().date),
+            score: doc.data().score,
+            time: doc.data().time,
+          };
         });
         dispatch({ type: "REPLACE_STATS", payload: statsArray });
       },

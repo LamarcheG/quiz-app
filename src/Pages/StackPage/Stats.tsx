@@ -1,58 +1,25 @@
-import { collection, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import db from "../../firebaseInit";
-import { User } from "../../interfaces";
-import { useUser } from "../../Stores/UserContext";
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
 import { LoadingSpinner } from "../../Components/Styled/LoadingSpinner";
+import { useStackStats } from "../../Stores/StackContext";
 
 export const Stats = () => {
-  const { stackId } = useParams();
   const [statList, setStatList] = useState<any[]>([]);
-  const userContext = useUser() as unknown as User;
   const [isLoaded, setIsLoaded] = useState(false);
   const [nbOfStats, setNbOfStats] = useState(5);
   const [showLatest, setShowLatest] = useState(false);
-
-  const convertFirebaseDate = (date: any) => {
-    const newDate = new Date(date.seconds * 1000);
-    return newDate;
-  };
-
-  const getStackStats = () => {
-    const stackRef = collection(
-      db,
-      `/users/${userContext.user.uid}/stacks/${stackId}/stats`
-    );
-    const unsubscribe = onSnapshot(
-      stackRef,
-      (snapshot) => {
-        const stats = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          date: convertFirebaseDate(doc.data().date),
-          score: doc.data().score,
-          time: doc.data().time,
-        }));
-        sortStats(stats);
-        setStatList(stats);
-        setIsLoaded(true);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    return unsubscribe;
-  };
+  const statListContext = useStackStats() as unknown as any[];
 
   useEffect(() => {
-    const unsubscribe = getStackStats();
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+    if (!statListContext || statListContext.length === 0) {
+      setIsLoaded(true);
+      return;
+    }
+    sortStats(statListContext);
+    setStatList(statListContext);
+    setIsLoaded(true);
+  }, [statListContext]);
 
   const sortStats = (statList: any[]) => {
     statList.sort((a, b) => {
