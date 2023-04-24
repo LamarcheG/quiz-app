@@ -17,54 +17,30 @@ import {
   QuestionType,
   User,
 } from "../../interfaces";
+import { useStackQuestions } from "../../Stores/StackContext";
 import { useUser } from "../../Stores/UserContext";
 
 export const EditStack = () => {
   const [displayForm, setDisplayForm] = useState(false);
-  const [questions, setQuestions] = useState<IQuestionItem[]>([]);
   const [questionStack, setQuestionStack] = useState<IQuestionItem[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState<IQuestionItem>();
   const [isLoaded, setIsLoaded] = useState(false);
   const [lastId, setLastId] = useState("");
   const { stackId } = useParams();
   const userContext = useUser() as unknown as User;
-
-  const subscribeToQuestions = () => {
-    const collectionRef = collection(
-      db,
-      `/users/${userContext.user.uid}/stacks/${stackId}/questions`
-    );
-    const unsubscribe = onSnapshot(
-      collectionRef,
-      (snapshot) => {
-        const questionsArray = snapshot.docs.map((doc) => {
-          return { ...doc.data(), id: doc.id } as IQuestionItem;
-        });
-        setQuestions(questionsArray);
-        setCurrentQuestion(questionsArray[0]);
-        setIsLoaded(true);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-    return unsubscribe;
-  };
+  const questions = useStackQuestions() as unknown as IQuestionItem[];
 
   useEffect(() => {
-    const unsubscribe = subscribeToQuestions();
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
-  useEffect(() => {
+    if (!questions || questions.length <= 0) {
+      setIsLoaded(true);
+      return;
+    }
     setQuestionStack(sortQuestions(questions));
+    setIsLoaded(true);
   }, [questions]);
 
   useEffect(() => {
-    if (questionStack.length > 0) {
+    if (questionStack?.length > 0) {
       setCurrentQuestion(questionStack[0]);
     }
   }, [questionStack]);
