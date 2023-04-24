@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, Outlet, useParams } from "react-router-dom";
 import db from "../firebaseInit";
 import { User } from "../interfaces";
+import { StackProvider } from "../Stores/StackContext";
 import { useUser } from "../Stores/UserContext";
 
 //make aggregate type for activeTab
@@ -105,7 +106,9 @@ export const Stack = () => {
             </Link>
           </div>
           <div className="mt-3">
-            <Outlet />
+            <StackProvider id={stackId}>
+              <Outlet />
+            </StackProvider>
           </div>
         </div>
       )}
