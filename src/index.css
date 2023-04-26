@@ -24,11 +24,10 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
   text-decoration: inherit;
 }
 a:hover {
-  color: rgb(2 132 199 / var(--tw-border-opacity));
+  color: #00539CFF;
 }
 
 body {
