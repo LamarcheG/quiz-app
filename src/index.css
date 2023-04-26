@@ -26,9 +26,6 @@ a {
   font-weight: 500;
   text-decoration: inherit;
 }
-a:hover {
-  color: #00539CFF;
-}
 
 body {
   margin: 0;

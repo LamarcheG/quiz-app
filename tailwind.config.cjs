@@ -12,7 +12,6 @@ module.exports = {
         text: {
           OverBlue: "#f8f8f8",
           DEFAULT: "#e0e0e0",
-          primary: "#00539CFF",
         },
       },
     },

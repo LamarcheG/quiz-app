@@ -92,7 +92,7 @@ export const Nav = () => {
         <nav className="absolute flex h-16 w-full flex-row items-center gap-5 border-b border-primary bg-neutral-800">
           <Link
             to="/"
-            className="ml-5 flex flex-row text-lg text-text-OverBlue"
+            className="ml-5 flex flex-row rounded-md px-2 py-1 text-lg text-text-OverBlue hover:bg-primary"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +105,7 @@ export const Nav = () => {
           </Link>
           <Link
             to="/stacks"
-            className="flex flex-row text-lg text-text-OverBlue"
+            className="flex flex-row rounded-md px-2 py-1 text-lg text-text-OverBlue hover:bg-primary"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

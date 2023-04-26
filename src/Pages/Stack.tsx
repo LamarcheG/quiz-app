@@ -71,9 +71,9 @@ export const Stack = () => {
             <Link
               to={`/stacks/${stackId}/quiz`}
               className={
-                "inline-block w-16 rounded-full border-2 px-3 py-1 text-white" +
+                "inline-block w-16 rounded-full border-2 px-3 py-1 text-text-OverBlue hover:border-primary hover:bg-primary" +
                 (activeTab === "quiz"
-                  ? " border-sky-600"
+                  ? " border-primary"
                   : " border-neutral-500")
               }
               onClick={handleTabClick("quiz")}
@@ -83,9 +83,9 @@ export const Stack = () => {
             <Link
               to={`/stacks/${stackId}/stats`}
               className={
-                "inline-block w-16 rounded-full border-2 px-3 py-1 text-white" +
+                "inline-block w-16 rounded-full border-2 px-3 py-1 text-text-OverBlue hover:border-primary hover:bg-primary" +
                 (activeTab === "stats"
-                  ? " border-sky-600"
+                  ? " border-primary"
                   : " border-neutral-500")
               }
               onClick={handleTabClick("stats")}
@@ -95,9 +95,9 @@ export const Stack = () => {
             <Link
               to={`/stacks/${stackId}/edit`}
               className={
-                "inline-block w-16 rounded-full border-2 px-3 py-1 text-white" +
+                "inline-block w-16 rounded-full border-2 px-3 py-1 text-text-OverBlue hover:border-primary hover:bg-primary" +
                 (activeTab === "edit"
-                  ? " border-sky-600"
+                  ? " border-primary"
                   : " border-neutral-500")
               }
               onClick={handleTabClick("edit")}
