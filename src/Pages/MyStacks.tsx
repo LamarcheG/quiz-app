@@ -76,7 +76,7 @@ export const MyStacks = (props: any) => {
         {!isLoaded ? (
           <LoadingSpinner />
         ) : (
-          <ul className="flex flex-col gap-3 lg:grid lg:grid-cols-3 lg:gap-12">
+          <ul className="flex flex-col items-center gap-3 lg:grid lg:grid-cols-3 lg:gap-12">
             {stacks.map((stack) => {
               return (
                 <Link key={stack.id} to={`/stacks/${stack.id}/quiz`}>
