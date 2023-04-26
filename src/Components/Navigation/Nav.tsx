@@ -87,7 +87,7 @@ export const Nav = () => {
           )}
         </>
       ) : (
-        <nav className="absolute flex h-16 w-full flex-row items-center bg-gray-900">
+        <nav className="sha absolute flex h-16 w-full flex-row items-center border-b border-gray-700 bg-gray-900">
           <div className="mx-5 flex flex-row">
             <svg
               xmlns="http://www.w3.org/2000/svg"

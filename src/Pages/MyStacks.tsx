@@ -82,7 +82,7 @@ export const MyStacks = (props: any) => {
                 <Link key={stack.id} to={`/stacks/${stack.id}/quiz`}>
                   <li className="relative h-full">
                     <div
-                      className="h-36 w-64 rounded-md border-t border-l bg-gray-900 p-5 text-white shadow-md shadow-neutral-900 hover:text-white"
+                      className="h-36 w-64 rounded-md border-t border-l border-gray-700 bg-gray-900 p-5 text-white shadow-md shadow-neutral-900 hover:text-white"
                       onMouseEnter={() => handleHover(true, stack.id)}
                       onMouseLeave={() => handleHover(false, stack.id)}
                     >
@@ -109,15 +109,15 @@ export const MyStacks = (props: any) => {
                     <div
                       className={
                         shouldHover(stack.id)
-                          ? "absolute top-0 left-0 -z-10 h-36 w-64 translate-x-8 -translate-y-4 rotate-6 rounded-md border-t border-l bg-gray-900 shadow-md shadow-neutral-900 transition-all ease-in-out"
-                          : "absolute top-0 left-0 -z-10 h-36 w-64 rounded-md border-t border-l bg-gray-900 transition-all ease-in-out"
+                          ? "absolute top-0 left-0 -z-10 h-36 w-64 translate-x-8 -translate-y-4 rotate-6 rounded-md border-t border-l border-gray-700 bg-gray-900 shadow-md shadow-neutral-900 transition-all ease-in-out"
+                          : "absolute top-0 left-0 -z-10 h-36 w-64 rounded-md border-t border-l border-gray-700 bg-gray-900 transition-all ease-in-out"
                       }
                     ></div>
                     <div
                       className={
                         shouldHover(stack.id)
-                          ? "absolute top-0 left-0 -z-10 h-36 w-64 translate-x-4 -translate-y-2 rotate-3 rounded-md border-t border-l bg-gray-900 shadow-md shadow-neutral-900 transition-all ease-in-out"
-                          : "absolute top-0 left-0 -z-10 h-36 w-64 rounded-md border-t border-l bg-gray-900 transition-all ease-in-out"
+                          ? "absolute top-0 left-0 -z-10 h-36 w-64 translate-x-4 -translate-y-2 rotate-3 rounded-md border-t border-l border-gray-700 bg-gray-900 shadow-md shadow-neutral-900 transition-all ease-in-out"
+                          : "absolute top-0 left-0 -z-10 h-36 w-64 rounded-md border-t border-l border-gray-700 bg-gray-900 transition-all ease-in-out"
                       }
                     ></div>
                   </li>

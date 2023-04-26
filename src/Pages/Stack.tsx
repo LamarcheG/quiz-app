@@ -73,7 +73,7 @@ export const Stack = () => {
               className={
                 "inline-block w-16 rounded-full border-2 px-3 py-1 text-white" +
                 (activeTab === "quiz"
-                  ? " border-gray-900"
+                  ? " border-sky-600"
                   : " border-neutral-500")
               }
               onClick={handleTabClick("quiz")}
@@ -85,7 +85,7 @@ export const Stack = () => {
               className={
                 "inline-block w-16 rounded-full border-2 px-3 py-1 text-white" +
                 (activeTab === "stats"
-                  ? " border-gray-900"
+                  ? " border-sky-600"
                   : " border-neutral-500")
               }
               onClick={handleTabClick("stats")}
@@ -97,7 +97,7 @@ export const Stack = () => {
               className={
                 "inline-block w-16 rounded-full border-2 px-3 py-1 text-white" +
                 (activeTab === "edit"
-                  ? " border-gray-900"
+                  ? " border-sky-600"
                   : " border-neutral-500")
               }
               onClick={handleTabClick("edit")}

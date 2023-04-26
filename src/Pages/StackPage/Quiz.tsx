@@ -50,7 +50,12 @@ export const Quiz = () => {
           {isLoaded && !showQuiz && (
             <>
               {!showCountDown ? (
-                <button onClick={quizBegin}>Start Quiz</button>
+                <button
+                  onClick={quizBegin}
+                  className="border border-gray-700 bg-gray-900"
+                >
+                  Start Quiz
+                </button>
               ) : (
                 <div>
                   <h1>{countDown}</h1>

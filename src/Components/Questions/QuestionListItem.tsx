@@ -37,7 +37,7 @@ export const QuestionListItem = ({
       <form
         onSubmit={handleSubmit}
         className={
-          "m-0 flex w-72 flex-col items-center rounded-md border-t border-l bg-gray-900 p-5 shadow-lg shadow-neutral-900 transition-all xl:w-96" +
+          "m-0 flex w-72 flex-col items-center rounded-md border-t border-l border-gray-700 bg-gray-900 p-5 shadow-lg shadow-neutral-900 transition-all xl:w-96" +
           (isCorrect === true
             ? " border border-green-700"
             : isCorrect === false
