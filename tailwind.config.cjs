@@ -15,7 +15,7 @@ module.exports = {
           light: "#F0D5C7",
         },
         text: {
-          OverBlue: "#01539D",
+          OverBlue: "#f8f8f8",
           OverPeach: "#EEA47F",
           DEFAULT: "#e0e0e0",
         },
