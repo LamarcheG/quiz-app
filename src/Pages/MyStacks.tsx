@@ -112,18 +112,20 @@ export const MyStacks = (props: any) => {
                     </div>
                     <div
                       className={
-                        shouldHover(stack.id)
-                          ? "absolute top-0 left-0 -z-10 h-36 w-64 translate-x-8 -translate-y-4 rotate-6 rounded-md border-t border-l border-neutral-600 bg-neutral-800 shadow-md shadow-black transition-all ease-in-out"
-                          : "absolute top-0 left-0 -z-10 h-36 w-64 rounded-md border-t border-l border-neutral-600 bg-neutral-800 transition-all ease-in-out"
+                        "absolute top-0 left-0 -z-10 h-36 w-64 rounded-md border-t border-l border-neutral-600 bg-neutral-800 transition-all ease-in-out" +
+                        (shouldHover(stack.id)
+                          ? " translate-x-8 -translate-y-4 rotate-6 shadow-md shadow-black"
+                          : "")
                       }
                     >
                       <div className="h-1/3 border-b-2 border-primary"></div>
                     </div>
                     <div
                       className={
-                        shouldHover(stack.id)
-                          ? "absolute top-0 left-0 -z-10 h-36 w-64 translate-x-4 -translate-y-2 rotate-3 rounded-md border-t border-l border-neutral-600 bg-neutral-800 shadow-md shadow-black transition-all ease-in-out"
-                          : "absolute top-0 left-0 -z-10 h-36 w-64 rounded-md border-t border-l border-neutral-600 bg-neutral-800 transition-all ease-in-out"
+                        "absolute top-0 left-0 -z-10 h-36 w-64 rounded-md border-t border-l border-neutral-600 bg-neutral-800 transition-all ease-in-out" +
+                        (shouldHover(stack.id)
+                          ? " translate-x-4 -translate-y-2 rotate-3 rounded-md shadow-md shadow-black"
+                          : "")
                       }
                     >
                       <div className="h-1/3 border-b-2 border-primary"></div>
