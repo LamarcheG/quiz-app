@@ -25,7 +25,7 @@ export const MyStacks = (props: any) => {
   const stackContext = useStacks() as unknown as { stacks: StackWithStats[] };
   const [sortType, setSortType] = useState(SortType.Alphabetical);
   const [isReversed, setIsReversed] = useState(false);
-  const [displayConfirmDelete, setDisplayConfirmDelete] = useState(false);
+  const [isEditingClicked, setIsEditingClicked] = useState(false);
 
   useEffect(() => {
     if (stackContext.stacks) {
@@ -54,6 +54,7 @@ export const MyStacks = (props: any) => {
   };
 
   const handleEditFromToggle = () => {
+    setIsEditingClicked(true);
     setDisplayEditForm(!displayEditForm);
   };
 
@@ -99,8 +100,12 @@ export const MyStacks = (props: any) => {
           <h1 className="pr-5 text-text-OverBlue">My Stacks</h1>
           <button
             type="button"
-            className="ml-2 flex items-center justify-center rounded-md bg-primary px-2 py-1 text-text-OverBlue"
+            className={
+              "ml-2 flex items-center justify-center rounded-md bg-primary px-2 py-1 text-text-OverBlue" +
+              (isEditingClicked ? " animate-buttonClick" : "")
+            }
             onClick={() => handleEditFromToggle()}
+            onAnimationEnd={() => setIsEditingClicked(false)}
           >
             {!displayEditForm ? "Edit" : "Cancel"}
           </button>
