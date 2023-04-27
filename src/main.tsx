@@ -7,7 +7,7 @@ import { ErrorPage } from "./Pages/ErrorPage";
 import { Root } from "./Pages/Root";
 import { Quiz } from "./Pages/StackPage/Quiz";
 import { Index } from "./Pages/Index";
-import { MyStacks } from "./Pages/MyStacks";
+import { MyStacks } from "./Pages/MyStacks/MyStacks";
 import { Stats } from "./Pages/StackPage/Stats";
 import { EditStack } from "./Pages/StackPage/EditStack";
 import { Stack } from "./Pages/Stack";
