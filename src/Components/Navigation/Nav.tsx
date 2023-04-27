@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useWindowSize } from "../../Hooks/useWindowSize";
+import { NavTab } from "./NavTab";
 
 export const Nav = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const size = useWindowSize();
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
     setSmallScreen(size);
@@ -90,10 +92,7 @@ export const Nav = () => {
         </>
       ) : (
         <nav className="absolute flex h-16 w-full flex-row items-center gap-5 border-b border-primary bg-neutral-800">
-          <Link
-            to="/"
-            className="ml-5 flex flex-row rounded-md px-2 py-1 text-lg text-text-OverBlue transition-all duration-150 ease-in-out hover:bg-primary"
-          >
+          <NavTab to="/">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 576 512"
@@ -102,7 +101,7 @@ export const Nav = () => {
               <path d="M543.8 287.6c17 0 32-14 32-32.1c1-9-3-17-11-24L512 185V64c0-17.7-14.3-32-32-32H448c-17.7 0-32 14.3-32 32v36.7L309.5 7c-6-5-14-7-21-7s-15 1-22 8L10 231.5c-7 7-10 15-10 24c0 18 14 32.1 32 32.1h32v69.7c-.1 .9-.1 1.8-.1 2.8V472c0 22.1 17.9 40 40 40h16c1.2 0 2.4-.1 3.6-.2c1.5 .1 3 .2 4.5 .2H160h24c22.1 0 40-17.9 40-40V448 384c0-17.7 14.3-32 32-32h64c17.7 0 32 14.3 32 32v64 24c0 22.1 17.9 40 40 40h24 32.5c1.4 0 2.8 0 4.2-.1c1.1 .1 2.2 .1 3.3 .1h16c22.1 0 40-17.9 40-40V455.8c.3-2.6 .5-5.3 .5-8.1l-.7-160.2h32z" />
             </svg>
             Home
-          </Link>
+          </NavTab>
           <Link
             to="/stacks"
             className="flex flex-row rounded-md px-2 py-1 text-lg text-text-OverBlue transition-all duration-150 ease-in-out hover:bg-primary"
@@ -116,6 +115,16 @@ export const Nav = () => {
             </svg>
             My stacks
           </Link>
+          <NavTab to="/stacks">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 576 512"
+              className="mr-3 w-5 fill-text-OverBlue"
+            >
+              <path d="M264.5 5.2c14.9-6.9 32.1-6.9 47 0l218.6 101c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 149.8C37.4 145.8 32 137.3 32 128s5.4-17.9 13.9-21.8L264.5 5.2zM476.9 209.6l53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 277.8C37.4 273.8 32 265.3 32 256s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0l152-70.2zm-152 198.2l152-70.2 53.2 24.6c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L45.9 405.8C37.4 401.8 32 393.3 32 384s5.4-17.9 13.9-21.8l53.2-24.6 152 70.2c23.4 10.8 50.4 10.8 73.8 0z" />
+            </svg>
+            My stacks
+          </NavTab>
         </nav>
       )}
     </>
