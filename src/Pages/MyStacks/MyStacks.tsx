@@ -33,7 +33,7 @@ export const MyStacks = (props: any) => {
   }, [stackContext.stacks]);
 
   useEffect(() => {
-    if (stacks) {
+    if (stacks.length > 0) {
       setStacks(sortStacks(stacks));
     }
   }, [sortType]);
