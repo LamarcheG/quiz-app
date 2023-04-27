@@ -11,13 +11,14 @@ import { MyStacksItem } from "./MyStacksItem";
 export const MyStacks = (props: any) => {
   enum SortType {
     Alphabetical = "Alphabetical",
-    TimesCompleted = "TimesCompleted",
-    AverageScore = "AverageScore",
-    AverageTime = "AverageTime",
+    TimesCompleted = "Times completed",
+    AverageScore = "Average score",
+    AverageTime = "Average time",
   }
 
   const [stacks, setStacks] = useState<StackWithStats[]>([]);
-  const [displayForm, setDisplayForm] = useState(false);
+  const [displayAddForm, setDisplayForm] = useState(false);
+  const [displayEditForm, setDisplayEditForm] = useState(false);
   const [newSubject, setNewSubject] = useState("");
   const userContext = useUser() as unknown as User;
   const [isLoaded, setIsLoaded] = useState(false);
@@ -49,6 +50,10 @@ export const MyStacks = (props: any) => {
 
   const handleFormChange = () => (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewSubject(e.target.value);
+  };
+
+  const handleEditFromToggle = () => {
+    setDisplayEditForm(!displayEditForm);
   };
 
   const sortStacks = (stacks: StackWithStats[]) => {
@@ -83,28 +88,32 @@ export const MyStacks = (props: any) => {
 
   return (
     <div className="grid h-full items-center justify-center">
-      <div>
+      <div className="mt-16 md:mt-0">
         <div className="mb-2 flex items-center">
           <h1 className="pr-5 text-text-OverBlue">My Stacks</h1>
-          {!displayForm && (
-            <button
-              type="button"
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-primary p-0"
-              onClick={() => setDisplayForm(true)}
-            >
-              +
-            </button>
-          )}
+          <button
+            type="button"
+            className="ml-2 flex items-center justify-center rounded-md bg-primary px-2 py-1"
+            onClick={() => handleEditFromToggle()}
+          >
+            {!displayEditForm ? "Edit" : "Cancel"}
+          </button>
         </div>
-        <form className="mb-5 flex items-center justify-center lg:mb-10 lg:justify-start">
+        <form className="mb-10 flex items-center justify-center md:justify-start">
           <select
             className="mr-3 rounded-md border border-primary p-1"
             onChange={(e) => handleSortTypeChange(e)}
           >
-            <option value={SortType.Alphabetical}>Alphabetical</option>
-            <option value={SortType.TimesCompleted}>Times completed</option>
-            <option value={SortType.AverageScore}>Average score</option>
-            <option value={SortType.AverageTime}>Average time</option>
+            <option value={SortType.Alphabetical}>
+              {SortType.Alphabetical}
+            </option>
+            <option value={SortType.TimesCompleted}>
+              {SortType.TimesCompleted}
+            </option>
+            <option value={SortType.AverageScore}>
+              {SortType.AverageScore}
+            </option>
+            <option value={SortType.AverageTime}>{SortType.AverageTime}</option>
           </select>
           <button type="button" onClick={() => reverse()} className="p-0">
             {isReversed ? (
@@ -130,39 +139,61 @@ export const MyStacks = (props: any) => {
         {!isLoaded ? (
           <LoadingSpinner />
         ) : (
-          <ul className="flex flex-col items-center gap-3 lg:grid lg:grid-cols-3 lg:gap-12">
+          <ul className="flex flex-col items-center gap-3 md:grid md:grid-cols-2 md:gap-12 lg:grid lg:grid-cols-3 lg:gap-12">
             {stacks.map((stack) => {
               return <MyStacksItem key={stack.id} stack={stack} />;
             })}
-          </ul>
-        )}
 
-        {displayForm && (
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              addSubject();
-              setDisplayForm(false);
-            }}
-            className="flex flex-col items-center"
-          >
-            <input
-              type="text"
-              className="mt-2"
-              value={newSubject}
-              onChange={handleFormChange()}
-            />
-            <div>
-              <SubmitButton className="mt-2">Add</SubmitButton>
-              <button
-                type="button"
-                className="underline"
-                onClick={() => setDisplayForm(false)}
-              >
-                Annuler
-              </button>
-            </div>
-          </form>
+            {displayEditForm && (
+              <>
+                {displayAddForm ? (
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      addSubject();
+                      setDisplayForm(false);
+                    }}
+                    className="h-36 w-64 rounded-md border-t border-l border-neutral-600 bg-neutral-800 text-white shadow-md shadow-black"
+                  >
+                    <div className="flex h-1/3 w-full items-center justify-start border-b-2 border-primary px-5">
+                      <input
+                        type="text"
+                        className="h-6 w-full rounded-md placeholder:pl-2"
+                        name="newSubject"
+                        value={newSubject}
+                        placeholder="Name"
+                        onChange={handleFormChange()}
+                      />
+                    </div>
+                    <div className="flex h-2/3 items-center justify-start px-5">
+                      <SubmitButton className="mt-2">Add</SubmitButton>
+                      <button
+                        type="button"
+                        className="underline"
+                        onClick={() => setDisplayForm(false)}
+                      >
+                        Annuler
+                      </button>
+                    </div>
+                  </form>
+                ) : (
+                  <>
+                    {!displayAddForm && (
+                      <button
+                        type="button"
+                        onClick={() => setDisplayForm(true)}
+                        className="grid h-36 w-64 items-center justify-center rounded-md border-t border-l border-neutral-600 border-opacity-40 bg-neutral-800 bg-opacity-40 text-white shadow-md shadow-black"
+                      >
+                        <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary p-0">
+                          +
+                        </span>
+                      </button>
+                    )}
+                  </>
+                )}
+              </>
+            )}
+          </ul>
         )}
       </div>
     </div>

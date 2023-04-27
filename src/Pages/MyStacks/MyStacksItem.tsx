@@ -13,7 +13,7 @@ export const MyStacksItem = ({ stack }: myStacksItemProps) => {
     <Link key={stack.id} to={`/stacks/${stack.id}/quiz`}>
       <li className="relative h-full">
         <div
-          className="h-36 w-64 rounded-md border-t border-l border-neutral-600 bg-neutral-800 text-white shadow-md shadow-black hover:text-white"
+          className="h-36 w-64 rounded-md border-t border-l border-neutral-600 bg-neutral-800 text-white shadow-md shadow-black"
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
         >
