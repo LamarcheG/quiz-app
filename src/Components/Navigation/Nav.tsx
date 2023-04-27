@@ -47,7 +47,7 @@ export const Nav = () => {
               <div className="m-auto flex h-full min-h-min w-fit flex-col items-start justify-center gap-5">
                 <Link
                   to="/"
-                  className="flex flex-row fill-text-OverBlue text-lg text-text-OverBlue"
+                  className="flex flex-row rounded-md fill-text-OverBlue px-2 py-1 text-lg text-text-OverBlue"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +60,7 @@ export const Nav = () => {
                 </Link>
                 <Link
                   to="/stacks"
-                  className="flex flex-row text-lg text-text-OverBlue"
+                  className="flex flex-row rounded-md px-2 py-1 text-lg text-text-OverBlue"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +92,7 @@ export const Nav = () => {
         <nav className="absolute flex h-16 w-full flex-row items-center gap-5 border-b border-primary bg-neutral-800">
           <Link
             to="/"
-            className="ml-5 flex flex-row rounded-md px-2 py-1 text-lg text-text-OverBlue hover:bg-primary"
+            className="ml-5 flex flex-row rounded-md px-2 py-1 text-lg text-text-OverBlue transition-all duration-150 ease-in-out hover:bg-primary"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +105,7 @@ export const Nav = () => {
           </Link>
           <Link
             to="/stacks"
-            className="flex flex-row rounded-md px-2 py-1 text-lg text-text-OverBlue hover:bg-primary"
+            className="flex flex-row rounded-md px-2 py-1 text-lg text-text-OverBlue transition-all duration-150 ease-in-out hover:bg-primary"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

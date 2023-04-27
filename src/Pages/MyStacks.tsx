@@ -62,11 +62,11 @@ export const MyStacks = (props: any) => {
     <div className="grid h-full items-center justify-center">
       <div>
         <div className="mb-5 flex items-center lg:mb-10">
-          <h1 className="pr-5">My Stacks</h1>
+          <h1 className="pr-5 text-text-OverBlue">My Stacks</h1>
           {!displayForm && (
             <button
               type="button"
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-sky-600 p-0"
+              className="flex h-8 w-8 items-center justify-center rounded-full bg-primary p-0"
               onClick={() => setDisplayForm(true)}
             >
               +
@@ -105,7 +105,7 @@ export const MyStacks = (props: any) => {
                           </span>
                         </div>
                       ) : (
-                        <span className="flex h-2/3 items-center justify-center px-5">
+                        <span className="flex h-2/3 flex-col justify-center px-5">
                           Not started yet
                         </span>
                       )}

@@ -66,12 +66,14 @@ export const Stack = () => {
     <>
       {isLoaded && (
         <div className="pt-24 text-center">
-          <h1>Subject: {captitalize(stackName)}</h1>
+          <h1 className="text-text-OverBlue">
+            Subject: {captitalize(stackName)}
+          </h1>
           <div className="m-auto mt-2 flex w-4/6 items-center justify-between xl:w-64">
             <Link
               to={`/stacks/${stackId}/quiz`}
               className={
-                "inline-block w-16 rounded-full border-2 px-3 py-1 text-text-OverBlue hover:border-primary hover:bg-primary" +
+                "inline-block w-16 rounded-full border-2 px-3 py-1 text-text-OverBlue transition-all duration-150 ease-in-out hover:border-primary hover:bg-primary" +
                 (activeTab === "quiz"
                   ? " border-primary"
                   : " border-neutral-500")
@@ -83,7 +85,7 @@ export const Stack = () => {
             <Link
               to={`/stacks/${stackId}/stats`}
               className={
-                "inline-block w-16 rounded-full border-2 px-3 py-1 text-text-OverBlue hover:border-primary hover:bg-primary" +
+                "inline-block w-16 rounded-full border-2 px-3 py-1 text-text-OverBlue transition-all duration-150 ease-in-out hover:border-primary hover:bg-primary" +
                 (activeTab === "stats"
                   ? " border-primary"
                   : " border-neutral-500")
@@ -95,7 +97,7 @@ export const Stack = () => {
             <Link
               to={`/stacks/${stackId}/edit`}
               className={
-                "inline-block w-16 rounded-full border-2 px-3 py-1 text-text-OverBlue hover:border-primary hover:bg-primary" +
+                "inline-block w-16 rounded-full border-2 px-3 py-1 text-text-OverBlue transition-all duration-150 ease-in-out hover:border-primary hover:bg-primary" +
                 (activeTab === "edit"
                   ? " border-primary"
                   : " border-neutral-500")
