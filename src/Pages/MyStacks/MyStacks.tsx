@@ -1,4 +1,4 @@
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import db from "../../firebaseInit";
 import { SubmitButton } from "../../Components/Styled/SubmitButton";
@@ -25,6 +25,7 @@ export const MyStacks = (props: any) => {
   const stackContext = useStacks() as unknown as { stacks: StackWithStats[] };
   const [sortType, setSortType] = useState(SortType.Alphabetical);
   const [isReversed, setIsReversed] = useState(false);
+  const [displayConfirmDelete, setDisplayConfirmDelete] = useState(false);
 
   useEffect(() => {
     if (stackContext.stacks) {
@@ -86,6 +87,11 @@ export const MyStacks = (props: any) => {
     setIsReversed(!isReversed);
   };
 
+  const deleteStack = (stackId: string) => {
+    const docRef = doc(db, `/users/${userContext.user.uid}/stacks/${stackId}`);
+    deleteDoc(docRef);
+  };
+
   return (
     <div className="grid h-full items-center justify-center">
       <div className="mt-16 md:mt-0">
@@ -93,7 +99,7 @@ export const MyStacks = (props: any) => {
           <h1 className="pr-5 text-text-OverBlue">My Stacks</h1>
           <button
             type="button"
-            className="ml-2 flex items-center justify-center rounded-md bg-primary px-2 py-1"
+            className="ml-2 flex items-center justify-center rounded-md bg-primary px-2 py-1 text-text-OverBlue"
             onClick={() => handleEditFromToggle()}
           >
             {!displayEditForm ? "Edit" : "Cancel"}
@@ -141,7 +147,14 @@ export const MyStacks = (props: any) => {
         ) : (
           <ul className="flex flex-col items-center gap-3 md:grid md:grid-cols-2 md:gap-12 lg:grid lg:grid-cols-3 lg:gap-12">
             {stacks.map((stack) => {
-              return <MyStacksItem key={stack.id} stack={stack} />;
+              return (
+                <MyStacksItem
+                  key={stack.id}
+                  stack={stack}
+                  isEditing={displayEditForm}
+                  deleteStack={deleteStack}
+                />
+              );
             })}
 
             {displayEditForm && (
