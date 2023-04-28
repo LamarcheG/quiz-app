@@ -77,7 +77,6 @@ export const MyStacksItem = ({
                   <div className="absolute bottom-2 left-4 aspect-square w-1 rounded-full bg-primary-light"></div>
                   <div className="absolute bottom-2 left-6 aspect-square w-1 rounded-full bg-blue-300"></div>
                   <div className="absolute bottom-2 left-8 aspect-square w-1 rounded-full bg-blue-200"></div>
-                  <div></div>
                   <span>
                     Completed: {stack.stats.nbOfStats}{" "}
                     {stack.stats.nbOfStats > 1 ? "times" : "time"}

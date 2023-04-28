@@ -171,9 +171,10 @@ export const MyStacks = (props: any) => {
                       addSubject();
                       setDisplayForm(false);
                     }}
-                    className="h-36 w-64 rounded-md border-t border-l border-neutral-600 bg-neutral-800 text-white shadow-md shadow-black"
+                    className="h-44 w-64 rounded-md border-t border-l border-neutral-600 bg-neutral-800 text-white shadow-md shadow-black"
                   >
-                    <div className="flex h-1/3 w-full items-center justify-start border-b-2 border-primary px-5">
+                    <div className="relative flex h-1/3 w-full items-center justify-start  px-5">
+                      <div className="absolute bottom-0 left-0  h-1 w-full bg-gradient-to-r from-primary via-primary-light to-zinc-200"></div>
                       <input
                         type="text"
                         className="h-6 w-full rounded-md placeholder:pl-2"
@@ -183,8 +184,14 @@ export const MyStacks = (props: any) => {
                         onChange={handleFormChange()}
                       />
                     </div>
-                    <div className="flex h-2/3 items-center justify-start px-5">
-                      <SubmitButton className="mt-2">Add</SubmitButton>
+                    <div className="relative flex h-2/3 items-center justify-start rounded-b-md bg-zinc-100 px-5 text-neutral-800">
+                      <div className="absolute left-2 top-3 h-2/3 w-[1px] bg-neutral-400"></div>
+                      <div className="absolute bottom-[10px] left-11 h-[1px] w-2/3 bg-neutral-400"></div>
+                      <div className="absolute bottom-2 left-2 aspect-square w-1 rounded-full bg-primary"></div>
+                      <div className="absolute bottom-2 left-4 aspect-square w-1 rounded-full bg-primary-light"></div>
+                      <div className="absolute bottom-2 left-6 aspect-square w-1 rounded-full bg-blue-300"></div>
+                      <div className="absolute bottom-2 left-8 aspect-square w-1 rounded-full bg-blue-200"></div>
+                      <SubmitButton>Add</SubmitButton>
                       <button
                         type="button"
                         className="underline"
