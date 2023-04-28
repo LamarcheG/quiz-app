@@ -52,7 +52,7 @@ export const Quiz = () => {
               {!showCountDown ? (
                 <button
                   onClick={quizBegin}
-                  className="border border-gray-700 bg-gray-900"
+                  className="rounded-md  bg-primary text-text-OverBlue transition-all duration-150 ease-in-out hover:scale-110"
                 >
                   Start Quiz
                 </button>

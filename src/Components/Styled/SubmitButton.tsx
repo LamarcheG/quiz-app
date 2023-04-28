@@ -16,7 +16,7 @@ export const SubmitButton = ({
       type="submit"
       onClick={onClick}
       className={
-        "w-32 rounded-md bg-sky-600 p-2 text-white transition duration-300 ease-in-out hover:scale-105 hover:border-transparent" +
+        "w-32 rounded-md bg-primary p-2 text-white transition duration-300 ease-in-out hover:scale-105 hover:border-transparent" +
         (className ? " " + className : "")
       }
       disabled={disabled}
