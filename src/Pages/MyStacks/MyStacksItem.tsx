@@ -55,8 +55,9 @@ export const MyStacksItem = ({
       {isEditing ? (
         <div key={stack.id}>
           <li className="relative h-full">
-            <div className="h-36 w-64 rounded-md border-t border-l border-neutral-600 bg-neutral-800 text-white shadow-md shadow-black">
-              <div className="flex h-1/3 items-center justify-between border-b-2 border-primary pl-5 pr-3">
+            <div className="h-44 w-64 rounded-md border-t border-l border-neutral-600 bg-neutral-800 text-white shadow-md shadow-black">
+              <div className="relative flex h-1/3 items-center justify-between pl-5 pr-3">
+                <div className="absolute bottom-0 left-0  h-1 w-full bg-gradient-to-r from-primary via-primary-light to-zinc-200"></div>
                 <h2 className="text-2xl font-bold text-text-OverBlue">
                   {stack.name}
                 </h2>
@@ -69,7 +70,14 @@ export const MyStacksItem = ({
                 </button>
               </div>
               {Object.keys(stack.stats).length > 0 ? (
-                <div className="flex h-2/3 flex-col justify-center px-5">
+                <div className="relative flex h-2/3 flex-col justify-center rounded-b-md bg-zinc-100 px-5 text-neutral-800">
+                  <div className="absolute left-2 top-3 h-2/3 w-[1px] bg-neutral-400"></div>
+                  <div className="absolute bottom-[10px] left-11 h-[1px] w-2/3 bg-neutral-400"></div>
+                  <div className="absolute bottom-2 left-2 aspect-square w-1 rounded-full bg-primary"></div>
+                  <div className="absolute bottom-2 left-4 aspect-square w-1 rounded-full bg-primary-light"></div>
+                  <div className="absolute bottom-2 left-6 aspect-square w-1 rounded-full bg-blue-300"></div>
+                  <div className="absolute bottom-2 left-8 aspect-square w-1 rounded-full bg-blue-200"></div>
+                  <div></div>
                   <span>
                     Completed: {stack.stats.nbOfStats}{" "}
                     {stack.stats.nbOfStats > 1 ? "times" : "time"}
@@ -78,9 +86,15 @@ export const MyStacksItem = ({
                   <span>Average score: {stack.stats.averageScore}%</span>
                 </div>
               ) : (
-                <span className="flex h-2/3 flex-col justify-center px-5">
-                  Not started yet
-                </span>
+                <div className="relative flex h-2/3 flex-col justify-center rounded-b-md bg-zinc-100 px-5 text-neutral-800">
+                  <div className="absolute left-2 top-3 h-2/3 w-[1px] bg-neutral-400"></div>
+                  <div className="absolute bottom-[10px] left-11 h-[1px] w-2/3 bg-neutral-400"></div>
+                  <div className="absolute bottom-2 left-2 aspect-square w-1 rounded-full bg-primary"></div>
+                  <div className="absolute bottom-2 left-4 aspect-square w-1 rounded-full bg-primary-light"></div>
+                  <div className="absolute bottom-2 left-6 aspect-square w-1 rounded-full bg-blue-300"></div>
+                  <div className="absolute bottom-2 left-8 aspect-square w-1 rounded-full bg-blue-200"></div>
+                  <span>Not started yet</span>
+                </div>
               )}
             </div>
           </li>
@@ -89,17 +103,24 @@ export const MyStacksItem = ({
         <Link key={stack.id} to={`/stacks/${stack.id}/quiz`}>
           <li className="relative h-full">
             <div
-              className="h-36 w-64 rounded-md border-t border-l border-neutral-600 bg-neutral-800 text-white shadow-md shadow-black"
+              className="h-44 w-64 rounded-md border-t border-l border-neutral-600 bg-neutral-800 text-white shadow-md shadow-black"
               onMouseEnter={() => setIsHovering(true)}
               onMouseLeave={() => setIsHovering(false)}
             >
-              <div className="flex h-1/3 items-center justify-between border-b-2 border-primary px-5">
+              <div className="relative flex h-1/3 items-center justify-between px-5">
+                <div className="absolute bottom-0 left-0  h-1 w-full bg-gradient-to-r from-primary via-primary-light to-zinc-200"></div>
                 <h2 className=" text-2xl font-bold text-text-OverBlue">
                   {stack.name}
                 </h2>
               </div>
               {Object.keys(stack.stats).length > 0 ? (
-                <div className="flex h-2/3 flex-col justify-center px-5">
+                <div className="relative flex h-2/3 flex-col justify-center rounded-b-md bg-zinc-100 px-5 text-neutral-800">
+                  <div className="absolute left-2 top-3 h-2/3 w-[1px] bg-neutral-400"></div>
+                  <div className="absolute bottom-[10px] left-11 h-[1px] w-2/3 bg-neutral-400"></div>
+                  <div className="absolute bottom-2 left-2 aspect-square w-1 rounded-full bg-primary"></div>
+                  <div className="absolute bottom-2 left-4 aspect-square w-1 rounded-full bg-primary-light"></div>
+                  <div className="absolute bottom-2 left-6 aspect-square w-1 rounded-full bg-blue-300"></div>
+                  <div className="absolute bottom-2 left-8 aspect-square w-1 rounded-full bg-blue-200"></div>
                   <span>
                     Completed: {stack.stats.nbOfStats}{" "}
                     {stack.stats.nbOfStats > 1 ? "times" : "time"}
@@ -108,30 +129,42 @@ export const MyStacksItem = ({
                   <span>Average score: {stack.stats.averageScore}%</span>
                 </div>
               ) : (
-                <span className="flex h-2/3 flex-col justify-center px-5">
+                <div className="relative flex h-2/3 flex-col justify-center rounded-b-md bg-zinc-100 px-5 text-neutral-800">
+                  <div className="absolute left-2 top-3 h-2/3 w-[1px] bg-neutral-400"></div>
+                  <div className="absolute bottom-[10px] left-11 h-[1px] w-2/3 bg-neutral-400"></div>
+                  <div className="absolute bottom-2 left-2 aspect-square w-1 rounded-full bg-primary"></div>
+                  <div className="absolute bottom-2 left-4 aspect-square w-1 rounded-full bg-primary-light"></div>
+                  <div className="absolute bottom-2 left-6 aspect-square w-1 rounded-full bg-blue-300"></div>
+                  <div className="absolute bottom-2 left-8 aspect-square w-1 rounded-full bg-blue-200"></div>
                   Not started yet
-                </span>
+                </div>
               )}
             </div>
             <div
               className={
-                "absolute top-0 left-0 -z-10 h-36 w-64 rounded-md border-t border-l border-neutral-600 bg-neutral-800 transition-all ease-in-out" +
+                "absolute top-0 left-0 -z-10 h-44 w-64 rounded-md border-t border-l border-neutral-600 bg-neutral-800 transition-all ease-in-out" +
                 (isHovering
                   ? " translate-x-8 -translate-y-4 rotate-6 shadow-md shadow-black"
                   : "")
               }
             >
-              <div className="h-1/3 border-b-2 border-primary"></div>
+              <div className="relative h-1/3">
+                <div className="absolute bottom-0 left-0  h-1 w-full bg-gradient-to-r from-primary via-primary-light to-zinc-200"></div>
+              </div>
+              <div className="h-2/3 rounded-b-md bg-zinc-100"></div>
             </div>
             <div
               className={
-                "absolute top-0 left-0 -z-10 h-36 w-64 rounded-md border-t border-l border-neutral-600 bg-neutral-800 transition-all ease-in-out" +
+                "absolute top-0 left-0 -z-10 h-44 w-64 rounded-md border-t border-l border-neutral-600 bg-neutral-800 transition-all ease-in-out" +
                 (isHovering
                   ? " translate-x-4 -translate-y-2 rotate-3 rounded-md shadow-md shadow-black"
                   : "")
               }
             >
-              <div className="h-1/3 border-b-2 border-primary"></div>
+              <div className="relative h-1/3">
+                <div className="absolute bottom-0 left-0  h-1 w-full bg-gradient-to-r from-primary via-primary-light to-zinc-200"></div>
+              </div>
+              <div className="h-2/3 rounded-b-md bg-zinc-100"></div>
             </div>
           </li>
         </Link>

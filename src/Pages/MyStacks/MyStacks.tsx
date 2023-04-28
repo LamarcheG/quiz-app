@@ -200,7 +200,7 @@ export const MyStacks = (props: any) => {
                       <button
                         type="button"
                         onClick={() => setDisplayForm(true)}
-                        className="grid h-36 w-64 items-center justify-center rounded-md border-t border-l border-neutral-600 border-opacity-40 bg-neutral-800 bg-opacity-40 text-white shadow-md shadow-black"
+                        className="grid h-44 w-64 items-center justify-center rounded-md border-t border-l border-neutral-600 border-opacity-40 bg-neutral-800 bg-opacity-40 text-white shadow-md shadow-black"
                       >
                         <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary p-0">
                           +
