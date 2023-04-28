@@ -37,22 +37,32 @@ export const QuestionListItem = ({
       <form
         onSubmit={handleSubmit}
         className={
-          "m-0 flex w-72 flex-col items-center rounded-md border-t border-l border-gray-700 bg-gray-900 p-5 shadow-lg shadow-neutral-900 transition-all xl:w-96" +
+          "m-0 flex w-72 flex-col items-center rounded-md border-t border-l border-neutral-600 bg-neutral-800 shadow-md shadow-black transition-all xl:w-96" +
           (isCorrect === true
-            ? " border border-green-700"
+            ? " border-2 border-green-700"
             : isCorrect === false
-            ? " border border-red-700"
+            ? " border-2 border-red-700"
             : " border-blue-200")
         }
       >
-        <h2 className="text-2xl">{question.question}</h2>
-        {children}
+        <div className="relative w-full">
+          <div className="absolute bottom-0 left-0  h-1 w-full bg-gradient-to-r from-primary via-primary-light to-zinc-200"></div>
+          <h2 className="px-5 py-3 text-2xl">{question.question}</h2>
+        </div>
 
-        {isCorrect === true ? (
-          <p className="text-lg text-green-700">Correct!</p>
-        ) : isCorrect === false || isCorrect === null ? (
-          <SubmitButton>Submit</SubmitButton>
-        ) : null}
+        <div className="relative w-full rounded-b-md bg-zinc-100 px-5 text-neutral-800">
+          <div className="absolute left-2 top-3 h-2/3 w-[1px] bg-neutral-400"></div>
+          <div className="absolute bottom-2 left-2 aspect-square w-1 rounded-full bg-primary"></div>
+          <div className="absolute bottom-2 left-4 aspect-square w-1 rounded-full bg-primary-light"></div>
+          <div className="absolute bottom-2 left-6 aspect-square w-1 rounded-full bg-blue-300"></div>
+          <div className="absolute bottom-2 left-8 aspect-square w-1 rounded-full bg-blue-200"></div>
+          <div className="m-auto w-fit">{children}</div>
+          {isCorrect === true ? (
+            <p className="text-lg text-green-700">Correct!</p>
+          ) : isCorrect === false || isCorrect === null ? (
+            <SubmitButton className="mb-3">Submit</SubmitButton>
+          ) : null}
+        </div>
       </form>
     </>
   );
