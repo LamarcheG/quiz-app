@@ -122,10 +122,16 @@ export const EditStack = () => {
       ) : (
         <>
           {isLoaded && questionStack && (
-            <div className="relative m-auto grid h-fit min-h-[16rem] w-96 items-center justify-center rounded-md border-t border-l border-gray-700 bg-gray-900 p-5 shadow-lg shadow-neutral-900">
+            <div className="relative m-auto grid h-fit min-h-[16rem] w-96 items-center justify-center rounded-md border-t border-l border-neutral-600 bg-neutral-800 p-5 text-white shadow-md shadow-black">
+              <div className="absolute left-3 bottom-6 h-2/3 w-[1px] bg-neutral-400"></div>
+              <div className="absolute left-14 bottom-[10px] h-[1px] w-2/3 bg-neutral-400"></div>
+              <div className="absolute bottom-2 left-3 aspect-square w-1 rounded-full bg-primary"></div>
+              <div className="absolute bottom-2 left-5 aspect-square w-1 rounded-full bg-primary-light"></div>
+              <div className="absolute bottom-2 left-7 aspect-square w-1 rounded-full bg-blue-300"></div>
+              <div className="absolute bottom-2 left-9 aspect-square w-1 rounded-full bg-blue-200"></div>
               <button
                 type="button"
-                className="absolute left-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-sky-600 p-0"
+                className="absolute left-2 top-2 flex h-8 w-8 items-center justify-center rounded-full bg-primary-light p-0"
                 onClick={() => setDisplayForm(true)}
               >
                 +

@@ -92,7 +92,7 @@ export const EditQuestionForm = ({
           id="question"
           value={questionInput}
           onChange={handleChange}
-          className="rounded-sm px-2"
+          className="rounded-md px-2"
         />
       </div>
       {choices.length > 0 && (
@@ -107,7 +107,7 @@ export const EditQuestionForm = ({
                   id={`choice${index}`}
                   value={choice}
                   onChange={handleChange}
-                  className="rounded-sm px-2"
+                  className="rounded-md px-2"
                 />
               </li>
             ))}
@@ -122,7 +122,7 @@ export const EditQuestionForm = ({
           id="answer"
           value={answerInput}
           onChange={handleChange}
-          className="rounded-sm px-2"
+          className="rounded-md px-2"
         />
       </div>
       {success === true ? (
