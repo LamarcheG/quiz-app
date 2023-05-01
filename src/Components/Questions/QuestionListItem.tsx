@@ -50,7 +50,7 @@ export const QuestionListItem = ({
           <h2 className="px-5 py-3 text-2xl">{question.question}</h2>
         </div>
 
-        <div className="relative w-full rounded-b-md bg-zinc-100 px-5 text-neutral-800">
+        <div className="relative w-full rounded-b-md bg-blue-50 px-5 text-neutral-800">
           <div className="absolute left-2 top-3 h-2/3 w-[1px] bg-neutral-400"></div>
           <div className="absolute bottom-2 left-2 aspect-square w-1 rounded-full bg-primary"></div>
           <div className="absolute bottom-2 left-4 aspect-square w-1 rounded-full bg-primary-light"></div>

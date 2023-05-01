@@ -70,7 +70,7 @@ export const MyStacksItem = ({
                 </button>
               </div>
               {Object.keys(stack.stats).length > 0 ? (
-                <div className="relative flex h-2/3 flex-col justify-center rounded-b-md bg-zinc-100 px-5 text-neutral-800">
+                <div className="relative flex h-2/3 flex-col justify-center rounded-b-md bg-blue-50 px-5 text-neutral-800">
                   <div className="absolute left-2 top-3 h-2/3 w-[1px] bg-neutral-400"></div>
                   <div className="absolute bottom-[10px] left-11 h-[1px] w-2/3 bg-neutral-400"></div>
                   <div className="absolute bottom-2 left-2 aspect-square w-1 rounded-full bg-primary"></div>
@@ -85,7 +85,7 @@ export const MyStacksItem = ({
                   <span>Average score: {stack.stats.averageScore}%</span>
                 </div>
               ) : (
-                <div className="relative flex h-2/3 flex-col justify-center rounded-b-md bg-zinc-100 px-5 text-neutral-800">
+                <div className="relative flex h-2/3 flex-col justify-center rounded-b-md bg-blue-50 px-5 text-neutral-800">
                   <div className="absolute left-2 top-3 h-2/3 w-[1px] bg-neutral-400"></div>
                   <div className="absolute bottom-[10px] left-11 h-[1px] w-2/3 bg-neutral-400"></div>
                   <div className="absolute bottom-2 left-2 aspect-square w-1 rounded-full bg-primary"></div>
@@ -113,7 +113,7 @@ export const MyStacksItem = ({
                 </h2>
               </div>
               {Object.keys(stack.stats).length > 0 ? (
-                <div className="relative flex h-2/3 flex-col justify-center rounded-b-md bg-zinc-100 px-5 text-neutral-800">
+                <div className="relative flex h-2/3 flex-col justify-center rounded-b-md bg-blue-50 px-5 text-neutral-800">
                   <div className="absolute left-2 top-3 h-2/3 w-[1px] bg-neutral-400"></div>
                   <div className="absolute bottom-[10px] left-11 h-[1px] w-2/3 bg-neutral-400"></div>
                   <div className="absolute bottom-2 left-2 aspect-square w-1 rounded-full bg-primary"></div>
@@ -128,7 +128,7 @@ export const MyStacksItem = ({
                   <span>Average score: {stack.stats.averageScore}%</span>
                 </div>
               ) : (
-                <div className="relative flex h-2/3 flex-col justify-center rounded-b-md bg-zinc-100 px-5 text-neutral-800">
+                <div className="relative flex h-2/3 flex-col justify-center rounded-b-md bg-blue-50 px-5 text-neutral-800">
                   <div className="absolute left-2 top-3 h-2/3 w-[1px] bg-neutral-400"></div>
                   <div className="absolute bottom-[10px] left-11 h-[1px] w-2/3 bg-neutral-400"></div>
                   <div className="absolute bottom-2 left-2 aspect-square w-1 rounded-full bg-primary"></div>
@@ -150,7 +150,7 @@ export const MyStacksItem = ({
               <div className="relative h-1/3">
                 <div className="absolute bottom-0 left-0  h-1 w-full bg-gradient-to-r from-primary via-primary-light to-zinc-200"></div>
               </div>
-              <div className="h-2/3 rounded-b-md bg-zinc-100"></div>
+              <div className="h-2/3 rounded-b-md bg-blue-50"></div>
             </div>
             <div
               className={
@@ -163,7 +163,7 @@ export const MyStacksItem = ({
               <div className="relative h-1/3">
                 <div className="absolute bottom-0 left-0  h-1 w-full bg-gradient-to-r from-primary via-primary-light to-zinc-200"></div>
               </div>
-              <div className="h-2/3 rounded-b-md bg-zinc-100"></div>
+              <div className="h-2/3 rounded-b-md bg-blue-50"></div>
             </div>
           </li>
         </Link>
