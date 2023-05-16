@@ -4,7 +4,7 @@ import db from "../firebaseInit";
 import { User } from "../interfaces";
 import { useUser } from "./UserContext";
 
-const StacksContext = createContext(null);
+export const StacksContext = createContext(null);
 const StacksDispatchContext = createContext<React.Dispatch<any> | null>(null);
 
 const reducer = (state: any, action: any) => {

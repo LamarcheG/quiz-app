@@ -16,7 +16,7 @@ import { FillInTheBlank } from "../AnswerInputs/FillInTheBlank";
 import { MultipleChoice } from "../AnswerInputs/MultipleChoice";
 import { ShortAnswer } from "../AnswerInputs/ShortAnswer";
 import { TrueOrFalse } from "../AnswerInputs/TrueOrFalse";
-import { QuestionListItem } from "./QuestionListItem";
+import { QuestionListItem } from "./EditQuestion/QuestionListItem/QuestionListItem";
 
 interface QuestionListProps {
   questions: IQuestionItem[];

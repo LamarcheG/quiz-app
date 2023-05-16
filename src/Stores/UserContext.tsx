@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer } from "react";
 
-const UserContext = createContext(null);
+export const UserContext = createContext(null);
 const UserDispatchContext = createContext<React.Dispatch<any> | null>(null);
 
 const initialState = {
